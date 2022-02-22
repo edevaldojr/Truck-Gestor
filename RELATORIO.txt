@@ -1,3 +1,10 @@
 21/02/2022
--Criação do modelo pessoa e suas extensões.
+-Criação do modelo usuario.
 -Inserção das telas de login, cadastro e home.
+-CRUD de usuarios
+-Conexão com banco de dados e consultas
+-Problemas com execução
+
+22/02/2021
+-Criando autenticação
+-Mesmo problema na execução, refiz o projeto e continuou o erro
