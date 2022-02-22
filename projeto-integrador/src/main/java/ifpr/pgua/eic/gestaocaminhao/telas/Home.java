@@ -1,26 +1,34 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class Home {
 
     @FXML
-    Button btHome;
+    private Button btHome;
 
     @FXML
-    Button btCadastros;
+    private Button btCadastros;
 
     @FXML
-    Button btEntradas;
+    private Button btEntradas;
 
     @FXML
-    Button btDespesas;
+    private Button btDespesas;
 
     @FXML
-    Button btRelatorios;
+    private Button btRelatorios;
 
     @FXML
-    Button btLogout;
+    private Button btLogout;
+
+    @FXML
+    private RepositorioUsuarios repositorioUsuarios;
+
+    public Home(RepositorioUsuarios repositorioUsuarios) {
+        this.repositorioUsuarios = repositorioUsuarios;
+    }
 
 }
