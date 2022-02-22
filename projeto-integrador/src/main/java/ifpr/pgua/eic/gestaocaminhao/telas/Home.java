@@ -59,11 +59,11 @@ public class Home {
 
             if (autenticacaoServico.getLogado().getGestor()) {
                 painelCentral.getChildren().clear();
-                painelCentral.getChildren().add(App.loadTela("fxml/home_Gestor.fxml", a -> new HomeGestor(this)));
+                painelCentral.getChildren().add(App.loadTela("fxml/home_gestor.fxml", a -> new HomeGestor(this)));
 
             } else {
                 painelCentral.getChildren().clear();
-                painelCentral.getChildren().add(App.loadTela("fxml/home_Moto.fxml", a -> new HomeMoto(this)));
+                painelCentral.getChildren().add(App.loadTela("fxml/home_moto.fxml", a -> new HomeMoto(this)));
 
             }
 
@@ -76,7 +76,7 @@ public class Home {
         if (tela.equals("cadastro")) {
             painelCentral.getChildren().clear();
             painelCentral.getChildren().add(
-                    App.loadTela("fxml/cadastro_Users.fxml", a -> new CadastroUsuario(autenticacaoServico, this)));
+                    App.loadTela("fxml/cadastro_users.fxml", a -> new CadastroUsuario(autenticacaoServico, this)));
 
         }
     }

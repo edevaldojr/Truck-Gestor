@@ -12,7 +12,7 @@
 <VBox xmlns="http://javafx.com/javafx" 
       xmlns:fx="http://javafx.com/fxml" 
       prefHeight="400" prefWidth="600"
-      fx:controller="ifpr.pgua.eic.atividade3bim.telas.HomeAdmin"
+      fx:controller="ifpr.pgua.eic.atividade3bim.telas.HomeMoto"
       >
     <Label text="Você é admin!!!"/>
     <Button text="Logout" onAction="#logout"/>
