@@ -1,15 +1,15 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
+import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class Login {
-
-    private RepositorioUsuarios repositorioUsuarios;
 
     @FXML
     private TextField tfCpf;
@@ -24,17 +24,35 @@ public class Login {
     private Button btCadastrar;
 
     @FXML
-    private AnchorPane painelAnchorPane;
+    private Pane rootPane;
 
-    public Login(RepositorioUsuarios repositorioUsuarios) {
-        this.repositorioUsuarios = repositorioUsuarios;
+    private AutenticacaoServico autenticacaoServico;
+    private Home homeControler;
+
+    public Login(AutenticacaoServico autenticacaoServico, Home homeControler) {
+        this.autenticacaoServico = autenticacaoServico;
+        this.homeControler = homeControler;
+
     }
 
     @FXML
-    private void loadCadastrar() {
-        painelAnchorPane.getChildren().clear();
-        painelAnchorPane.getChildren()
-                .add(App.loadTela("fxml/cadastros.fxml", (o) -> new CadastroUsuario(repositorioUsuarios)));
+    public void logar() {
+        String usuario = tfCpf.getText();
+        String senha = tfSenha.getText();
+        int cpfLogin = Integer.parseInt(usuario);
+        try {
+            autenticacaoServico.logar(cpfLogin, senha);
+            if (autenticacaoServico.estaLogado()) {
+                homeControler.atualizaTela();
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    @FXML
+    public void cadastrar() {
+        homeControler.carregaTela("cadastro");
     }
 
 }

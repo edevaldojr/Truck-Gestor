@@ -12,7 +12,7 @@
 <VBox xmlns="http://javafx.com/javafx" 
       xmlns:fx="http://javafx.com/fxml" 
       prefHeight="400" prefWidth="600"
-      fx:controller="ifpr.pgua.eic.atividade3bim.telas.Login"
+      fx:controller="ifpr.pgua.eic.atividade3bim.telas.Cadastro"
       fx:id="rootPane"
       >
 
@@ -26,7 +26,6 @@
         <TextField fx:id="tfSenha"/>
     </HBox>
 
-    <Button fx:id="btLogin" text="Logar" onAction="#logar"/>
     <Button text="Cadastrar" onAction="#cadastrar"/>
 
 </VBox>

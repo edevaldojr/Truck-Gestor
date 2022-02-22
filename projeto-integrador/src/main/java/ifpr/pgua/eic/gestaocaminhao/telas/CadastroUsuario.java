@@ -4,12 +4,14 @@ import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
+import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
 
 public class CadastroUsuario {
 
@@ -50,6 +52,12 @@ public class CadastroUsuario {
     @FXML
     private TextField tfCnh;
 
+    @FXML
+    private Pane rootPane;
+
+    private AutenticacaoServico autenticacaoServico;
+    private Home homeControler;
+
     public CadastroUsuario(RepositorioUsuarios repositorioUsuarios) {
         this.repositorioUsuarios = repositorioUsuarios;
     }
@@ -57,6 +65,11 @@ public class CadastroUsuario {
     public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios) {
         this.repositorioUsuarios = repositorioUsuarios;
         this.usuarioExistente = usuarioExiste;
+    }
+
+    public CadastroUsuario(AutenticacaoServico autenticacaoServico, Home homeControler) {
+        this.autenticacaoServico = autenticacaoServico;
+        this.homeControler = homeControler;
     }
 
     public void initialize() {
@@ -82,6 +95,13 @@ public class CadastroUsuario {
         String cnh = tfCnh.getText();
         boolean gestor = cbCadastroUsuario.isSelected();
         int cpf = Integer.parseInt(cpfS);
+
+        try {
+            autenticacaoServico.cadastrar(cpf, senha);
+            homeControler.atualizaTela();
+        } catch (Exception e) {
+
+        }
 
         boolean temErro = false;
         String msg = "";
