@@ -19,7 +19,7 @@
                <children>
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
+                        <Button fx:id="btVoltar" onAction="#voltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
                      </children>
                   </Pane>
                </children>
@@ -41,7 +41,7 @@
                         <TextField fx:id="tfEmail" layoutX="384.0" layoutY="173.0" prefHeight="22.0" prefWidth="207.0" promptText="Email" />
                         <PasswordField fx:id="pfSenha" layoutX="95.0" layoutY="225.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
                         <TextField fx:id="tfCnh" layoutX="384.0" layoutY="225.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH" />
-                        <CheckBox fx:id="cbCadastroUsuario" layoutX="100.0" layoutY="273.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />
+                        <CheckBox fx:id="cbGestor" layoutX="100.0" layoutY="273.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />
                         <Label layoutX="95.0" layoutY="38.0" text="CPF:" />
                         <Label layoutX="384.0" layoutY="38.0" text="Nome:" />
                         <Label layoutX="384.0" layoutY="98.0" text="Endereço:" />

@@ -2,6 +2,7 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import java.sql.SQLException;
 
+import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class CadastroUsuario {
@@ -47,13 +49,13 @@ public class CadastroUsuario {
     private Button btLimpar;
 
     @FXML
-    private CheckBox cbCadastroUsuario;
+    private CheckBox cbGestor;
 
     @FXML
     private TextField tfCnh;
 
     @FXML
-    private Pane rootPane;
+    private AnchorPane root;
 
     private AutenticacaoServico autenticacaoServico;
     private Home homeControler;
@@ -84,6 +86,14 @@ public class CadastroUsuario {
     }
 
     @FXML
+    private void voltar() {
+        root.getChildren().clear();
+        root.getChildren()
+                .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, homeControler)));
+
+    }
+
+    @FXML
     private void cadastrar() {
         String cpf = tfCpf.getText();
         String nome = tfNome.getText();
@@ -93,14 +103,7 @@ public class CadastroUsuario {
         String email = tfEmail.getText();
         String senha = pfSenha.getText();
         String cnh = tfCnh.getText();
-        boolean gestor = cbCadastroUsuario.isSelected();
-
-        try {
-            autenticacaoServico.cadastrar(cpf, senha);
-            homeControler.atualizaTela();
-        } catch (Exception e) {
-
-        }
+        boolean gestor = cbGestor.isSelected();
 
         boolean temErro = false;
         String msg = "";
@@ -145,7 +148,6 @@ public class CadastroUsuario {
                 temErro = true;
                 msg += "CNH não pode ser vazio!\n";
             }
-
         }
 
         if (!temErro) {
@@ -153,11 +155,11 @@ public class CadastroUsuario {
                 boolean ret;
 
                 if (usuarioExistente != null) {
-                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, cidade, endereco, email, senha, telefone,
+                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, cidade, endereco, telefone, email, senha,
                             cnh,
                             gestor);
                 } else {
-                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, cidade, endereco, email, senha, telefone, cnh,
+                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh,
                             gestor);
                 }
 
@@ -189,6 +191,7 @@ public class CadastroUsuario {
         tfNome.clear();
         tfTelefone.clear();
         tfCnh.clear();
+        cbGestor.disarm();
     }
 
 }

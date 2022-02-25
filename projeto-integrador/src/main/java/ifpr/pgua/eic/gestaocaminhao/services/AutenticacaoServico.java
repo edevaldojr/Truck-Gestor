@@ -17,10 +17,6 @@ public class AutenticacaoServico {
         return this.logado;
     }
 
-    public void cadastrar(String loginCpf, String senha) throws Exception {
-        autenticacaoDAO.cadastrar(loginCpf, senha);
-    }
-
     public Usuario getLogado() {
         return this.logado;
     }

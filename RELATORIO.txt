@@ -5,6 +5,10 @@
 -Conexão com banco de dados e consultas
 -Problemas com execução
 
-22/02/2021
+22/02/2022
 -Criando autenticação
 -Mesmo problema na execução, refiz o projeto e continuou o erro
+
+25/02/2022
+-Erro arrumado
+-Tela de Cadastro funcional

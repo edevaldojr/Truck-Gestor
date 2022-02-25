@@ -12,7 +12,7 @@ public class Usuario {
     private String cnh;
     private boolean gestor;
 
-    public Usuario(String cpf, String nome, String cidade, String endereco, String email, String senha, String telefone,
+    public Usuario(String cpf, String nome, String cidade, String endereco, String telefone, String email, String senha,
             String cnh, boolean gestor) {
         this.cpf = cpf;
         this.nome = nome;

@@ -41,21 +41,10 @@ public class Home {
     @FXML
     public void atualizaTela() {
         if (!autenticacaoServico.estaLogado()) {
-            root.getLeft().setVisible(false);
             painelCentral.getChildren().clear();
             painelCentral.getChildren()
                     .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, this)));
         } else {
-            /*
-             * root.getLeft().setVisible(true);
-             * if(autenticacaoServico.getLogado().isAdmin()){
-             * btCadastrar.setDisable(false);
-             * }else{
-             * btCadastrar.setDisable(true);
-             * }
-             */
-
-            // criando homes diferentes para cada tipo de usuario
 
             if (autenticacaoServico.getLogado().getGestor()) {
                 painelCentral.getChildren().clear();
@@ -76,7 +65,7 @@ public class Home {
         if (tela.equals("cadastro")) {
             painelCentral.getChildren().clear();
             painelCentral.getChildren().add(
-                    App.loadTela("fxml/cadastro_users.fxml", a -> new CadastroUsuario(autenticacaoServico, this)));
+                    App.loadTela("fxml/cadastro_users.fxml", a -> new CadastroUsuario(repositorioUsuarios)));
 
         }
     }

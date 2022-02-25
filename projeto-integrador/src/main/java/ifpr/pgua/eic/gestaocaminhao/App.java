@@ -17,6 +17,7 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import ifpr.pgua.eic.gestaocaminhao.telas.Home;
+import ifpr.pgua.eic.gestaocaminhao.telas.Login;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 /**
@@ -35,7 +36,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Scene scene = new Scene(loadTela("fxml/home.fxml", o -> new Home(repositorioUsuarios, autenticacaoServico)),
+        Scene scene = new Scene(loadTela("fxml/login.fxml", o -> new Login(autenticacaoServico, repositorioUsuarios)),
                 864, 515);
         // stage.setMaximized(true);
         stage.setTitle("Truck");

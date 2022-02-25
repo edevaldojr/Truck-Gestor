@@ -38,7 +38,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         pstmt.setString(9, u.getCnh());
 
         pstmt.execute();
-
         pstmt.close();
         con.close();
 
@@ -49,15 +48,15 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean atualizar(String cpf, Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Usuario SET nome=?, cidade=?, endereco=?, email=?, telefone=?, senha=?, gestor=?, cnh=? WHERE cpf=?";
+        String sql = "UPDATE projeto_Usuario SET nome=?, cidade=?, endereco=?, telefone=?, email=?,  senha=?, gestor=?, cnh=? WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, u.getNome());
         pstmt.setString(2, u.getCidade());
         pstmt.setString(3, u.getEndereco());
-        pstmt.setString(4, u.getEmail());
-        pstmt.setString(5, u.getTelefone());
+        pstmt.setString(4, u.getTelefone());
+        pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getSenha());
         pstmt.setBoolean(7, u.getGestor());
         pstmt.setString(8, u.getCnh());
@@ -93,13 +92,13 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         String nome = rs.getString("nome");
         String cidade = rs.getString("cidade");
         String endereco = rs.getString("endereco");
+        String telefone = rs.getString("telefone");
         String email = rs.getString("email");
         String senha = rs.getString("senha");
-        String telefone = rs.getString("telefone");
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
 
-        Usuario u = new Usuario(cpf, nome, cidade, endereco, email, senha, telefone, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh, gestor);
 
         return u;
 
