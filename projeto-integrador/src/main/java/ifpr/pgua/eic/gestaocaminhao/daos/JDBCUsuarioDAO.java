@@ -27,7 +27,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        pstmt.setInt(1, u.getCpf());
+        pstmt.setString(1, u.getCpf());
         pstmt.setString(2, u.getNome());
         pstmt.setString(3, u.getCidade());
         pstmt.setString(4, u.getEndereco());
@@ -46,7 +46,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     }
 
     @Override
-    public boolean atualizar(int cpf, Usuario u) throws Exception {
+    public boolean atualizar(String cpf, Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
         String sql = "UPDATE projeto_Usuario SET nome=?, cidade=?, endereco=?, email=?, telefone=?, senha=?, gestor=?, cnh=? WHERE cpf=?";
@@ -61,7 +61,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         pstmt.setString(6, u.getSenha());
         pstmt.setBoolean(7, u.getGestor());
         pstmt.setString(8, u.getCnh());
-        pstmt.setInt(9, cpf);
+        pstmt.setString(9, cpf);
 
         int ret = pstmt.executeUpdate();
 
@@ -72,14 +72,14 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     }
 
     @Override
-    public boolean remover(int cpf) throws Exception {
+    public boolean remover(String cpf) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
         String sql = "UPDATE projeto_Usuario SET ativo=0 WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
-        pstmt.setInt(1, cpf);
+        pstmt.setString(1, cpf);
 
         int ret = pstmt.executeUpdate();
 
@@ -89,7 +89,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     }
 
     public Usuario montarUsuario(ResultSet rs) throws Exception {
-        int cpf = rs.getInt("cpf");
+        String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
         String cidade = rs.getString("cidade");
         String endereco = rs.getString("endereco");

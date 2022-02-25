@@ -17,7 +17,7 @@ public class RepositorioUsuarios {
         usuarios = new ArrayList<>();
     }
 
-    public boolean cadastrarUsuario(int cpf, String nome, String cidade, String endereco, String email, String senha,
+    public boolean cadastrarUsuario(String cpf, String nome, String cidade, String endereco, String email, String senha,
             String telefone,
             String cnh, boolean gestor) throws SQLException {
         Usuario u = new Usuario(cpf, nome, cidade, endereco, email, senha, telefone, cnh, gestor);
@@ -34,7 +34,8 @@ public class RepositorioUsuarios {
 
     }
 
-    public boolean atualizarUsuarios(int cpf, String nome, String cidade, String endereco, String email, String senha,
+    public boolean atualizarUsuarios(String cpf, String nome, String cidade, String endereco, String email,
+            String senha,
             String telefone,
             String cnh, boolean gestor) throws SQLException {
 
@@ -47,7 +48,7 @@ public class RepositorioUsuarios {
         }
     }
 
-    public boolean removerUsuarios(int cpf) throws SQLException {
+    public boolean removerUsuarios(String cpf) throws SQLException {
         try {
             return usuarioDAO.remover(cpf);
         } catch (Exception e) {

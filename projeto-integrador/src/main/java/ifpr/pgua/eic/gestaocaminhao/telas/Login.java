@@ -37,11 +37,10 @@ public class Login {
 
     @FXML
     public void logar() {
-        String usuario = tfCpf.getText();
+        String cpf = tfCpf.getText();
         String senha = tfSenha.getText();
-        int cpfLogin = Integer.parseInt(usuario);
         try {
-            autenticacaoServico.logar(cpfLogin, senha);
+            autenticacaoServico.logar(cpf, senha);
             if (autenticacaoServico.estaLogado()) {
                 homeControler.atualizaTela();
             }

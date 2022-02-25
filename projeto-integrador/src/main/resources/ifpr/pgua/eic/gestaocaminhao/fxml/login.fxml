@@ -22,11 +22,11 @@
                   <Pane prefHeight="419.0" prefWidth="863.0">
                      <children>
                         <TextField fx:id="tfCpf" layoutX="328.0" layoutY="47.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
+                        <PasswordField fx:id="pfSenha" layoutX="328.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
                         <Label layoutX="391.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE" />
                         <Label layoutX="386.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE" />
                         <Button fx:id="btLogin" layoutX="328.0" layoutY="185.0" mnemonicParsing="false" text="Entrar" />
-                        <Button fx:id="btCadastrar" layoutX="470.0" layoutY="185.0" mnemonicParsing="false" onAction="#loadCadastrar" text="Cadastrar" />
-                        <PasswordField fx:id="pfSenha" layoutX="328.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
+                        <Button fx:id="btCadastrar" onAction="#cadastrar" layoutX="470.0" layoutY="185.0" mnemonicParsing="false" text="Cadastrar" /> 
                      </children>
                   </Pane>
                </children>

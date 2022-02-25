@@ -33,25 +33,25 @@
                <children>
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
                      <children>
-                        <TextField fx:id="tfCPF" layoutX="95.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
+                        <TextField fx:id="tfCpf" layoutX="95.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
                         <TextField fx:id="tfNome" layoutX="384.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome" />
+                        <TextField fx:id="tfCidade" layoutX="95.0" layoutY="106.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade" />
                         <TextField fx:id="tfEndereco" layoutX="384.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Bairro, Rua nº" />
                         <TextField fx:id="tfTelefone" layoutX="95.0" layoutY="164.0" prefHeight="22.0" prefWidth="204.0" promptText="Telefone" />
                         <TextField fx:id="tfEmail" layoutX="384.0" layoutY="173.0" prefHeight="22.0" prefWidth="207.0" promptText="Email" />
+                        <PasswordField fx:id="pfSenha" layoutX="95.0" layoutY="225.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
+                        <TextField fx:id="tfCnh" layoutX="384.0" layoutY="225.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH" />
+                        <CheckBox fx:id="cbCadastroUsuario" layoutX="100.0" layoutY="273.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />
                         <Label layoutX="95.0" layoutY="38.0" text="CPF:" />
                         <Label layoutX="384.0" layoutY="38.0" text="Nome:" />
                         <Label layoutX="384.0" layoutY="98.0" text="Endereço:" />
-                        <TextField fx:id="tfCidade" layoutX="95.0" layoutY="106.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade" />
                         <Label layoutX="95.0" layoutY="89.0" text="Cidade:" />
                         <Label layoutX="95.0" layoutY="147.0" text="Telefone" />
                         <Label layoutX="384.0" layoutY="156.0" text="Email:" />
                         <Label layoutX="95.0" layoutY="208.0" text="Senha" />
-                        <Button fx:id="btCadastrar" layoutX="149.0" layoutY="323.0" mnemonicParsing="false" text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="388.0" layoutY="323.0" mnemonicParsing="false" text="Limpar" />
-                        <CheckBox fx:id="cbCadastroUsuario" layoutX="100.0" layoutY="273.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />
-                        <TextField fx:id="tfCNH" layoutX="384.0" layoutY="225.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH" />
+                        <Button fx:id="btCadastrar" onAction="#cadastrar" layoutX="149.0" layoutY="323.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button fx:id="btLimpar" onAction="#limpar" layoutX="388.0" layoutY="323.0" mnemonicParsing="false" text="Limpar" />
                         <Label layoutX="384.0" layoutY="208.0" text="CNH:" />
-                        <PasswordField fx:id="pfSenha" layoutX="95.0" layoutY="225.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
                      </children>
                   </Pane>
                </children>

@@ -2,7 +2,7 @@ package ifpr.pgua.eic.gestaocaminhao.models;
 
 public class Usuario {
 
-    private int cpf;
+    private String cpf;
     private String nome;
     private String endereco;
     private String cidade;
@@ -12,7 +12,7 @@ public class Usuario {
     private String cnh;
     private boolean gestor;
 
-    public Usuario(int cpf, String nome, String cidade, String endereco, String email, String senha, String telefone,
+    public Usuario(String cpf, String nome, String cidade, String endereco, String email, String senha, String telefone,
             String cnh, boolean gestor) {
         this.cpf = cpf;
         this.nome = nome;
@@ -41,11 +41,11 @@ public class Usuario {
         this.cnh = cnh;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

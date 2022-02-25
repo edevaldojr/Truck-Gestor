@@ -12,13 +12,13 @@ public class AutenticacaoServico {
         this.autenticacaoDAO = autenticacaoDAO;
     }
 
-    public Usuario logar(int login, String senha) throws Exception {
-        this.logado = autenticacaoDAO.login(login, senha);
+    public Usuario logar(String loginCpf, String senha) throws Exception {
+        this.logado = autenticacaoDAO.login(loginCpf, senha);
         return this.logado;
     }
 
-    public void cadastrar(int login, String senha) throws Exception {
-        autenticacaoDAO.cadastrar(login, senha);
+    public void cadastrar(String loginCpf, String senha) throws Exception {
+        autenticacaoDAO.cadastrar(loginCpf, senha);
     }
 
     public Usuario getLogado() {

@@ -18,27 +18,27 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     }
 
     @Override
-    public Usuario login(int loginCPF, String senha) throws Exception {
+    public Usuario login(String loginCPF, String senha) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
         String sql = "SELECT * from projeto_Usuario WHERE cpf=? AND senha=? AND ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        pstmt.setInt(1, loginCPF);
+        pstmt.setString(1, loginCPF);
         pstmt.setString(2, senha);
 
         ResultSet rs = pstmt.executeQuery(sql);
 
         Usuario u = montarUsuario(rs);
-        int login = u.getCpf();
+        String login = u.getCpf();
         String password = u.getSenha();
 
         pstmt.close();
         con.close();
         rs.close();
 
-        if (loginCPF == login && senha.equals(password)) {
+        if (loginCPF.equals(login) && senha.equals(password)) {
             return u;
         } else {
             return null;
@@ -46,7 +46,7 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     }
 
     public Usuario montarUsuario(ResultSet rs) throws Exception {
-        int cpf = rs.getInt("cpf");
+        String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
         String cidade = rs.getString("cidade");
         String endereco = rs.getString("endereco");
@@ -63,7 +63,7 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     }
 
     @Override
-    public boolean cadastrar(int loginCPF, String senha) throws Exception {
+    public boolean cadastrar(String loginCPF, String senha) throws Exception {
         // TODO Auto-generated method stub
         return false;
     }

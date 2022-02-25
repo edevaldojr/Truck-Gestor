@@ -38,7 +38,7 @@ public class App extends Application {
         Scene scene = new Scene(loadTela("fxml/home.fxml", o -> new Home(repositorioUsuarios, autenticacaoServico)),
                 864, 515);
         // stage.setMaximized(true);
-        // stage.setTitle("Truck");
+        stage.setTitle("Truck");
         // stage.getIcons().add(new Image(""));
         stage.setScene(scene);
         stage.show();

@@ -8,9 +8,9 @@ public interface UsuarioDAO {
 
     boolean cadastrar(Usuario u) throws Exception;
 
-    boolean atualizar(int cpf, Usuario u) throws Exception;
+    boolean atualizar(String cpf, Usuario u) throws Exception;
 
-    boolean remover(int cpf) throws Exception;
+    boolean remover(String cpf) throws Exception;
 
     ArrayList<Usuario> listar() throws Exception;
 

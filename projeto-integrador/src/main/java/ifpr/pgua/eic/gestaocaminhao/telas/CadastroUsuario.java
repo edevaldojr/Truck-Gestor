@@ -38,7 +38,7 @@ public class CadastroUsuario {
     private TextField tfTelefone;
 
     @FXML
-    private TextField tfSenha;
+    private TextField pfSenha;
 
     @FXML
     private Button btCadastrar;
@@ -85,16 +85,15 @@ public class CadastroUsuario {
 
     @FXML
     private void cadastrar() {
-        String cpfS = tfCpf.getText();
+        String cpf = tfCpf.getText();
         String nome = tfNome.getText();
         String cidade = tfCidade.getText();
         String endereco = tfEndereco.getText();
         String telefone = tfTelefone.getText();
         String email = tfEmail.getText();
-        String senha = tfSenha.getText();
+        String senha = pfSenha.getText();
         String cnh = tfCnh.getText();
         boolean gestor = cbCadastroUsuario.isSelected();
-        int cpf = Integer.parseInt(cpfS);
 
         try {
             autenticacaoServico.cadastrar(cpf, senha);
@@ -106,7 +105,7 @@ public class CadastroUsuario {
         boolean temErro = false;
         String msg = "";
 
-        if (cpfS.isEmpty() || cpfS.isBlank()) {
+        if (cpf.isEmpty() || cpf.isBlank()) {
             temErro = true;
             msg += "CPF não pode ser vazio!\n";
         }
@@ -141,9 +140,12 @@ public class CadastroUsuario {
             msg += "Telefone não pode ser vazio!\n";
         }
 
-        if (cnh.isEmpty() || cnh.isBlank() && gestor == false) {
-            temErro = true;
-            msg += "CNH não pode ser vazio!\n";
+        if (cnh.isEmpty() || cnh.isBlank()) {
+            if (!gestor) {
+                temErro = true;
+                msg += "CNH não pode ser vazio!\n";
+            }
+
         }
 
         if (!temErro) {
@@ -182,7 +184,7 @@ public class CadastroUsuario {
         tfCpf.clear();
         tfCidade.clear();
         tfEndereco.clear();
-        tfSenha.clear();
+        pfSenha.clear();
         tfEmail.clear();
         tfNome.clear();
         tfTelefone.clear();
