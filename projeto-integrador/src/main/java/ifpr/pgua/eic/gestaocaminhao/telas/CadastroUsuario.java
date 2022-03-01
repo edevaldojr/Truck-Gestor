@@ -58,20 +58,15 @@ public class CadastroUsuario {
     private AnchorPane root;
 
     private AutenticacaoServico autenticacaoServico;
-    private Home homeControler;
 
-    public CadastroUsuario(RepositorioUsuarios repositorioUsuarios) {
+    public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios) {
         this.repositorioUsuarios = repositorioUsuarios;
+        this.autenticacaoServico = autenticacaoServico;
     }
 
     public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios) {
         this.repositorioUsuarios = repositorioUsuarios;
         this.usuarioExistente = usuarioExiste;
-    }
-
-    public CadastroUsuario(AutenticacaoServico autenticacaoServico, Home homeControler) {
-        this.autenticacaoServico = autenticacaoServico;
-        this.homeControler = homeControler;
     }
 
     public void initialize() {
@@ -89,7 +84,7 @@ public class CadastroUsuario {
     private void voltar() {
         root.getChildren().clear();
         root.getChildren()
-                .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, homeControler)));
+                .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, repositorioUsuarios)));
 
     }
 
@@ -164,7 +159,7 @@ public class CadastroUsuario {
                 }
 
                 if (ret) {
-                    msg = "Usuário cadastrada com sucesso!";
+                    msg = "Usuário cadastrado com sucesso!";
                     limpar();
                 } else {
                     msg = "Erro ao cadastrar usuário!";

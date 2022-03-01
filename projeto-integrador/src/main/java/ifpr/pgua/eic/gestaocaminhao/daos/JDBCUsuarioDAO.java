@@ -34,7 +34,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getTelefone());
         pstmt.setString(7, u.getSenha());
-        pstmt.setBoolean(8, u.getGestor());
+        pstmt.setBoolean(8, u.isGestor());
         pstmt.setString(9, u.getCnh());
 
         pstmt.execute();
@@ -58,7 +58,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         pstmt.setString(4, u.getTelefone());
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getSenha());
-        pstmt.setBoolean(7, u.getGestor());
+        pstmt.setBoolean(7, u.isGestor());
         pstmt.setString(8, u.getCnh());
         pstmt.setString(9, cpf);
 

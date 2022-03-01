@@ -12,3 +12,9 @@
 25/02/2022
 -Erro arrumado
 -Tela de Cadastro funcional
+
+01/02/2022 
+-Bug na tela de login concertado
+-Tela de login funcional diferenciando tipos de usuário!
+-Tela de logout funcional!!
+-Adicionando alerta no login

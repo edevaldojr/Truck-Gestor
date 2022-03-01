@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Home">
+<AnchorPane fx:id="root"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
          <left>
@@ -20,7 +20,7 @@
                   <Button fx:id="btCadastros" mnemonicParsing="false" prefHeight="41.0" prefWidth="191.0" text="Cadastrar Caminhão" />
                   <Pane prefHeight="244.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="21.0" layoutY="177.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Logout" />
+                        <Button fx:id="btLogout" onAction="#logout" layoutX="21.0" layoutY="177.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Logout" />
                      </children>
                   </Pane>
                </children>

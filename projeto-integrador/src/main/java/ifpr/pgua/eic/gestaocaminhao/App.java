@@ -16,7 +16,6 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
-import ifpr.pgua.eic.gestaocaminhao.telas.Home;
 import ifpr.pgua.eic.gestaocaminhao.telas.Login;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 

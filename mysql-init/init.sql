@@ -11,3 +11,12 @@ CREATE TABLE `tads20_edevaldo`.`projeto_Usuario` (
   `cnh` VARCHAR(14),
   `ativo` TINYINT NOT NULL default 1,
   PRIMARY KEY (`cpf`));
+
+DROP TABLE IF EXISTS projeto_login;
+create table projeto_login (
+    id int not null AUTO_INCREMENT,
+	  cpf_login varchar(14) not null,
+    senha_login varchar(45) not null,
+    PRIMARY KEY(id),
+    FOREIGN KEY(cpf_login) references projeto_Usuario(cpf)
+)

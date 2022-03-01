@@ -1,19 +1,23 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
+import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 
 public class HomeMoto {
 
-    private Home homeController;
+    private AutenticacaoServico autenticacaoServico;
+    private Login login;
 
-    public HomeMoto(Home homeController) {
+    public HomeMoto(Login login, AutenticacaoServico autenticacaoServico) {
         System.out.println("Home Motorista");
-        this.homeController = homeController;
+        this.autenticacaoServico = autenticacaoServico;
+        this.login = login;
     }
 
     @FXML
     public void logout() {
-        homeController.logout();
+        autenticacaoServico.logout();
+        login.atualizaTela();
     }
 
 }

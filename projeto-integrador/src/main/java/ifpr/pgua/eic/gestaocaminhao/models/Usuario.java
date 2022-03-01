@@ -25,7 +25,7 @@ public class Usuario {
         this.gestor = gestor;
     }
 
-    public boolean getGestor() {
+    public boolean isGestor() {
         return gestor;
     }
 

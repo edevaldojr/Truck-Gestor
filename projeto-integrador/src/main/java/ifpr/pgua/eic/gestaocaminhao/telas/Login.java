@@ -5,9 +5,11 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -30,30 +32,30 @@ public class Login {
 
     private AutenticacaoServico autenticacaoServico;
     private RepositorioUsuarios repositorioUsuarios;
-    private Home homeControler;
-
-    public Login(AutenticacaoServico autenticacaoServico, Home homeControler) {
-        this.autenticacaoServico = autenticacaoServico;
-        this.homeControler = homeControler;
-
-    }
 
     public Login(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios) {
-        this.repositorioUsuarios = repositorioUsuarios;
         this.autenticacaoServico = autenticacaoServico;
-
+        this.repositorioUsuarios = repositorioUsuarios;
     }
 
     @FXML
     public void logar() {
         String cpf = tfCpf.getText();
         String senha = pfSenha.getText();
+        boolean temErro = false;
         try {
             autenticacaoServico.logar(cpf, senha);
             if (autenticacaoServico.estaLogado()) {
-                homeControler.atualizaTela();
+                Alert alerta = new Alert(temErro ? AlertType.CONFIRMATION : AlertType.INFORMATION,
+                        "Login realizado com sucesso!");
+                alerta.showAndWait();
+                atualizaTela();
             }
         } catch (Exception e) {
+            temErro = true;
+            Alert alerta = new Alert(temErro ? AlertType.ERROR : AlertType.INFORMATION,
+                    "Email ou senha incorretos!");
+            alerta.showAndWait();
             e.getCause();
         }
     }
@@ -62,7 +64,32 @@ public class Login {
     public void cadastrar() {
         root.getChildren().clear();
         root.getChildren().add(
-                App.loadTela("fxml/cadastro_users.fxml", a -> new CadastroUsuario(repositorioUsuarios)));
+                App.loadTela("fxml/cadastro_users.fxml",
+                        a -> new CadastroUsuario(autenticacaoServico, repositorioUsuarios)));
+    }
+
+    @FXML
+    public void atualizaTela() {
+        if (!autenticacaoServico.estaLogado()) {
+            root.getChildren().clear();
+            root.getChildren()
+                    .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, repositorioUsuarios)));
+        } else {
+
+            if (autenticacaoServico.getLogado().isGestor()) {
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
+                        a -> new HomeGestor(this, autenticacaoServico)));
+
+            } else {
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
+                        a -> new HomeMoto(this, autenticacaoServico)));
+
+            }
+
+        }
+
     }
 
 }

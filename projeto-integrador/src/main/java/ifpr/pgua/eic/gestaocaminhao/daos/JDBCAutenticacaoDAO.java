@@ -3,7 +3,7 @@ package ifpr.pgua.eic.gestaocaminhao.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
@@ -23,13 +23,14 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
 
         String sql = "SELECT * from projeto_Usuario WHERE cpf=? AND senha=? AND ativo=1";
 
-        PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, loginCPF);
         pstmt.setString(2, senha);
 
-        ResultSet rs = pstmt.executeQuery(sql);
+        ResultSet rs = pstmt.executeQuery();
 
+        rs.next();
         Usuario u = montarUsuario(rs);
         String login = u.getCpf();
         String password = u.getSenha();
@@ -45,7 +46,7 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
         }
     }
 
-    public Usuario montarUsuario(ResultSet rs) throws Exception {
+    private Usuario montarUsuario(ResultSet rs) throws Exception {
         String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
         String cidade = rs.getString("cidade");
@@ -56,10 +57,9 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
 
-        Usuario u = new Usuario(cpf, nome, cidade, endereco, email, senha, telefone, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh, gestor);
 
         return u;
-
     }
 
     @Override
