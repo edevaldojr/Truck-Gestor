@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
@@ -13,11 +14,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 public class CadastroUsuario {
 
     private RepositorioUsuarios repositorioUsuarios;
+
+    private RepositorioCaminhao repositorioCaminhao;
 
     private Usuario usuarioExistente = null;
 
@@ -59,9 +61,11 @@ public class CadastroUsuario {
 
     private AutenticacaoServico autenticacaoServico;
 
-    public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios) {
+    public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao) {
         this.repositorioUsuarios = repositorioUsuarios;
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios) {
@@ -74,6 +78,10 @@ public class CadastroUsuario {
             tfNome.setText(usuarioExistente.getNome());
             tfEmail.setText(usuarioExistente.getEmail());
             tfTelefone.setText(usuarioExistente.getTelefone());
+            tfCidade.setText(usuarioExistente.getCidade());
+            tfEndereco.setText(usuarioExistente.getEndereco());
+            tfCnh.setText(usuarioExistente.getCnh());
+            pfSenha.setText(usuarioExistente.getSenha());
 
             btCadastrar.setText("Atualizar");
 
@@ -84,7 +92,8 @@ public class CadastroUsuario {
     private void voltar() {
         root.getChildren().clear();
         root.getChildren()
-                .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, repositorioUsuarios)));
+                .add(App.loadTela("fxml/login.fxml",
+                        a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)));
 
     }
 

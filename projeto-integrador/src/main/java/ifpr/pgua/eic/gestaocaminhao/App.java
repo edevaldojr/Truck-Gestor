@@ -11,9 +11,12 @@ import javafx.util.Callback;
 import java.io.IOException;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCAutenticacaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCUsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import ifpr.pgua.eic.gestaocaminhao.telas.Login;
@@ -27,15 +30,19 @@ public class App extends Application {
     FabricaConexoes fabricaConexoes = FabricaConexoes.getInstance();
 
     UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes);
+    CaminhaoDAO caminhaoDAO = new JDBCCaminhaoDAO(fabricaConexoes);
     private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes);
 
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);
+    private RepositorioCaminhao repositorioCaminhao = new RepositorioCaminhao(caminhaoDAO);
     private AutenticacaoServico autenticacaoServico = new AutenticacaoServico(autenticacaoDAO);
 
     @Override
     public void start(Stage stage) throws IOException {
 
-        Scene scene = new Scene(loadTela("fxml/login.fxml", o -> new Login(autenticacaoServico, repositorioUsuarios)),
+        Scene scene = new Scene(
+                loadTela("fxml/login.fxml",
+                        o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)),
                 864, 515);
         // stage.setMaximized(true);
         stage.setTitle("Truck");

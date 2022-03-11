@@ -2,6 +2,7 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
@@ -32,10 +33,13 @@ public class Login {
 
     private AutenticacaoServico autenticacaoServico;
     private RepositorioUsuarios repositorioUsuarios;
+    private RepositorioCaminhao repositorioCaminhao;
 
-    public Login(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios) {
+    public Login(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     @FXML
@@ -54,7 +58,7 @@ public class Login {
         } catch (Exception e) {
             temErro = true;
             Alert alerta = new Alert(temErro ? AlertType.ERROR : AlertType.INFORMATION,
-                    "Email ou senha incorretos!");
+                    "Cpf ou senha incorretos!");
             alerta.showAndWait();
             e.getCause();
         }
@@ -65,7 +69,7 @@ public class Login {
         root.getChildren().clear();
         root.getChildren().add(
                 App.loadTela("fxml/cadastro_users.fxml",
-                        a -> new CadastroUsuario(autenticacaoServico, repositorioUsuarios)));
+                        a -> new CadastroUsuario(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)));
     }
 
     @FXML
@@ -73,13 +77,14 @@ public class Login {
         if (!autenticacaoServico.estaLogado()) {
             root.getChildren().clear();
             root.getChildren()
-                    .add(App.loadTela("fxml/login.fxml", a -> new Login(autenticacaoServico, repositorioUsuarios)));
+                    .add(App.loadTela("fxml/login.fxml",
+                            a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)));
         } else {
 
             if (autenticacaoServico.getLogado().isGestor()) {
                 root.getChildren().clear();
                 root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
-                        a -> new HomeGestor(this, autenticacaoServico)));
+                        a -> new HomeGestor(this, autenticacaoServico, repositorioCaminhao)));
 
             } else {
                 root.getChildren().clear();
