@@ -14,7 +14,7 @@
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btHome" mnemonicParsing="false" prefHeight="64.0" prefWidth="184.0" text="Home" />
-                  <Button fx:id="btEntradas" onAction="#entradasViagens" mnemonicParsing="false" prefHeight="41.0" prefWidth="184.0" text="Entradas" />
+                  <Button fx:id="btEntradas" onAction="#abrirEntradasViagens" mnemonicParsing="false" prefHeight="41.0" prefWidth="184.0" text="Entradas" />
                   <Button fx:id="btDespesas" mnemonicParsing="false" prefHeight="41.0" prefWidth="195.0" text="Despesas" />
                   <Button fx:id="btRelatorios" onAction="#abrirRelatorios" mnemonicParsing="false" prefHeight="41.0" prefWidth="194.0" text="Relatórios" />
                   <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="191.0" text="Cadastrar Caminhão" />

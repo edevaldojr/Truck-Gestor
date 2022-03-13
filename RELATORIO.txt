@@ -18,3 +18,8 @@
 -Tela de login funcional diferenciando tipos de usuário!
 -Tela de logout funcional!!
 -Adicionando alerta no login
+
+11/03/2022
+- Criando tela de cadastro de caminhões
+- Criando tabela no banco e fazendo a conexao
+- preparando para o caso de uso "inserção de entradas" 
