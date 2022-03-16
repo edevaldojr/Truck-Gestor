@@ -23,3 +23,7 @@
 - Criando tela de cadastro de caminhões
 - Criando tabela no banco e fazendo a conexao
 - preparando para o caso de uso "inserção de entradas" 
+
+13/03/2022
+- Criando tabela, estado, cidade, endereco e empresa.
+- Melhorando tabela usuario

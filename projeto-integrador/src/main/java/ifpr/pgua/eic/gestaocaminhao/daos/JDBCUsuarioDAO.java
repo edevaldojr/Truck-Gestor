@@ -3,7 +3,6 @@ package ifpr.pgua.eic.gestaocaminhao.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -29,8 +28,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         pstmt.setString(1, u.getCpf());
         pstmt.setString(2, u.getNome());
-        pstmt.setString(3, u.getCidade());
-        pstmt.setString(4, u.getEndereco());
+        pstmt.setInt(4, u.getEndereco());
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getTelefone());
         pstmt.setString(7, u.getSenha());
@@ -53,8 +51,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, u.getNome());
-        pstmt.setString(2, u.getCidade());
-        pstmt.setString(3, u.getEndereco());
+        pstmt.setInt(3, u.getEndereco());
         pstmt.setString(4, u.getTelefone());
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getSenha());
@@ -90,19 +87,20 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public Usuario montarUsuario(ResultSet rs) throws Exception {
         String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
-        String cidade = rs.getString("cidade");
-        String endereco = rs.getString("endereco");
         String telefone = rs.getString("telefone");
         String email = rs.getString("email");
         String senha = rs.getString("senha");
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
+        int endereco = rs.getInt("endereco_id"); 
 
-        Usuario u = new Usuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 
         return u;
 
     }
+
+  
 
     @Override
     public ArrayList<Usuario> listar() throws Exception {
@@ -127,5 +125,9 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         return lista;
     }
+
+    
+
+    
 
 }

@@ -49,23 +49,18 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     private Usuario montarUsuario(ResultSet rs) throws Exception {
         String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
-        String cidade = rs.getString("cidade");
-        String endereco = rs.getString("endereco");
+        int endereco = rs.getInt("endereco_id");
         String email = rs.getString("email");
         String senha = rs.getString("senha");
         String telefone = rs.getString("telefone");
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
 
-        Usuario u = new Usuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 
         return u;
     }
 
-    @Override
-    public boolean cadastrar(String loginCPF, String senha) throws Exception {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    
 
 }

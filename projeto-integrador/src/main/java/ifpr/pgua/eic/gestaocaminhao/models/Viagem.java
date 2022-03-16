@@ -9,11 +9,11 @@ public class Viagem {
     private LocalDate data_da_baixa;
     private double valor;
 
-    private Empresa empresa_origem;
-    private Empresa empresa_destino;
+    private int empresa_origem;
+    private int empresa_destino;
 
-    public Viagem(int id, double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
-            Empresa empresa_destino) {
+    public Viagem(int id, double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
+            int empresa_destino) {
         this.id = id;
         this.peso = peso;
         this.data_da_baixa = data_da_baixa;
@@ -22,8 +22,13 @@ public class Viagem {
         this.empresa_destino = empresa_destino;
     }
 
-    public Viagem() {
-
+    public Viagem(double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
+    int empresa_destino) {
+        this.peso = peso;
+        this.data_da_baixa = data_da_baixa;
+        this.valor = valor;
+        this.empresa_origem = empresa_origem;
+        this.empresa_destino = empresa_destino;
     }
 
     public int getId() {
@@ -58,19 +63,19 @@ public class Viagem {
         this.valor = valor;
     }
 
-    public Empresa getEmpresa_origem() {
+    public int getEmpresa_origem() {
         return empresa_origem;
     }
 
-    public void setEmpresa_origem(Empresa empresa_origem) {
+    public void setEmpresa_origem(int empresa_origem) {
         this.empresa_origem = empresa_origem;
     }
 
-    public Empresa getEmpresa_destino() {
+    public int getEmpresa_destino() {
         return empresa_destino;
     }
 
-    public void setEmpresa_destino(Empresa empresa_destino) {
+    public void setEmpresa_destino(int empresa_destino) {
         this.empresa_destino = empresa_destino;
     }
 }

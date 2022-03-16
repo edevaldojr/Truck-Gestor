@@ -44,10 +44,11 @@ drop table if exists projeto_Empresa;
 create table projeto_Empresa(
 	  id int not null AUTO_INCREMENT,
     nome varchar(100) not null,
-    endereco int not null,
     tipo enum ('DESTINO','ORIGEM') not null,
+    endereco_id int not null,
     ativo TINYINT not null default 1,
-	  PRIMARY KEY(id)
+	  PRIMARY KEY(id),
+    FOREIGN KEY(endereco_id) REFERENCES projeto_Endereco(id)    
 );
 
 create table projeto_Viagem(

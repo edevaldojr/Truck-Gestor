@@ -1,6 +1,5 @@
 package ifpr.pgua.eic.gestaocaminhao.models;
 
-import java.util.Date;
 
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoCaminhao;
 

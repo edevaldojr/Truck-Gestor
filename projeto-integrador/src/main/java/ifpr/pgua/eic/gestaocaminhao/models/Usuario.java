@@ -1,28 +1,41 @@
 package ifpr.pgua.eic.gestaocaminhao.models;
 
+import java.util.List;
+
 public class Usuario {
 
     private String cpf;
     private String nome;
-    private String endereco;
-    private String cidade;
+    private int endereco;
     private String email;
     private String senha;
     private String telefone;
     private String cnh;
     private boolean gestor;
+    private List<Viagem> viagens;
 
-    public Usuario(String cpf, String nome, String cidade, String endereco, String telefone, String email, String senha,
+    public Usuario(String cpf, String nome, int endereco, String telefone, String email, String senha,
             String cnh, boolean gestor) {
         this.cpf = cpf;
         this.nome = nome;
-        this.cidade = cidade;
         this.endereco = endereco;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
         this.cnh = cnh;
         this.gestor = gestor;
+    }
+    public Usuario(String cpf, String nome, int endereco, String telefone, String email, String senha,
+            String cnh, boolean gestor, List<Viagem> viagens) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.cnh = cnh;
+        this.gestor = gestor;
+        this.viagens = viagens;
     }
 
     public boolean isGestor() {
@@ -57,28 +70,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
     public String getTelefone() {
         return telefone;
     }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     public String getEmail() {
@@ -97,11 +94,20 @@ public class Usuario {
         this.senha = senha;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario [cidade=" + cidade + ", cnh=" + cnh + ", cpf=" + cpf + ", email=" + email + ", endereco="
-                + endereco + ", gestor=" + gestor + ", nome=" + nome + ", senha=" + senha + ", telefone=" + telefone
-                + "]";
+    public int getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(int endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 
 }

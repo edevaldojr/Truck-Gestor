@@ -17,11 +17,11 @@ public class RepositorioUsuarios {
         usuarios = new ArrayList<>();
     }
 
-    public boolean cadastrarUsuario(String cpf, String nome, String cidade, String endereco, String telefone,
+    public boolean cadastrarUsuario(String cpf, String nome, int endereco, String telefone,
             String email,
             String senha,
             String cnh, boolean gestor) throws SQLException {
-        Usuario u = new Usuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 
         try {
             usuarioDAO.cadastrar(u);
@@ -35,12 +35,12 @@ public class RepositorioUsuarios {
 
     }
 
-    public boolean atualizarUsuarios(String cpf, String nome, String cidade, String endereco, String email,
+    public boolean atualizarUsuarios(String cpf, String nome, int endereco, String email,
             String senha,
             String telefone,
             String cnh, boolean gestor) throws SQLException {
 
-        Usuario usuario = new Usuario(cpf, nome, cidade, endereco, email, senha, telefone, cnh, gestor);
+        Usuario usuario = new Usuario(cpf, nome, endereco, email, senha, telefone, cnh, gestor);
 
         try {
             return usuarioDAO.atualizar(cpf, usuario);

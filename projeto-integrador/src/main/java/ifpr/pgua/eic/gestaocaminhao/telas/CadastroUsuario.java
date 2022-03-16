@@ -78,8 +78,7 @@ public class CadastroUsuario {
             tfNome.setText(usuarioExistente.getNome());
             tfEmail.setText(usuarioExistente.getEmail());
             tfTelefone.setText(usuarioExistente.getTelefone());
-            tfCidade.setText(usuarioExistente.getCidade());
-            tfEndereco.setText(usuarioExistente.getEndereco());
+            tfEndereco.setText(usuarioExistente.getEndereco()+"");
             tfCnh.setText(usuarioExistente.getCnh());
             pfSenha.setText(usuarioExistente.getSenha());
 
@@ -102,12 +101,13 @@ public class CadastroUsuario {
         String cpf = tfCpf.getText();
         String nome = tfNome.getText();
         String cidade = tfCidade.getText();
-        String endereco = tfEndereco.getText();
+        String end = tfEndereco.getText();
         String telefone = tfTelefone.getText();
         String email = tfEmail.getText();
         String senha = pfSenha.getText();
         String cnh = tfCnh.getText();
         boolean gestor = cbGestor.isSelected();
+        int endereco = Integer.parseInt(end);
 
         boolean temErro = false;
         String msg = "";
@@ -127,7 +127,7 @@ public class CadastroUsuario {
             msg += "Cidade não pode ser vazio!\n";
         }
 
-        if (endereco.isEmpty() || endereco.isBlank()) {
+        if (end.isEmpty() || end.isBlank()) {
             temErro = true;
             msg += "Endereço não pode ser vazio!\n";
         }
@@ -159,11 +159,11 @@ public class CadastroUsuario {
                 boolean ret;
 
                 if (usuarioExistente != null) {
-                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, cidade, endereco, telefone, email, senha,
+                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha,
                             cnh,
                             gestor);
                 } else {
-                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, cidade, endereco, telefone, email, senha, cnh,
+                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
                             gestor);
                 }
 

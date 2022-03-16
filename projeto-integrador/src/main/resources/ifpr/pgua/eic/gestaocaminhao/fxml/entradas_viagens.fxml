@@ -44,7 +44,7 @@
                         <Label layoutX="93.0" layoutY="158.0" text="Ano de Fabricação:" />
                         <Label layoutX="93.0" layoutY="216.0" text="Modelo:" />
                         <Label layoutX="382.0" layoutY="216.0" text="Tipo:" />
-                        <Button fx:id="btCadastrar" layoutX="89.0" layoutY="323.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                        <Button fx:id="btCadastrar" layoutX="89.0" layoutY="323.0" mnemonicParsing="false"  text="Cadastrar" />
                         <Button fx:id="btLimpar" layoutX="197.0" layoutY="323.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                      </children>

@@ -6,5 +6,4 @@ public interface AutenticacaoDAO {
 
     Usuario login(String loginCPF, String senha) throws Exception;
 
-    boolean cadastrar(String loginCPF, String senha) throws Exception;
 }

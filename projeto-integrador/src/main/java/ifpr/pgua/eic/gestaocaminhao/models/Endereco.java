@@ -8,11 +8,11 @@ public class Endereco {
     private String bairro;
     private String cep;
 
-    private Cidade cidade;
+    private int cidade;
     private Viagem viagem;
 
     public Endereco(int id, String numero, String complemento, String bairro, String cep,
-            Cidade cidade, Viagem viagem) {
+            int cidade, Viagem viagem) {
         this.id = id;
         this.numero = numero;
         this.complemento = complemento;
@@ -66,11 +66,11 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public Cidade getCidade() {
+    public int getCidade() {
         return cidade;
     }
 
-    public void setCidade(Cidade cidade) {
+    public void setCidade(int cidade) {
         this.cidade = cidade;
     }
 
@@ -82,9 +82,5 @@ public class Endereco {
         this.viagem = viagem;
     }
 
-    @Override
-    public String toString() {
-        return "Endereco [Cidade= " + cidade + ", Bairro= " + bairro + ", Cep= " + cep + ", Numero= " + numero + " ]";
-    }
 
 }
