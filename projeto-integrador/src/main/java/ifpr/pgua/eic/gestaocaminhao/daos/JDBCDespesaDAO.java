@@ -11,7 +11,7 @@ import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
-public class JDBCDespesa implements DespesaDAO{
+public class JDBCDespesaDAO implements DespesaDAO {
 
     FabricaConexoes fabricaConexoes;
 
@@ -86,11 +86,10 @@ public class JDBCDespesa implements DespesaDAO{
         String nome = rs.getString("nome");
         double valorDespesaAutopeca = rs.getDouble("valorDespesaAutopeca");
         double valorDespesaCombustivel = rs.getDouble("valorDespesaCombustivel");
-        
 
         Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesaAutopeca, valorDespesaCombustivel);
 
         return despesa;
     }
-    
+
 }

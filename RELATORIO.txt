@@ -27,3 +27,8 @@
 13/03/2022
 - Criando tabela, estado, cidade, endereco e empresa.
 - Melhorando tabela usuario
+
+15/03/2022
+-Povoando tabela de cidade e estados.
+-Terminado de criar os metodos JDBCViagemDAO, criando classe Despesa.
+-Criando banco pra Viagem e para Despesas(inserir LocalDate em despesa: pendente).

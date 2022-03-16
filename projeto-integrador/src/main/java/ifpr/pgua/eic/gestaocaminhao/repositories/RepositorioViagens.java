@@ -8,7 +8,6 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 
 public class RepositorioViagens {
-    
 
     private ArrayList<Viagem> viagens;
 
@@ -20,8 +19,8 @@ public class RepositorioViagens {
     }
 
     public boolean cadastrarViagens(double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
-    int empresa_destino) throws SQLException {
-        Viagem v = new Viagem(peso, data_da_baixa, valor, empresa_origem, empresa_destino);
+            int empresa_destino, String carga) throws SQLException {
+        Viagem v = new Viagem(peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga);
 
         try {
             viagemDAO.cadastrar(v);
@@ -36,9 +35,9 @@ public class RepositorioViagens {
     }
 
     public boolean atualizarViagens(int id, double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
-    int empresa_destino) throws SQLException {
+            int empresa_destino, String carga) throws SQLException {
 
-            Viagem viagem = new Viagem(id, peso, data_da_baixa, valor, empresa_origem, empresa_destino);
+        Viagem viagem = new Viagem(id, peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga);
 
         try {
             return viagemDAO.atualizar(id, viagem);
@@ -58,6 +57,5 @@ public class RepositorioViagens {
     public ArrayList<Viagem> listarViagens() throws Exception {
         return viagemDAO.listar();
     }
-
 
 }

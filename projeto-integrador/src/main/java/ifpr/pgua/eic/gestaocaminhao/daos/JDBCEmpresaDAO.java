@@ -25,7 +25,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         pstmt.setString(1, e.getNome());
         pstmt.setInt(2, e.getTipo().getCod());
-        pstmt.setInt(3, e.getEndereco().getId());
+        pstmt.setInt(3, e.getEndereco());
 
         pstmt.execute();
         pstmt.close();
@@ -44,7 +44,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         pstmt.setString(1, e.getNome());
         pstmt.setInt(2, e.getTipo().getCod());
-        pstmt.setInt(3, e.getEndereco().getId());
+        pstmt.setInt(3, e.getEndereco());
 
         int ret = pstmt.executeUpdate();
 
@@ -73,19 +73,37 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
     @Override
     public ArrayList<Empresa> listar() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList<Empresa> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Empresa u = montarEmpresa(rs);
+            lista.add(u);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
     }
 
     public Empresa montarEmpresa(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
-        int tp = rs.getInt("tipo");
         int endereco = rs.getInt("endereco_id");
-        TipoEmpresa tipo = tipo.toEnum(tp);
+        TipoEmpresa tipo = TipoEmpresa.valueOf(rs.getString("tipo"));
 
         Empresa empresa = new Empresa(id, nome, endereco, tipo);
 
+        return empresa;
     }
 
 }
