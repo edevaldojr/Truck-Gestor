@@ -67,11 +67,38 @@ create table projeto_Viagem(
 
 create table projeto_Endereco(
 	  id int not null AUTO_INCREMENT,
-    numero int not null,
+    numero varchar(11) not null,
     complemento varchar(45) not null,
     bairro varchar(45) not null,
     cep varchar(10) not null,
 	  cidade_id int not null,
     PRIMARY KEY(id),
     FOREIGN KEY(cidade_id) REFERENCES projeto_Cidade(id)
+);
+
+
+create table projeto_Despesa(
+	id int not null AUTO_INCREMENT,
+    tipoDespesa ENUM('AUTOPECAS', 'COMBUSTIVEL') not null,
+    nome varchar(120) not null,
+    valorDespesaAutopeca double,
+    valorDespesaCombustivel double,
+    dataDespesa date not null,
+    PRIMARY KEY(id)
+);
+
+drop table if exists projeto_Viagem;
+create table projeto_Viagem(
+	id int not null AUTO_INCREMENT,
+    peso double not null,
+    data_da_Baixa datetime not null,
+    valor double not null,
+    carga varchar(45) not null,
+    empresa_origem_id int not null,
+    empresa_destino_id int not null,
+    motorista varchar(12) not null,
+    PRIMARY KEY(id),
+    FOREIGN KEY(empresa_origem_id) REFERENCES projeto_Empresa(id),
+    FOREIGN KEY(empresa_destino_id) REFERENCES projeto_Empresa(id),
+    FOREIGN KEY(motorista) references projeto_Usuario(cpf)
 );

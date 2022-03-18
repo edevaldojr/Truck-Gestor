@@ -6,13 +6,11 @@ public class Estado {
     
     private int id;
     private String nome;
-    
-    private List<Cidade> cidades;
+    private String uf;
 
-    public Estado(int id, String nome, List<Cidade> cidades) {
+    public Estado(int id, String nome, String uf) {
         this.id = id;
         this.nome = nome;
-        this.cidades = cidades;
     }
 
     public Estado(){
@@ -35,11 +33,11 @@ public class Estado {
         this.nome = nome;
     }
 
-    public List<Cidade> getCidades() {
-        return cidades;
+    public String getUf() {
+        return uf;
     }
 
-    public void setCidades(List<Cidade> cidades) {
-        this.cidades = cidades;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }

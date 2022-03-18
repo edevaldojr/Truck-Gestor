@@ -32,3 +32,10 @@
 -Povoando tabela de cidade e estados.
 -Terminado de criar os metodos JDBCViagemDAO, criando classe Despesa.
 -Criando banco pra Viagem e para Despesas(inserir LocalDate em despesa: pendente).
+-(Fazer chave estrangeira que ligue usuario motorista a viagem)
+
+18/03/2022
+-Inserindo localdate para saber a data da despesa.
+-Viagem contém motorista!
+-DAOS de cidade, estado e endereço criados
+-Repositorio de despesas.

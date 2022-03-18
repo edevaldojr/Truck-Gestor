@@ -8,18 +8,15 @@ public class Endereco {
     private String bairro;
     private String cep;
 
-    private int cidade;
-    private Viagem viagem;
+    private Cidade cidade;
 
-    public Endereco(int id, String numero, String complemento, String bairro, String cep,
-            int cidade, Viagem viagem) {
+    public Endereco(int id, String numero, String complemento, String bairro, String cep, Cidade cidade) {
         this.id = id;
         this.numero = numero;
         this.complemento = complemento;
         this.bairro = bairro;
         this.cep = cep;
         this.cidade = cidade;
-        this.viagem = viagem;
     }
 
     public Endereco() {
@@ -66,21 +63,12 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public int getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(int cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
-
-    public Viagem getViagem() {
-        return viagem;
-    }
-
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
-    }
-
 
 }

@@ -106,4 +106,29 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
         return empresa;
     }
 
+    @Override
+    public Empresa buscar(int id) throws Exception {
+        Empresa e = null;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Empresa WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while(rs.next()){
+            e = montarEmpresa(rs);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return e;
+    }
+
 }

@@ -14,4 +14,6 @@ public interface EmpresaDAO {
 
     ArrayList<Empresa> listar() throws Exception;
 
+    Empresa buscar(int id) throws Exception;
+
 }

@@ -14,4 +14,6 @@ public interface ViagemDAO {
 
     ArrayList<Viagem> listar() throws Exception;
 
+    Viagem buscar(int id) throws Exception;
+
 }

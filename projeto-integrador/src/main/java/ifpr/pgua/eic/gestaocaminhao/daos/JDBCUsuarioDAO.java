@@ -126,6 +126,31 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         return lista;
     }
 
+    @Override
+    public Usuario buscar(String cpf) throws Exception {
+        Usuario u = null;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Usuario WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, cpf);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while(rs.next()){
+            u = montarUsuario(rs);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return u;
+    }
+
     
 
     
