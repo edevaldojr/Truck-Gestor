@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 
 public interface CidadeDAO {
-    
+
     ArrayList<Cidade> listar() throws Exception;
 
-    Cidade buscar(int id) throws Exception;
+    Cidade buscarPorNome(String nome) throws Exception;
+
+    Cidade buscarPorId(int id) throws Exception;
 
 }

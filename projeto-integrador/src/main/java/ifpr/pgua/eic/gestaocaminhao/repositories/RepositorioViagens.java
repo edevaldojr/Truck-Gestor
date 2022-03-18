@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
+import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 
 public class RepositorioViagens {
@@ -18,9 +20,9 @@ public class RepositorioViagens {
         viagens = new ArrayList<>();
     }
 
-    public boolean cadastrarViagens(double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
-            int empresa_destino, String carga) throws SQLException {
-        Viagem v = new Viagem(peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga);
+    public boolean cadastrarViagens(double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
+            Empresa empresa_destino, String carga, Usuario caminhoneiro) throws SQLException {
+        Viagem v = new Viagem(peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga, caminhoneiro);
 
         try {
             viagemDAO.cadastrar(v);
@@ -34,10 +36,11 @@ public class RepositorioViagens {
 
     }
 
-    public boolean atualizarViagens(int id, double peso, LocalDate data_da_baixa, double valor, int empresa_origem,
-            int empresa_destino, String carga) throws SQLException {
+    public boolean atualizarViagens(int id, double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
+            Empresa empresa_destino, String carga, Usuario caminhoneiro) throws SQLException {
 
-        Viagem viagem = new Viagem(id, peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga);
+        Viagem viagem = new Viagem(id, peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga,
+                caminhoneiro);
 
         try {
             return viagemDAO.atualizar(id, viagem);

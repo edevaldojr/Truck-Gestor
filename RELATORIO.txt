@@ -39,3 +39,4 @@
 -Viagem contém motorista!
 -DAOS de cidade, estado e endereço criados
 -Repositorio de despesas.
+-Arrumando cadastro usuário com endereços.

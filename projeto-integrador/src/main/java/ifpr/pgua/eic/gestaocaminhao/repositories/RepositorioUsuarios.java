@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 
 public class RepositorioUsuarios {
@@ -17,10 +18,8 @@ public class RepositorioUsuarios {
         usuarios = new ArrayList<>();
     }
 
-    public boolean cadastrarUsuario(String cpf, String nome, int endereco, String telefone,
-            String email,
-            String senha,
-            String cnh, boolean gestor) throws SQLException {
+    public boolean cadastrarUsuario(String cpf, String nome, Endereco endereco, String telefone, String email,
+            String senha, String cnh, boolean gestor) throws SQLException {
         Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 
         try {
@@ -35,10 +34,8 @@ public class RepositorioUsuarios {
 
     }
 
-    public boolean atualizarUsuarios(String cpf, String nome, int endereco, String email,
-            String senha,
-            String telefone,
-            String cnh, boolean gestor) throws SQLException {
+    public boolean atualizarUsuarios(String cpf, String nome, Endereco endereco, String email, String senha,
+            String telefone, String cnh, boolean gestor) throws SQLException {
 
         Usuario usuario = new Usuario(cpf, nome, endereco, email, senha, telefone, cnh, gestor);
 

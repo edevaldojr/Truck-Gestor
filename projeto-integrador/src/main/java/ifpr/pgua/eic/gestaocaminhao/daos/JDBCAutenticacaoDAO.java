@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
 
     FabricaConexoes fabricaConexoes;
+
+    EnderecoDAO enderecoDAO;
 
     public JDBCAutenticacaoDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
@@ -56,7 +60,9 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
 
-        Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
+        Endereco enderecoObj = enderecoDAO.buscar(endereco);
+
+        Usuario u = new Usuario(cpf, nome, enderecoObj, telefone, email, senha, cnh, gestor);
 
         return u;
     }

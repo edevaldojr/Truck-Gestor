@@ -6,7 +6,7 @@ public class Usuario {
 
     private String cpf;
     private String nome;
-    private int endereco;
+    private Endereco endereco;
     private String email;
     private String senha;
     private String telefone;
@@ -14,7 +14,7 @@ public class Usuario {
     private boolean gestor;
     private List<Viagem> viagens;
 
-    public Usuario(String cpf, String nome, int endereco, String telefone, String email, String senha,
+    public Usuario(String cpf, String nome, Endereco endereco, String telefone, String email, String senha,
             String cnh, boolean gestor) {
         this.cpf = cpf;
         this.nome = nome;
@@ -25,7 +25,8 @@ public class Usuario {
         this.cnh = cnh;
         this.gestor = gestor;
     }
-    public Usuario(String cpf, String nome, int endereco, String telefone, String email, String senha,
+
+    public Usuario(String cpf, String nome, Endereco endereco, String telefone, String email, String senha,
             String cnh, boolean gestor, List<Viagem> viagens) {
         this.cpf = cpf;
         this.nome = nome;
@@ -94,11 +95,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(int endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 

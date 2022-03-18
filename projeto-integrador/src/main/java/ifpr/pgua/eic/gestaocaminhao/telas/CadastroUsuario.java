@@ -3,6 +3,10 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
+import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
@@ -21,6 +25,9 @@ public class CadastroUsuario {
 
     private RepositorioCaminhao repositorioCaminhao;
 
+    private EnderecoDAO enderecoDAO;
+    private CidadeDAO cidadeDAO;
+
     private Usuario usuarioExistente = null;
 
     @FXML
@@ -28,12 +35,6 @@ public class CadastroUsuario {
 
     @FXML
     private TextField tfNome;
-
-    @FXML
-    private TextField tfCidade;
-
-    @FXML
-    private TextField tfEndereco;
 
     @FXML
     private TextField tfEmail;
@@ -45,6 +46,27 @@ public class CadastroUsuario {
     private TextField pfSenha;
 
     @FXML
+    private TextField tfCnh;
+
+    @FXML
+    private TextField tfCidade;
+
+    @FXML
+    private TextField tfBairro;
+
+    @FXML
+    private TextField tfRua;
+    
+    @FXML
+    private TextField tfNumero;
+
+    @FXML
+    private TextField tfCep;
+
+    @FXML
+    private TextField tfComplemento;
+
+    @FXML
     private Button btCadastrar;
 
     @FXML
@@ -53,8 +75,7 @@ public class CadastroUsuario {
     @FXML
     private CheckBox cbGestor;
 
-    @FXML
-    private TextField tfCnh;
+    
 
     @FXML
     private AnchorPane root;
@@ -78,9 +99,13 @@ public class CadastroUsuario {
             tfNome.setText(usuarioExistente.getNome());
             tfEmail.setText(usuarioExistente.getEmail());
             tfTelefone.setText(usuarioExistente.getTelefone());
-            tfEndereco.setText(usuarioExistente.getEndereco()+"");
             tfCnh.setText(usuarioExistente.getCnh());
             pfSenha.setText(usuarioExistente.getSenha());
+            tfCidade.setText(usuarioExistente.getEndereco().getCidade().getNome());
+            tfBairro.setText(usuarioExistente.getEndereco().getBairro());
+            tfNumero.setText(usuarioExistente.getEndereco().getNumero()+"");
+            tfCep.setText(usuarioExistente.getEndereco().getCep());
+            tfComplemento.setText(usuarioExistente.getEndereco().getComplemento());
 
             btCadastrar.setText("Atualizar");
 
@@ -97,17 +122,22 @@ public class CadastroUsuario {
     }
 
     @FXML
-    private void cadastrar() {
+    private void cadastrar() throws Exception {
         String cpf = tfCpf.getText();
         String nome = tfNome.getText();
-        String cidade = tfCidade.getText();
-        String end = tfEndereco.getText();
         String telefone = tfTelefone.getText();
         String email = tfEmail.getText();
         String senha = pfSenha.getText();
         String cnh = tfCnh.getText();
+        String cidade = tfCidade.getText();
+        String rua = tfRua.getText();
+        String bairro = tfBairro.getText();
+        String numero = tfNumero.getText();
+        String cep = tfCep.getText();
+        String complemento = tfComplemento.getText();
+
+
         boolean gestor = cbGestor.isSelected();
-        int endereco = Integer.parseInt(end);
 
         boolean temErro = false;
         String msg = "";
@@ -127,9 +157,28 @@ public class CadastroUsuario {
             msg += "Cidade não pode ser vazio!\n";
         }
 
-        if (end.isEmpty() || end.isBlank()) {
+        if (bairro.isEmpty() || bairro.isBlank()) {
             temErro = true;
-            msg += "Endereço não pode ser vazio!\n";
+            msg += "Bairro não pode ser vazio!\n";
+        }
+        if (numero.isEmpty() || numero.isBlank()) {
+            temErro = true;
+            msg += "Número não pode ser vazio!\n";
+        }
+
+        if (rua.isEmpty() || rua.isBlank()) {
+            temErro = true;
+            msg += "Rua não pode ser vazio!\n";
+        }
+
+        if (cep.isEmpty() || cep.isBlank()) {
+            temErro = true;
+            msg += "CEP não pode ser vazio!\n";
+        }
+
+        if (complemento.isEmpty() || complemento.isBlank()) {
+            temErro = true;
+            msg += "Complemento não pode ser vazio!\n";
         }
 
         if (email.isEmpty() || email.isBlank()) {
@@ -159,12 +208,13 @@ public class CadastroUsuario {
                 boolean ret;
 
                 if (usuarioExistente != null) {
-                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha,
-                            cnh,
-                            gestor);
+                    Cidade cidadeObj = cidadeDAO.buscarPorNome(cidade);
+                    Endereco endereco = new Endereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
                 } else {
-                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
-                            gestor);
+                    Cidade cidadeObj = cidadeDAO.buscarPorNome(cidade);
+                    Endereco endereco = new Endereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
                 }
 
                 if (ret) {
@@ -189,12 +239,16 @@ public class CadastroUsuario {
     private void limpar() {
         tfCpf.clear();
         tfCidade.clear();
-        tfEndereco.clear();
         pfSenha.clear();
         tfEmail.clear();
         tfNome.clear();
         tfTelefone.clear();
         tfCnh.clear();
+        tfBairro.clear();
+        tfRua.clear();
+        tfNumero.clear();
+        tfCep.clear();
+        tfComplemento.clear();
         cbGestor.disarm();
     }
 

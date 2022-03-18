@@ -6,13 +6,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCUsuarioDAO implements UsuarioDAO {
 
     FabricaConexoes fabricaConexoes;
+    EnderecoDAO enderecoDAO;
 
     public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
@@ -28,7 +31,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         pstmt.setString(1, u.getCpf());
         pstmt.setString(2, u.getNome());
-        pstmt.setInt(4, u.getEndereco());
+        pstmt.setInt(4, u.getEndereco().getId());
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getTelefone());
         pstmt.setString(7, u.getSenha());
@@ -51,7 +54,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, u.getNome());
-        pstmt.setInt(3, u.getEndereco());
+        pstmt.setInt(3, u.getEndereco().getId());
         pstmt.setString(4, u.getTelefone());
         pstmt.setString(5, u.getEmail());
         pstmt.setString(6, u.getSenha());
@@ -92,15 +95,15 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         String senha = rs.getString("senha");
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
-        int endereco = rs.getInt("endereco_id"); 
+        int end = rs.getInt("endereco_id");
+
+        Endereco endereco = enderecoDAO.buscar(end);
 
         Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 
         return u;
 
     }
-
-  
 
     @Override
     public ArrayList<Usuario> listar() throws Exception {
@@ -140,7 +143,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         ResultSet rs = pstmt.executeQuery();
 
-        while(rs.next()){
+        while (rs.next()) {
             u = montarUsuario(rs);
         }
 
@@ -150,9 +153,5 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         return u;
     }
-
-    
-
-    
 
 }
