@@ -17,8 +17,9 @@ public class JDBCCidadeDAO implements CidadeDAO {
     FabricaConexoes fabricaConexoes;
     EstadoDAO estadoDAO;
 
-    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes) {
+    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes, EstadoDAO estadoDAO) {
         this.fabricaConexoes = fabricaConexoes;
+        this.estadoDAO = estadoDAO;
     }
 
     public Cidade montarCidade(ResultSet rs) throws Exception {

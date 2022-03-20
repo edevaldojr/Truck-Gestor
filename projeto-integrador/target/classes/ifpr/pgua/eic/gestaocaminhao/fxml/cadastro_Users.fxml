@@ -35,16 +35,19 @@
                <children>
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
                      <children>
-                        <TextField fx:id="tfComplemento" layoutX="386.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="Casa, Nº Apto etc" />
                         <TextField fx:id="tfCpf" layoutX="95.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
-                        <TextField fx:id="tfNome" layoutX="384.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome" />
-                        <TextField fx:id="tfCidade" layoutX="97.0" layoutY="237.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade" />
-                        <TextField fx:id="tfRua" layoutX="97.0" layoutY="285.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome da Rua" />
+                        <TextField fx:id="tfNome" layoutX="384.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome" />                       
                         <TextField fx:id="tfTelefone" layoutX="96.0" layoutY="106.0" prefHeight="25.0" prefWidth="206.0" promptText="Telefone" />
                         <TextField fx:id="tfEmail" layoutX="386.0" layoutY="106.0" prefHeight="22.0" prefWidth="207.0" promptText="Email" />
                         <PasswordField fx:id="pfSenha" layoutX="97.0" layoutY="158.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
                         <TextField fx:id="tfCnh" layoutX="386.0" layoutY="158.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH" />
-                        <CheckBox fx:id="cbGestor" layoutX="107.0" layoutY="380.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />
+                        <TextField fx:id="tfCidade" layoutX="97.0" layoutY="237.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade" />
+                        <TextField fx:id="tfBairro" layoutX="386.0" layoutY="237.0" prefHeight="25.0" prefWidth="207.0" promptText="Bairro" />
+                        <TextField fx:id="tfRua" layoutX="97.0" layoutY="285.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome da Rua" />
+                        <TextField fx:id="tfNumero" layoutX="386.0" layoutY="285.0" prefHeight="25.0" prefWidth="207.0" promptText="Número" />
+                        <TextField fx:id="tfCep" layoutX="97.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="CEP" />
+                        <TextField fx:id="tfComplemento" layoutX="386.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="Casa, Nº Apto etc" />        
+                        <CheckBox fx:id="cbGestor" layoutX="107.0" layoutY="380.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />         
                         <Label layoutX="95.0" layoutY="38.0" text="CPF:" />
                         <Label layoutX="384.0" layoutY="38.0" text="Nome:" />
                         <Label layoutX="97.0" layoutY="268.0" text="Rua" />
@@ -55,9 +58,6 @@
                         <Button fx:id="btCadastrar" layoutX="165.0" layoutY="430.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
                         <Button fx:id="btLimpar" layoutX="406.0" layoutY="430.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <Label layoutX="386.0" layoutY="141.0" text="CNH:" />
-                        <TextField fx:id="tfNumero" layoutX="386.0" layoutY="285.0" prefHeight="25.0" prefWidth="207.0" promptText="Número" />
-                        <TextField fx:id="tfBairro" layoutX="386.0" layoutY="237.0" prefHeight="25.0" prefWidth="207.0" promptText="Bairro" />
-                        <TextField fx:id="tfCep" layoutX="97.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="CEP" />
                         <Label layoutX="386.0" layoutY="220.0" text="Bairro:" />
                         <Label layoutX="97.0" layoutY="317.0" text="CEP:" />
                         <Label layoutX="386.0" layoutY="268.0" text="Número:" />

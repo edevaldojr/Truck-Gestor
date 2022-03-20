@@ -12,11 +12,23 @@ import java.io.IOException;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCAutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCaminhaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEnderecoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCUsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import ifpr.pgua.eic.gestaocaminhao.telas.Login;
@@ -31,18 +43,27 @@ public class App extends Application {
 
     UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes);
     CaminhaoDAO caminhaoDAO = new JDBCCaminhaoDAO(fabricaConexoes);
-    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes);
+    EstadoDAO estadoDAO = new JDBCEstadoDAO(fabricaConexoes);
+    CidadeDAO cidadeDAO = new JDBCCidadeDAO(fabricaConexoes, estadoDAO);
+    EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, cidadeDAO);
+    EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, enderecoDAO);
+    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, enderecoDAO);
 
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);
     private RepositorioCaminhao repositorioCaminhao = new RepositorioCaminhao(caminhaoDAO);
     private AutenticacaoServico autenticacaoServico = new AutenticacaoServico(autenticacaoDAO);
+    private RepositorioEndereco repositorioEndereco = new RepositorioEndereco(enderecoDAO);
+    private RepositorioEstado repositorioEstado = new RepositorioEstado(estadoDAO);
+    private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
+    private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO);
 
     @Override
     public void start(Stage stage) throws IOException {
 
         Scene scene = new Scene(
                 loadTela("fxml/login.fxml",
-                        o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)),
+                        o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)),
                 864, 515);
         // stage.setMaximized(true);
         stage.setTitle("Truck");

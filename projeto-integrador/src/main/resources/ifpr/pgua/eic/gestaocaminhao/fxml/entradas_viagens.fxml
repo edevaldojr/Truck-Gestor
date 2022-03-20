@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradaViagens">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
          <left>
@@ -32,21 +34,23 @@
                <children>
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
                      <children>
-                        <TextField fx:id="tfPlaca" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Quantidade de toneladas" />
-                        <TextField fx:id="tfCor" layoutX="382.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Cor" />
-                        <TextField fx:id="tfAnoFrabricacao" layoutX="93.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Ano de fabricação" />
-                        <TextField fx:id="tfMarca" layoutX="382.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Marca" />
-                        <TextField fx:id="tfModelo" layoutX="93.0" layoutY="233.0" prefHeight="22.0" prefWidth="204.0" promptText="Modelo:" />
-                        <TextField fx:id="tfTipo" layoutX="382.0" layoutY="233.0" prefHeight="22.0" prefWidth="207.0" promptText="(1) Caçamba, (2) Container" />
-                        <Label layoutX="93.0" layoutY="98.0" text="Tonelada:" />
-                        <Label layoutX="382.0" layoutY="98.0" text="Cor:" />
-                        <Label layoutX="382.0" layoutY="158.0" text="Marca:" />
-                        <Label layoutX="93.0" layoutY="158.0" text="Ano de Fabricação:" />
-                        <Label layoutX="93.0" layoutY="216.0" text="Modelo:" />
-                        <Label layoutX="382.0" layoutY="216.0" text="Tipo:" />
-                        <Button fx:id="btCadastrar" layoutX="89.0" layoutY="323.0" mnemonicParsing="false"  text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="197.0" layoutY="323.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+                        <TextField fx:id="tfPeso" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Peso " />
+                        <TextField fx:id="tfPrecoTonelada" layoutX="388.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Preço Tonelada" />
+                        <TextField fx:id="tfCarga" layoutX="93.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Carga" />
+                        <ComboBox fx:id="cbEmpresaOrigem" layoutX="388.0" layoutY="175.0" prefHeight="26.0" prefWidth="209.0" promptText="Empresa Origem" />
+                        <ComboBox fx:id="cbEmpresaDestino" layoutX="93.0" layoutY="246.0" prefHeight="26.0" prefWidth="210.0" promptText="Empresa Destino" />
+                        <DatePicker fx:id="dpDataDaBaixa" layoutX="388.0" layoutY="247.0" prefHeight="26.0" prefWidth="216.0" />
+                        <TextField fx:id="tfCpfMoto" layoutX="93.0" layoutY="325.0" prefHeight="26.0" prefWidth="220.0" promptText="CPF do motorista" />
+                        <Label layoutX="93.0" layoutY="98.0" text="Peso Tonelada:" />
+                        <Label layoutX="388.0" layoutY="225.0" text="Data da Baixa:" />
+                        <Label layoutX="388.0" layoutY="98.0" text="Preço por Tonelada:" />
+                        <Label layoutX="93.0" layoutY="158.0" text="Carga:" />
+                        <Label layoutX="93.0" layoutY="225.0" text="Empresa Destino:" />
+                        <Label layoutX="388.0" layoutY="156.0" text="Empresa Origem:" />
+                        <Button fx:id="btCadastrar" layoutX="93.0" layoutY="392.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                        <Button fx:id="btLimpar" layoutX="201.0" layoutY="392.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="93.0" layoutY="307.0" text="CPF do motorista:" />
                      </children>
                   </Pane>
                </children>

@@ -58,4 +58,12 @@ public class RepositorioUsuarios {
         return usuarioDAO.listar();
     }
 
+    public Usuario buscar(String cpf) throws SQLException {
+        try {
+            return usuarioDAO.buscar(cpf);
+        } catch (Exception e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
 }

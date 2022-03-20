@@ -17,8 +17,9 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
 
     EnderecoDAO enderecoDAO;
 
-    public JDBCAutenticacaoDAO(FabricaConexoes fabricaConexoes) {
+    public JDBCAutenticacaoDAO(FabricaConexoes fabricaConexoes, EnderecoDAO enderecoDAO) {
         this.fabricaConexoes = fabricaConexoes;
+        this.enderecoDAO = enderecoDAO;
     }
 
     @Override
@@ -66,7 +67,5 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
 
         return u;
     }
-
-    
 
 }

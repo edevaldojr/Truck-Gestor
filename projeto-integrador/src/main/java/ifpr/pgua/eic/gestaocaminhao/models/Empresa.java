@@ -3,22 +3,23 @@ package ifpr.pgua.eic.gestaocaminhao.models;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
 
 public class Empresa {
-    
+
     private int id;
     private String nome;
-    private int endereco;
-    private int tipo; 
+    private Endereco endereco;
+    private int tipo;
 
-
-    public Empresa(int id, String nome, int endereco, TipoEmpresa tipo) {
+    public Empresa(int id, String nome, Endereco endereco, TipoEmpresa tipo) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.tipo = tipo.getCod();
     }
 
-    public Empresa(){
-        
+    public Empresa(String nome, Endereco endereco, TipoEmpresa tipo) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.tipo = tipo.getCod();
     }
 
     public int getId() {
@@ -37,11 +38,11 @@ public class Empresa {
         this.nome = nome;
     }
 
-    public int getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(int endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 

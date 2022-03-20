@@ -25,18 +25,18 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean cadastrar(Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Usuario(cpf,nome,cidade,endereco,email,telefone,senha,gestor,cnh) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_Usuario(cpf,nome,telefone,email,senha,gestor,cnh,endereco_id) VALUES (?,?,?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.setString(1, u.getCpf());
         pstmt.setString(2, u.getNome());
-        pstmt.setInt(4, u.getEndereco().getId());
-        pstmt.setString(5, u.getEmail());
-        pstmt.setString(6, u.getTelefone());
-        pstmt.setString(7, u.getSenha());
-        pstmt.setBoolean(8, u.isGestor());
-        pstmt.setString(9, u.getCnh());
+        pstmt.setString(3, u.getTelefone());
+        pstmt.setString(4, u.getEmail());
+        pstmt.setString(5, u.getSenha());
+        pstmt.setBoolean(6, u.isGestor());
+        pstmt.setString(7, u.getCnh());
+        pstmt.setInt(8, u.getEndereco().getId());
 
         pstmt.execute();
         pstmt.close();

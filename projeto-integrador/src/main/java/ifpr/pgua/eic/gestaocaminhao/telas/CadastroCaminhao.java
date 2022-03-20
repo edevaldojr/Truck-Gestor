@@ -6,6 +6,12 @@ import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,6 +24,12 @@ public class CadastroCaminhao {
 
     private RepositorioCaminhao repositorioCaminhao;
     private AutenticacaoServico autenticacaoServico;
+    private RepositorioUsuarios repositorioUsuarios;
+    private RepositorioEndereco repositorioEndereco;
+    private RepositorioCidade repositorioCidade;
+    private RepositorioEstado repositorioEstado;
+    private RepositorioViagens repositorioViagens;
+    private RepositorioEmpresa repositorioEmpresa;
     private Caminhao caminhaoExistente = null;
     private Login login;
 
@@ -79,7 +91,8 @@ public class CadastroCaminhao {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/home_gestor.fxml",
-                        a -> new HomeGestor(login, autenticacaoServico, repositorioCaminhao)));
+                        a -> new HomeGestor(login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
 
     }
 

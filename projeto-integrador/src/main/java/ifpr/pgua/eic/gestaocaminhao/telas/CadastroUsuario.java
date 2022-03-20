@@ -3,14 +3,19 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
+import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,10 +27,12 @@ import javafx.scene.layout.AnchorPane;
 public class CadastroUsuario {
 
     private RepositorioUsuarios repositorioUsuarios;
-
     private RepositorioCaminhao repositorioCaminhao;
+    private RepositorioEndereco repositorioEndereco;
+    private RepositorioCidade repositorioCidade;
+    private RepositorioEstado repositorioEstado;
+    private RepositorioEmpresa repositorioEmpresa;
 
-    private EnderecoDAO enderecoDAO;
     private CidadeDAO cidadeDAO;
 
     private Usuario usuarioExistente = null;
@@ -56,7 +63,7 @@ public class CadastroUsuario {
 
     @FXML
     private TextField tfRua;
-    
+
     @FXML
     private TextField tfNumero;
 
@@ -75,23 +82,32 @@ public class CadastroUsuario {
     @FXML
     private CheckBox cbGestor;
 
-    
-
     @FXML
     private AnchorPane root;
 
     private AutenticacaoServico autenticacaoServico;
 
     public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
-            RepositorioCaminhao repositorioCaminhao) {
-        this.repositorioUsuarios = repositorioUsuarios;
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa) {
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
         this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
     }
 
-    public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios) {
+    public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios,
+            RepositorioEndereco repositorioEndereco, RepositorioCidade repositorioCidade,
+            RepositorioEstado repositorioEstado) {
         this.repositorioUsuarios = repositorioUsuarios;
         this.usuarioExistente = usuarioExiste;
+        this.repositorioEndereco = repositorioEndereco;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
     }
 
     public void initialize() {
@@ -103,7 +119,7 @@ public class CadastroUsuario {
             pfSenha.setText(usuarioExistente.getSenha());
             tfCidade.setText(usuarioExistente.getEndereco().getCidade().getNome());
             tfBairro.setText(usuarioExistente.getEndereco().getBairro());
-            tfNumero.setText(usuarioExistente.getEndereco().getNumero()+"");
+            tfNumero.setText(usuarioExistente.getEndereco().getNumero() + "");
             tfCep.setText(usuarioExistente.getEndereco().getCep());
             tfComplemento.setText(usuarioExistente.getEndereco().getComplemento());
 
@@ -117,7 +133,8 @@ public class CadastroUsuario {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/login.fxml",
-                        a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao)));
+                        a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
 
     }
 
@@ -135,7 +152,6 @@ public class CadastroUsuario {
         String numero = tfNumero.getText();
         String cep = tfCep.getText();
         String complemento = tfComplemento.getText();
-
 
         boolean gestor = cbGestor.isSelected();
 
@@ -176,11 +192,6 @@ public class CadastroUsuario {
             msg += "CEP não pode ser vazio!\n";
         }
 
-        if (complemento.isEmpty() || complemento.isBlank()) {
-            temErro = true;
-            msg += "Complemento não pode ser vazio!\n";
-        }
-
         if (email.isEmpty() || email.isBlank()) {
             temErro = true;
             msg += "Email não pode ser vazio!\n";
@@ -208,13 +219,17 @@ public class CadastroUsuario {
                 boolean ret;
 
                 if (usuarioExistente != null) {
-                    Cidade cidadeObj = cidadeDAO.buscarPorNome(cidade);
-                    Endereco endereco = new Endereco(numero, complemento, bairro, rua, cep, cidadeObj);
-                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
+                    Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
+                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
+                    ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha, cnh,
+                            gestor);
                 } else {
-                    Cidade cidadeObj = cidadeDAO.buscarPorNome(cidade);
-                    Endereco endereco = new Endereco(numero, complemento, bairro, rua, cep, cidadeObj);
-                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
+                    Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
+                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
+                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
+                            gestor);
                 }
 
                 if (ret) {

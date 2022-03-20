@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 
 public interface EmpresaDAO {
-    
+
     boolean cadastrar(Empresa e) throws Exception;
 
     boolean atualizar(int id, Empresa e) throws Exception;
@@ -15,5 +15,7 @@ public interface EmpresaDAO {
     ArrayList<Empresa> listar() throws Exception;
 
     Empresa buscar(int id) throws Exception;
+
+    Empresa buscarPorNome(String nome) throws Exception;
 
 }

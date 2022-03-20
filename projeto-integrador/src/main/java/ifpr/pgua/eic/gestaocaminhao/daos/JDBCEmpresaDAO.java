@@ -7,25 +7,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
+import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCEmpresaDAO implements EmpresaDAO {
 
     FabricaConexoes fabricaConexoes;
+    EnderecoDAO enderecoDAO;
+
+    public JDBCEmpresaDAO(FabricaConexoes fabricaConexoes, EnderecoDAO enderecoDAO) {
+        this.fabricaConexoes = fabricaConexoes;
+        this.enderecoDAO = enderecoDAO;
+    }
 
     @Override
     public boolean cadastrar(Empresa e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Empresa(nome, tipo, endereco_id, ativo) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO projeto_Empresa(nome, tipo, endereco_id) VALUES (?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.setString(1, e.getNome());
         pstmt.setInt(2, e.getTipo().getCod());
-        pstmt.setInt(3, e.getEndereco());
+        pstmt.setInt(3, e.getEndereco().getId());
 
         pstmt.execute();
         pstmt.close();
@@ -44,7 +52,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         pstmt.setString(1, e.getNome());
         pstmt.setInt(2, e.getTipo().getCod());
-        pstmt.setInt(3, e.getEndereco());
+        pstmt.setInt(3, e.getEndereco().getId());
 
         int ret = pstmt.executeUpdate();
 
@@ -98,8 +106,10 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public Empresa montarEmpresa(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
-        int endereco = rs.getInt("endereco_id");
+        int enderecoid = rs.getInt("endereco_id");
         TipoEmpresa tipo = TipoEmpresa.valueOf(rs.getString("tipo"));
+
+        Endereco endereco = enderecoDAO.buscar(enderecoid);
 
         Empresa empresa = new Empresa(id, nome, endereco, tipo);
 
@@ -120,7 +130,32 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         ResultSet rs = pstmt.executeQuery();
 
-        while(rs.next()){
+        while (rs.next()) {
+            e = montarEmpresa(rs);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return e;
+    }
+
+    @Override
+    public Empresa buscarPorNome(String nome) throws Exception {
+        Empresa e = null;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Empresa WHERE nome=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, nome);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
             e = montarEmpresa(rs);
         }
 

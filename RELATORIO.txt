@@ -40,3 +40,8 @@
 -DAOS de cidade, estado e endereço criados
 -Repositorio de despesas.
 -Arrumando cadastro usuário com endereços.
+
+20/03/2022
+-Arrumando Login concluído!!
+-Tela cadastrar empresa!
+-Tela cadastrar Usuario!

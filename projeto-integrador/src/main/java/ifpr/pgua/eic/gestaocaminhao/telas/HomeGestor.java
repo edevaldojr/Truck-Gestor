@@ -2,6 +2,12 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +17,12 @@ public class HomeGestor {
 
     private AutenticacaoServico autenticacaoServico;
     private RepositorioCaminhao repositorioCaminhao;
+    private RepositorioUsuarios repositorioUsuarios;
+    private RepositorioEndereco repositorioEndereco;
+    private RepositorioCidade repositorioCidade;
+    private RepositorioEstado repositorioEstado;
+    private RepositorioViagens repositorioViagens;
+    private RepositorioEmpresa repositorioEmpresa;
     private Login login;
 
     @FXML
@@ -25,10 +37,19 @@ public class HomeGestor {
     @FXML
     private AnchorPane root;
 
-    public HomeGestor(Login login, AutenticacaoServico autenticacaoServico, RepositorioCaminhao repositorioCaminhao) {
-        System.out.println("Home Gestor");
+    public HomeGestor(Login login, AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco,
+            RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade,
+            RepositorioEmpresa repositorioEmpresa) {
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
         this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
         this.login = login;
     }
 
@@ -46,6 +67,16 @@ public class HomeGestor {
     }
 
     @FXML
+    public void abrirCadastrarEmpresa() {
+        root.getChildren().clear();
+        root.getChildren()
+                .add(App.loadTela("fxml/cadastro_empresa.fxml",
+                        a -> new CadastroEmpresa(this.login, autenticacaoServico, repositorioUsuarios,
+                                repositorioCaminhao,
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+    }
+
+    @FXML
     public void abrirRelatorios() {
         root.getChildren().clear();
         root.getChildren()
@@ -58,7 +89,9 @@ public class HomeGestor {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/entradas_viagens.fxml",
-                        a -> new Entradas_viagens()));
+                        a -> new EntradasViagens(this.login, autenticacaoServico, repositorioUsuarios,
+                                repositorioCaminhao,
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
     }
 
     @FXML
