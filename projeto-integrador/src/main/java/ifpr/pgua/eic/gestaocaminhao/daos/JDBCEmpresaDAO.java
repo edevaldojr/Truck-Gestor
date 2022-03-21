@@ -80,12 +80,12 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     }
 
     @Override
-    public ArrayList<Empresa> listar() throws Exception {
-        ArrayList<Empresa> lista = new ArrayList<>();
+    public ArrayList<String> listarEmpresasOrigem() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1 and tipo='ORIGEM'";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -93,7 +93,31 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         while (rs.next()) {
             Empresa u = montarEmpresa(rs);
-            lista.add(u);
+            lista.add(u.getNome());
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<String> listarEmpresasDestino() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1 and tipo='DESTINO'";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Empresa u = montarEmpresa(rs);
+            lista.add(u.getNome());
         }
 
         rs.close();

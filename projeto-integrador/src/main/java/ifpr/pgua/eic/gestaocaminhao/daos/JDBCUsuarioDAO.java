@@ -17,8 +17,9 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     FabricaConexoes fabricaConexoes;
     EnderecoDAO enderecoDAO;
 
-    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes) {
+    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes, EnderecoDAO enderecoDAO) {
         this.fabricaConexoes = fabricaConexoes;
+        this.enderecoDAO = enderecoDAO;
     }
 
     @Override
@@ -135,7 +136,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Usuario WHERE id=?";
+        String sql = "SELECT * FROM projeto_Usuario WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

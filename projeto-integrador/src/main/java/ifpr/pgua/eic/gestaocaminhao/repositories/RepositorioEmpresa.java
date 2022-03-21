@@ -53,8 +53,12 @@ public class RepositorioEmpresa {
         }
     }
 
-    public ArrayList<Empresa> listarEmpresas() throws Exception {
-        return empresaDAO.listar();
+    public ArrayList<String> listarEmpresasOrigem() throws Exception {
+        return empresaDAO.listarEmpresasOrigem();
+    }
+
+    public ArrayList<String> listarEmpresasDestino() throws Exception {
+        return empresaDAO.listarEmpresasDestino();
     }
 
     public Empresa buscar(String nome) throws SQLException {

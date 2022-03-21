@@ -12,7 +12,9 @@ public interface EmpresaDAO {
 
     boolean remover(int id) throws Exception;
 
-    ArrayList<Empresa> listar() throws Exception;
+    ArrayList<String> listarEmpresasOrigem() throws Exception;
+
+    ArrayList<String> listarEmpresasDestino() throws Exception;
 
     Empresa buscar(int id) throws Exception;
 

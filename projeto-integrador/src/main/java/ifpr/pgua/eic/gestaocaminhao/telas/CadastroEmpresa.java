@@ -73,7 +73,8 @@ public class CadastroEmpresa {
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco,
             RepositorioEstado repositorioEstado,
-            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa) {
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -81,6 +82,7 @@ public class CadastroEmpresa {
         this.repositorioCidade = repositorioCidade;
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
         this.login = login;
     }
 
@@ -100,7 +102,8 @@ public class CadastroEmpresa {
         root.getChildren()
                 .add(App.loadTela("fxml/home_gestor.fxml",
                         a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                repositorioViagens)));
 
     }
 
@@ -158,7 +161,10 @@ public class CadastroEmpresa {
                 boolean ret;
 
                 Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                }
+                ;
                 Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                 ret = repositorioEmpresa.cadastrarEmpresa(nomeEmpresa, endereco, tipo);
 

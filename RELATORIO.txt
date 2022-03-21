@@ -45,3 +45,4 @@
 -Arrumando Login concluído!!
 -Tela cadastrar empresa!
 -Tela cadastrar Usuario!
+-Tela cadastrar viagem concluida(Gostaria de adicionar trigger para calculo imediado de entrada em dinheiro)

@@ -40,10 +40,10 @@ public class EntradasViagens {
     private TextField tfPrecoTonelada;
 
     @FXML
-    private ComboBox<Empresa> cbEmpresaOrigem;
+    private ComboBox<String> cbEmpresaOrigem;
 
     @FXML
-    private ComboBox<Empresa> cbEmpresaDestino;
+    private ComboBox<String> cbEmpresaDestino;
 
     @FXML
     private DatePicker dpDataDaBaixa;
@@ -68,11 +68,10 @@ public class EntradasViagens {
     private Login login;
 
     public EntradasViagens(Login login, AutenticacaoServico autenticacaoServico,
-            RepositorioUsuarios repositorioUsuarios,
-            RepositorioCaminhao repositorioCaminhao,
-            RepositorioEndereco repositorioEndereco,
-            RepositorioEstado repositorioEstado,
-            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa) {
+            RepositorioUsuarios repositorioUsuarios, RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -80,11 +79,15 @@ public class EntradasViagens {
         this.repositorioCidade = repositorioCidade;
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
         this.login = login;
     }
 
-    public void initialize() {
-
+    public void initialize() throws Exception {
+        cbEmpresaOrigem.getItems().clear();
+        cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+        cbEmpresaDestino.getItems().clear();
+        cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
     }
 
     @FXML
@@ -92,7 +95,8 @@ public class EntradasViagens {
         root.getChildren().clear();
         root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
                 a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                        repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                        repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                        repositorioViagens)));
 
     }
 
@@ -102,8 +106,8 @@ public class EntradasViagens {
         String peso = tfPeso.getText();
         String carga = tfCarga.getText();
         String valor = tfPrecoTonelada.getText();
-        String empresaOrigem = cbEmpresaOrigem.getSelectionModel().getSelectedItem().getNome();
-        String empresaDestino = cbEmpresaDestino.getSelectionModel().getSelectedItem().getNome();
+        String empresaOrigem = cbEmpresaOrigem.getSelectionModel().getSelectedItem();
+        String empresaDestino = cbEmpresaDestino.getSelectionModel().getSelectedItem();
         LocalDate data_da_baixa = dpDataDaBaixa.getValue();
 
         double pesoDouble = Double.parseDouble(peso);
@@ -166,10 +170,13 @@ public class EntradasViagens {
 
     @FXML
     private void limpar() {
+        cbEmpresaDestino.setValue(null);
+        cbEmpresaOrigem.setValue(null);
         tfCpfMoto.clear();
         tfPeso.clear();
         tfCarga.clear();
         tfPrecoTonelada.clear();
+        dpDataDaBaixa.setValue(null);
     }
 
 }

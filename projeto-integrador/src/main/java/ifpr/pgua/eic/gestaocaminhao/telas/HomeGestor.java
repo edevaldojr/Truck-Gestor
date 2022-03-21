@@ -42,7 +42,8 @@ public class HomeGestor {
             RepositorioEndereco repositorioEndereco,
             RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade,
-            RepositorioEmpresa repositorioEmpresa) {
+            RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -50,6 +51,7 @@ public class HomeGestor {
         this.repositorioCidade = repositorioCidade;
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
         this.login = login;
     }
 
@@ -63,7 +65,9 @@ public class HomeGestor {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/cadastro_caminhao.fxml",
-                        a -> new CadastroCaminhao(this.login, this.autenticacaoServico, this.repositorioCaminhao)));
+                        a -> new CadastroCaminhao(this.login, autenticacaoServico, repositorioUsuarios,
+                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
+                                repositorioCidade, repositorioEmpresa, repositorioViagens)));
     }
 
     @FXML
@@ -72,8 +76,8 @@ public class HomeGestor {
         root.getChildren()
                 .add(App.loadTela("fxml/cadastro_empresa.fxml",
                         a -> new CadastroEmpresa(this.login, autenticacaoServico, repositorioUsuarios,
-                                repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
+                                repositorioCidade, repositorioEmpresa, repositorioViagens)));
     }
 
     @FXML
@@ -90,8 +94,8 @@ public class HomeGestor {
         root.getChildren()
                 .add(App.loadTela("fxml/entradas_viagens.fxml",
                         a -> new EntradasViagens(this.login, autenticacaoServico, repositorioUsuarios,
-                                repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
+                                repositorioCidade, repositorioEmpresa, repositorioViagens)));
     }
 
     @FXML

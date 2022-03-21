@@ -14,6 +14,7 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ public class CadastroUsuario {
     private RepositorioCidade repositorioCidade;
     private RepositorioEstado repositorioEstado;
     private RepositorioEmpresa repositorioEmpresa;
+    private RepositorioViagens repositorioViagens;
 
     private CidadeDAO cidadeDAO;
 
@@ -90,7 +92,8 @@ public class CadastroUsuario {
     public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
-            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa) {
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -134,7 +137,8 @@ public class CadastroUsuario {
         root.getChildren()
                 .add(App.loadTela("fxml/login.fxml",
                         a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                repositorioViagens)));
 
     }
 
@@ -220,13 +224,19 @@ public class CadastroUsuario {
 
                 if (usuarioExistente != null) {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                        repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    }
+                    ;
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                     ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha, cnh,
                             gestor);
                 } else {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                        repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    }
+                    ;
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                     ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
                             gestor);

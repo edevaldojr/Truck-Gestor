@@ -66,9 +66,21 @@ public class CadastroCaminhao {
     }
 
     public CadastroCaminhao(Login login, AutenticacaoServico autenticacaoServico,
-            RepositorioCaminhao repositorioCaminhao) {
-        this.repositorioCaminhao = repositorioCaminhao;
+            RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco,
+            RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade,
+            RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
+        this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
         this.login = login;
     }
 
@@ -92,7 +104,8 @@ public class CadastroCaminhao {
         root.getChildren()
                 .add(App.loadTela("fxml/home_gestor.fxml",
                         a -> new HomeGestor(login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa)));
+                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                repositorioViagens)));
 
     }
 

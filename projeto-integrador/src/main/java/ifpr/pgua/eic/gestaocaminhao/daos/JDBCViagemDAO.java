@@ -14,12 +14,11 @@ import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
-public class JDBCViagemDAO implements ViagemDAO{
+public class JDBCViagemDAO implements ViagemDAO {
 
     FabricaConexoes fabricaConexoes;
     JDBCUsuarioDAO jdbcUsuarioDAO;
     JDBCEmpresaDAO jdbcEmpresaDAO;
-
 
     public JDBCViagemDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
@@ -29,7 +28,7 @@ public class JDBCViagemDAO implements ViagemDAO{
     public boolean cadastrar(Viagem v) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Viagem(peso, data_da_baixa, valor, carga, empresa_origem, empresa_destino) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_Viagem(peso, data_da_Baixa, valor, carga, empresa_origem_id, empresa_destino_id, motorista) VALUES (?,?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -40,7 +39,6 @@ public class JDBCViagemDAO implements ViagemDAO{
         pstmt.setInt(5, v.getEmpresa_origem().getId());
         pstmt.setInt(6, v.getEmpresa_destino().getId());
         pstmt.setString(7, v.getCaminhoneiro().getCpf());
-        pstmt.setInt(8, v.getId());
 
         pstmt.execute();
         pstmt.close();
@@ -53,7 +51,7 @@ public class JDBCViagemDAO implements ViagemDAO{
     public boolean atualizar(int id, Viagem v) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Viagem SET peso=?, data_da_baixa=?, valor=?, carga=? empresa_origem=?, empresa_destino=?, motorista=? WHERE id=?";
+        String sql = "UPDATE projeto_Viagem SET peso=?, data_da_Baixa=?, valor=?, carga=? empresa_origem_id=?, empresa_destino_id=?, motorista=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -115,15 +113,14 @@ public class JDBCViagemDAO implements ViagemDAO{
         return lista;
     }
 
-
     public Viagem montarViagem(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         double peso = rs.getDouble("peso");
-        Date data = rs.getDate("data_da_baixa");
+        Date data = rs.getDate("data_da_Baixa");
         double valor = rs.getDouble("valor");
         String carga = rs.getString("carga");
-        int empresa_origem = rs.getInt("empresa_origem");
-        int empresa_destino = rs.getInt("empresa_origem");
+        int empresa_origem = rs.getInt("empresa_origem_id");
+        int empresa_destino = rs.getInt("empresa_origem_id");
         String moto = rs.getString("motorista");
 
         Empresa origem = jdbcEmpresaDAO.buscar(empresa_origem);
@@ -131,8 +128,7 @@ public class JDBCViagemDAO implements ViagemDAO{
         Usuario motorista = jdbcUsuarioDAO.buscar(moto);
         LocalDate data_da_baixa = data.toLocalDate();
 
-
-        Viagem u = new Viagem(id,peso, data_da_baixa, valor, origem, destino, carga, motorista);
+        Viagem u = new Viagem(id, peso, data_da_baixa, valor, origem, destino, carga, motorista);
 
         return u;
     }
@@ -151,7 +147,7 @@ public class JDBCViagemDAO implements ViagemDAO{
 
         ResultSet rs = pstmt.executeQuery();
 
-        while(rs.next()){
+        while (rs.next()) {
             v = montarViagem(rs);
         }
 
@@ -161,5 +157,5 @@ public class JDBCViagemDAO implements ViagemDAO{
 
         return v;
     }
-    
+
 }
