@@ -12,11 +12,10 @@ public class Viagem {
     private Empresa empresa_destino;
     private String carga;
     private Usuario caminhoneiro;
-    
-    
+    private double valor_total;
 
     public Viagem(int id, double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
-        Empresa empresa_destino, String carga, Usuario caminhoneiro) {
+            Empresa empresa_destino, String carga, Usuario caminhoneiro, double valor_total) {
         this.id = id;
         this.peso = peso;
         this.data_da_baixa = data_da_baixa;
@@ -25,10 +24,11 @@ public class Viagem {
         this.empresa_destino = empresa_destino;
         this.carga = carga;
         this.caminhoneiro = caminhoneiro;
+        this.valor_total = valor_total;
     }
 
     public Viagem(double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
-    Empresa empresa_destino, String carga, Usuario caminhoneiro) {
+            Empresa empresa_destino, String carga, Usuario caminhoneiro) {
         this.peso = peso;
         this.data_da_baixa = data_da_baixa;
         this.valor = valor;
@@ -100,5 +100,21 @@ public class Viagem {
 
     public void setCaminhoneiro(Usuario caminhoneiro) {
         this.caminhoneiro = caminhoneiro;
+    }
+
+    public String getCarga() {
+        return carga;
+    }
+
+    public void setCarga(String carga) {
+        this.carga = carga;
+    }
+
+    public double getValor_total() {
+        return valor_total;
+    }
+
+    public void setValor_total(double valor_total) {
+        this.valor_total = valor_total;
     }
 }

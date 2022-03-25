@@ -37,10 +37,10 @@ public class RepositorioViagens {
     }
 
     public boolean atualizarViagens(int id, double peso, LocalDate data_da_baixa, double valor, Empresa empresa_origem,
-            Empresa empresa_destino, String carga, Usuario caminhoneiro) throws SQLException {
+            Empresa empresa_destino, String carga, Usuario caminhoneiro, double valor_total) throws SQLException {
 
         Viagem viagem = new Viagem(id, peso, data_da_baixa, valor, empresa_origem, empresa_destino, carga,
-                caminhoneiro);
+                caminhoneiro, valor_total);
 
         try {
             return viagemDAO.atualizar(id, viagem);

@@ -101,16 +101,24 @@ public class CadastroUsuario {
         this.repositorioCidade = repositorioCidade;
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
     }
 
-    public CadastroUsuario(Usuario usuarioExiste, RepositorioUsuarios repositorioUsuarios,
-            RepositorioEndereco repositorioEndereco, RepositorioCidade repositorioCidade,
-            RepositorioEstado repositorioEstado) {
+    public CadastroUsuario(Usuario usuarioExiste, AutenticacaoServico autenticacaoServico,
+            RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
+        this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
-        this.usuarioExistente = usuarioExiste;
         this.repositorioEndereco = repositorioEndereco;
+        this.repositorioCaminhao = repositorioCaminhao;
         this.repositorioCidade = repositorioCidade;
         this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
+        this.usuarioExistente = usuarioExiste;
     }
 
     public void initialize() {

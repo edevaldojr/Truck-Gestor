@@ -55,12 +55,13 @@ drop table if exists projeto_Viagem;
 create table projeto_Viagem(
 	id int not null AUTO_INCREMENT,
     peso double not null,
-    data_da_Baixa datetime not null,
+    data_da_Baixa date not null,
     valor double not null,
     carga varchar(45) not null,
     empresa_origem_id int not null,
     empresa_destino_id int not null,
     motorista varchar(12) not null,
+    total double not null,
     PRIMARY KEY(id),
     FOREIGN KEY(empresa_origem_id) REFERENCES projeto_Empresa(id),
     FOREIGN KEY(empresa_destino_id) REFERENCES projeto_Empresa(id),
@@ -83,13 +84,25 @@ create table projeto_Endereco(
 );
 
 
+drop table if exists projeto_Despesa;
 create table projeto_Despesa(
 	id int not null AUTO_INCREMENT,
     tipoDespesa ENUM('AUTOPECAS', 'COMBUSTIVEL') not null,
     nome varchar(120) not null,
-    valorDespesaAutopeca double,
-    valorDespesaCombustivel double,
+    valorDespesa double,
     dataDespesa date not null,
     PRIMARY KEY(id)
 );
+
+
+-- trigger calcular valor viagem
+delimiter $$
+drop trigger if exists calcula_entrada$$
+create trigger calcula_entrada before insert on projeto_Viagem for each
+row
+begin
+ declare total_entrada double;
+	set total_entrada = new.valor * (new.peso * 1000);
+    set new.total = total_entrada;
+end$$
 

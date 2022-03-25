@@ -46,3 +46,7 @@
 -Tela cadastrar empresa!
 -Tela cadastrar Usuario!
 -Tela cadastrar viagem concluida(Gostaria de adicionar trigger para calculo imediado de entrada em dinheiro)
+
+22/03/2022
+- trigger de calculo de entrada feita
+- Tela de relatorios com lista de todos os motorista, caminhões e gestores

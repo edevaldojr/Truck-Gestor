@@ -122,13 +122,14 @@ public class JDBCViagemDAO implements ViagemDAO {
         int empresa_origem = rs.getInt("empresa_origem_id");
         int empresa_destino = rs.getInt("empresa_origem_id");
         String moto = rs.getString("motorista");
+        double valor_total = rs.getDouble("valor_total");
 
         Empresa origem = jdbcEmpresaDAO.buscar(empresa_origem);
         Empresa destino = jdbcEmpresaDAO.buscar(empresa_destino);
         Usuario motorista = jdbcUsuarioDAO.buscar(moto);
         LocalDate data_da_baixa = data.toLocalDate();
 
-        Viagem u = new Viagem(id, peso, data_da_baixa, valor, origem, destino, carga, motorista);
+        Viagem u = new Viagem(id, peso, data_da_baixa, valor, origem, destino, carga, motorista, valor_total);
 
         return u;
     }

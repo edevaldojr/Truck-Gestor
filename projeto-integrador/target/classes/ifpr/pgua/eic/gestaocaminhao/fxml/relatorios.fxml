@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Relatorios">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
          <left>
@@ -17,9 +19,6 @@
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
                         <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
-                        <Button fx:id="btListarCaminhao" layoutX="-3.0" layoutY="91.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="187.0" text="Listar Caminhões" />
-                        <Button fx:id="btListarPessoas" layoutX="-1.0" layoutY="138.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="185.0" text="Listar Pessoas" />
-                        <Button fx:id="btListarViagens" layoutY="185.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="184.0" text="Listar Viagens" />
                      </children>
                   </Pane>
                </children>
@@ -34,6 +33,12 @@
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
                      <children>
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
+                        <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
+                        <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
+                        <Text layoutX="201.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
+                        <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
+                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuários Cadastrados" />
                      </children>
                   </Pane>
                </children>

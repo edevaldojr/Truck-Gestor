@@ -85,7 +85,9 @@ public class HomeGestor {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/relatorios.fxml",
-                        a -> new Relatorios()));
+                        a -> new Relatorios(this.login, autenticacaoServico, repositorioUsuarios,
+                        repositorioCaminhao, repositorioEndereco, repositorioEstado,
+                        repositorioCidade, repositorioEmpresa, repositorioViagens)));
     }
 
     @FXML

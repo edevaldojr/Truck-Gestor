@@ -60,8 +60,22 @@ public class CadastroCaminhao {
     @FXML
     private AnchorPane root;
 
-    public CadastroCaminhao(Caminhao caminhaoExiste, RepositorioCaminhao repositorioCaminhao) {
+    public CadastroCaminhao(Caminhao caminhaoExiste, AutenticacaoServico autenticacaoServico,
+            RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco,
+            RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade,
+            RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens) {
+        this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
         this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
         this.caminhaoExistente = caminhaoExiste;
     }
 

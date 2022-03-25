@@ -46,7 +46,7 @@ public class RepositorioCaminhao {
         }
     }
 
-    public boolean removerCaminhaos(int id) throws SQLException {
+    public boolean removerCaminhoes(int id) throws SQLException {
         try {
             return CaminhaoDAO.remover(id);
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class RepositorioCaminhao {
         }
     }
 
-    public ArrayList<Caminhao> listarCaminhaos() throws Exception {
+    public ArrayList<Caminhao> listarCaminhoes() throws Exception {
         return CaminhaoDAO.listar();
     }
 
