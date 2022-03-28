@@ -5,9 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
@@ -17,11 +20,13 @@ import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 public class JDBCViagemDAO implements ViagemDAO {
 
     FabricaConexoes fabricaConexoes;
-    JDBCUsuarioDAO jdbcUsuarioDAO;
-    JDBCEmpresaDAO jdbcEmpresaDAO;
+    UsuarioDAO usuarioDAO;
+    EmpresaDAO empresaDAO;
 
-    public JDBCViagemDAO(FabricaConexoes fabricaConexoes) {
+    public JDBCViagemDAO(FabricaConexoes fabricaConexoes, UsuarioDAO usuarioDAO, EmpresaDAO empresaDAO) {
         this.fabricaConexoes = fabricaConexoes;
+        this.empresaDAO = empresaDAO;
+        this.usuarioDAO = usuarioDAO;
     }
 
     @Override
@@ -76,7 +81,7 @@ public class JDBCViagemDAO implements ViagemDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Viagem SET ativo=0 WHERE id=?";
+        String sql = "DELETE FROM projeto_Viagem WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -95,7 +100,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_Viagem";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -114,6 +119,8 @@ public class JDBCViagemDAO implements ViagemDAO {
     }
 
     public Viagem montarViagem(ResultSet rs) throws Exception {
+        DecimalFormat df = new DecimalFormat("###.00");
+
         int id = rs.getInt("id");
         double peso = rs.getDouble("peso");
         Date data = rs.getDate("data_da_Baixa");
@@ -122,12 +129,15 @@ public class JDBCViagemDAO implements ViagemDAO {
         int empresa_origem = rs.getInt("empresa_origem_id");
         int empresa_destino = rs.getInt("empresa_origem_id");
         String moto = rs.getString("motorista");
-        double valor_total = rs.getDouble("valor_total");
+        double valor_total = rs.getDouble("total");
 
-        Empresa origem = jdbcEmpresaDAO.buscar(empresa_origem);
-        Empresa destino = jdbcEmpresaDAO.buscar(empresa_destino);
-        Usuario motorista = jdbcUsuarioDAO.buscar(moto);
+        Empresa origem = empresaDAO.buscar(empresa_origem);
+        Empresa destino = empresaDAO.buscar(empresa_destino);
+        Usuario motorista = usuarioDAO.buscar(moto);
         LocalDate data_da_baixa = data.toLocalDate();
+        df.format(valor);
+        df.format(peso);
+        df.format(valor_total);
 
         Viagem u = new Viagem(id, peso, data_da_baixa, valor, origem, destino, carga, motorista, valor_total);
 

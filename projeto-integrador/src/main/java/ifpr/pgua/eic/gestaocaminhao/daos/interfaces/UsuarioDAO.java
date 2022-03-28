@@ -14,6 +14,10 @@ public interface UsuarioDAO {
 
     ArrayList<Usuario> listar() throws Exception;
 
+    ArrayList<Usuario> listarMotorista() throws Exception;
+
+    ArrayList<Usuario> listarGestor() throws Exception;
+
     Usuario buscar(String cpf) throws Exception;
 
 }

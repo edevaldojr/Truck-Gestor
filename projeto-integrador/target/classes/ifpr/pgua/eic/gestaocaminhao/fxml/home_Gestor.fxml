@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
@@ -15,13 +23,13 @@
                <children>
                   <Button fx:id="btHome" mnemonicParsing="false" prefHeight="64.0" prefWidth="184.0" text="Home" />
                   <Button fx:id="btEntradas" mnemonicParsing="false" onAction="#abrirEntradasViagens" prefHeight="41.0" prefWidth="184.0" text="Entradas" />
-                  <Button fx:id="btDespesas" mnemonicParsing="false" prefHeight="41.0" prefWidth="195.0" text="Despesas" />
+                  <Button fx:id="btDespesas" mnemonicParsing="false" onAction="#abrirCadastrarDespesas" prefHeight="41.0" prefWidth="195.0" text="Despesas" />
                   <Button fx:id="btRelatorios" mnemonicParsing="false" onAction="#abrirRelatorios" prefHeight="41.0" prefWidth="194.0" text="Relatórios" />
                   <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="191.0" text="Cadastrar Caminhão" />
-                  <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="38.0" prefWidth="184.0" text="Cadastrar Empresa" />
-                  <Pane prefHeight="185.0" prefWidth="172.0">
+                  <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="184.0" text="Cadastrar Empresa" />
+                  <Pane prefHeight="206.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="21.0" layoutY="177.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="142.0" text="Logout" />
+                        <Button fx:id="btLogout" layoutX="21.0" layoutY="159.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="142.0" text="Logout" />
                      </children>
                   </Pane>
                </children>
@@ -30,6 +38,40 @@
          <top>
             <HBox prefHeight="50.0" prefWidth="713.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
+         <right>
+            <Pane prefHeight="481.0" prefWidth="681.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                  <ComboBox fx:id="cbDataRelatorios" layoutX="469.0" layoutY="109.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
+                  <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:" />
+                  <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="189.0">
+                     <columns>
+                        <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
+                        <TableColumn fx:id="tbcValorViagem" prefWidth="83.0" text="Valor" />
+                     </columns>
+                  </TableView>
+                  <Text layoutX="203.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:" />
+                  <TableView fx:id="tbcListaDespesa" layoutX="203.0" layoutY="71.0" prefHeight="373.0" prefWidth="265.0">
+                     <columns>
+                        <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
+                        <TableColumn fx:id="tbcTipoDespesa" prefWidth="89.00003051757812" text="Tipo" />
+                        <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="lbLucro" layoutX="469.0" layoutY="70.0" prefHeight="39.0" prefWidth="79.0" text="Lucro:" textFill="#0ce809">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="198.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <ProgressIndicator fx:id="piListarHome" layoutX="472.0" layoutY="395.0" prefHeight="43.0" prefWidth="73.0" />
+               </children>
+            </Pane>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>

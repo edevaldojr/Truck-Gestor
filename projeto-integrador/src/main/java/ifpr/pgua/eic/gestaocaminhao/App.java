@@ -13,6 +13,7 @@ import java.io.IOException;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCAutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.JDBCDespesaDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEmpresaDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.JDBCEstadoDAO;
@@ -21,13 +22,16 @@ import ifpr.pgua.eic.gestaocaminhao.daos.JDBCViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
@@ -50,7 +54,8 @@ public class App extends Application {
     EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, cidadeDAO);
     EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, enderecoDAO);
     UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, enderecoDAO);
-    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes);
+    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, usuarioDAO, empresaDAO);
+    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes);
     private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, enderecoDAO);
 
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);
@@ -61,6 +66,7 @@ public class App extends Application {
     private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
     private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO);
     private RepositorioViagens repositorioViagens = new RepositorioViagens(viagemDAO);
+    private RepositorioDespesas repositorioDespesas = new RepositorioDespesas(despesaDAO);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -69,7 +75,7 @@ public class App extends Application {
                 loadTela("fxml/login.fxml",
                         o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens)),
+                                repositorioViagens, repositorioDespesas)),
                 864, 515);
         // stage.setMaximized(true);
         stage.setTitle("Truck");

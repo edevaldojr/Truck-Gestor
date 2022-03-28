@@ -106,3 +106,8 @@ begin
     set new.total = total_entrada;
 end$$
 
+drop table if exists projeto_EntradasSaídas;
+create table projeto_EntradasSaídas(
+			entradaTotal double not null,
+    		saídaTotal double not null
+);

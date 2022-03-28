@@ -1,12 +1,11 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
-import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
-import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
-import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
-import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
+import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
@@ -19,12 +18,13 @@ import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
-public class CadastroEmpresa {
-
+public class CadastroDespesa {
+    
     private AutenticacaoServico autenticacaoServico;
     private RepositorioUsuarios repositorioUsuarios;
     private RepositorioEndereco repositorioEndereco;
@@ -34,32 +34,19 @@ public class CadastroEmpresa {
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioCaminhao repositorioCaminhao;
     private RepositorioDespesas repositorioDespesas;
-    private Empresa EmpresaExistente = null;
     private Login login;
 
     @FXML
-    private TextField tfNome;
+    private TextField tfTipoDespesa;
 
     @FXML
-    private TextField tfCidade;
+    private TextField tfPrecoDespesa;
 
     @FXML
-    private TextField tfBairro;
+    private TextField tfNomeDespesa;
 
     @FXML
-    private TextField tfRua;
-
-    @FXML
-    private TextField tfNumero;
-
-    @FXML
-    private TextField tfCep;
-
-    @FXML
-    private TextField tfComplemento;
-
-    @FXML
-    private TextField tfTipo;
+    private DatePicker dpDataDespesa;
 
     @FXML
     private Button btCadastrar;
@@ -70,7 +57,7 @@ public class CadastroEmpresa {
     @FXML
     private AnchorPane root;
 
-    public CadastroEmpresa(Login login, AutenticacaoServico autenticacaoServico,
+    public CadastroDespesa(Login login, AutenticacaoServico autenticacaoServico,
             RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco,
@@ -89,9 +76,9 @@ public class CadastroEmpresa {
         this.login = login;
     }
 
-    public CadastroEmpresa(Login login, AutenticacaoServico autenticacaoServico,
-            RepositorioEmpresa repositorioEmpresa) {
-        this.repositorioEmpresa = repositorioEmpresa;
+    public CadastroDespesa(Login login, AutenticacaoServico autenticacaoServico,
+            RepositorioDespesas repositorioDespesas) {
+        this.repositorioDespesas = repositorioDespesas;
         this.autenticacaoServico = autenticacaoServico;
         this.login = login;
     }
@@ -112,64 +99,42 @@ public class CadastroEmpresa {
 
     @FXML
     private void cadastrar() {
-        String nomeEmpresa = tfNome.getText();
-        String tipoS = tfTipo.getText();
-        String cidade = tfCidade.getText();
-        String rua = tfRua.getText();
-        String bairro = tfBairro.getText();
-        String numero = tfNumero.getText();
-        String cep = tfCep.getText();
-        String complemento = tfComplemento.getText();
-        int tipoE = Integer.parseInt(tipoS);
-        TipoEmpresa tipo = TipoEmpresa.toEnum(tipoE);
+        String nome_Despesa = tfNomeDespesa.getText();
+        String tipo_Despesa = tfTipoDespesa.getText();
+        String preco_Despesa = tfPrecoDespesa.getText();
+        LocalDate data_Despesa = dpDataDespesa.getValue();
+        int tipoD = Integer.parseInt(tipo_Despesa);
+        TipoDespesa tipo = TipoDespesa.toEnum(tipoD);
+        double precoDespesa = Double.parseDouble(preco_Despesa);
 
         boolean temErro = false;
         String msg = "";
 
-        if (nomeEmpresa.isEmpty() || nomeEmpresa.isBlank()) {
+        if (nome_Despesa.isEmpty() || nome_Despesa.isBlank()) {
             temErro = true;
-            msg += "Nome da empresa não pode ser vazio!\n";
+            msg += "Nome da despesa não pode ser vazio!\n";
         }
 
-        if (tipoS.isEmpty() || tipoS.isBlank()) {
+        if (tipo_Despesa.isEmpty() || tipo_Despesa.isBlank()) {
             temErro = true;
-            msg += "Tipo não pode ser vazio!\n";
-        }
-        if (cidade.isEmpty() || cidade.isBlank()) {
-            temErro = true;
-            msg += "Cidade não pode ser vazio!\n";
+            msg += "Tipo da despesa não pode ser vazio!\n";
         }
 
-        if (bairro.isEmpty() || bairro.isBlank()) {
+        if (preco_Despesa.isEmpty() || preco_Despesa.isBlank()) {
             temErro = true;
-            msg += "Bairro não pode ser vazio!\n";
+            msg += "Preço da despesa não pode ser vazio!\n";
         }
-        if (numero.isEmpty() || numero.isBlank()) {
+        if (data_Despesa == null) {
             temErro = true;
-            msg += "Número não pode ser vazio!\n";
-        }
-
-        if (rua.isEmpty() || rua.isBlank()) {
-            temErro = true;
-            msg += "Rua não pode ser vazio!\n";
+            msg += "Data da despesa não pode ser vazio!\n";
         }
 
-        if (cep.isEmpty() || cep.isBlank()) {
-            temErro = true;
-            msg += "CEP não pode ser vazio!\n";
-        }
+        
 
         if (!temErro) {
             try {
                 boolean ret;
-
-                Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
-                    repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
-                }
-                ;
-                Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
-                ret = repositorioEmpresa.cadastrarEmpresa(nomeEmpresa, endereco, tipo);
+                ret = repositorioDespesas.cadastrarDespesa(tipo, nome_Despesa, precoDespesa, data_Despesa);
 
                 if (ret) {
                     msg = "Empresa cadastrada com sucesso!";
@@ -191,14 +156,10 @@ public class CadastroEmpresa {
 
     @FXML
     private void limpar() {
-        tfNome.clear();
-        tfCidade.clear();
-        tfBairro.clear();
-        tfRua.clear();
-        tfNumero.clear();
-        tfCep.clear();
-        tfComplemento.clear();
-        tfTipo.clear();
+        tfNomeDespesa.clear();
+        tfPrecoDespesa.clear();
+        tfTipoDespesa.clear();
+        dpDataDespesa.setValue(null);
     }
 
 }

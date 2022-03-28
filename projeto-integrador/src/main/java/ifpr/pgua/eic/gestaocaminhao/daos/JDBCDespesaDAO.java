@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -17,19 +18,22 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
     FabricaConexoes fabricaConexoes;
 
+    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes) {
+        this.fabricaConexoes = fabricaConexoes;
+    }
+
     @Override
     public boolean cadastrar(Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Despesa(tipoDespesa, nome, valorDespesaAutopeça, valorDespesaCombustivel, dataDespesa) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_Despesa(tipoDespesa, nome, valorDespesa, dataDespesa) VALUES (?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.setInt(1, d.getTipoDespesa().getCod());
         pstmt.setString(2, d.getNome());
-        pstmt.setDouble(3, d.getValorDespesaAutopeca());
-        pstmt.setDouble(4, d.getValorDespesaCombustivel());
-        pstmt.setDate(5, Date.valueOf(d.getDataDespesa()));
+        pstmt.setDouble(3, d.getValorDespesa());
+        pstmt.setDate(4, Date.valueOf(d.getDataDespesa()));
 
         pstmt.execute();
         pstmt.close();
@@ -42,16 +46,15 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean atualizar(int id, Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Despesa SET tipoDespesa=?, nome=?, valorDespesaAutopeça=?, valorDespesaCombustivel=?, dataDespesa=? WHERE id=?";
+        String sql = "UPDATE projeto_Despesa SET tipoDespesa=?, nome=?, valorDespesa=?, dataDespesa=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         pstmt.setInt(1, d.getTipoDespesa().getCod());
         pstmt.setString(2, d.getNome());
-        pstmt.setDouble(3, d.getValorDespesaAutopeca());
-        pstmt.setDouble(4, d.getValorDespesaCombustivel());
-        pstmt.setDate(5, Date.valueOf(d.getDataDespesa()));
-        pstmt.setInt(6, id);
+        pstmt.setDouble(3, d.getValorDespesa());
+        pstmt.setDate(4, Date.valueOf(d.getDataDespesa()));
+        pstmt.setInt(5, id);
 
         int ret = pstmt.executeUpdate();
 
@@ -65,7 +68,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Despesa SET ativo=0 WHERE id=?";
+        String sql = "DELETE projeto_Despesa WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -84,7 +87,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_Despesa";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -103,14 +106,15 @@ public class JDBCDespesaDAO implements DespesaDAO {
     }
 
     public Despesa montarDespesa(ResultSet rs) throws Exception {
+        DecimalFormat df = new DecimalFormat("###.00");
         int id = rs.getInt("id");
         TipoDespesa tipoDespesa = TipoDespesa.valueOf(rs.getString("tipoDespesa"));
         String nome = rs.getString("nome");
-        double valorDespesaAutopeca = rs.getDouble("valorDespesaAutopeca");
-        double valorDespesaCombustivel = rs.getDouble("valorDespesaCombustivel");
+        double valorDespesa = rs.getDouble("valorDespesa");
         LocalDate dataDespesa = rs.getDate("dataDespesa").toLocalDate();
+        df.format(valorDespesa);
 
-        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesaAutopeca, valorDespesaCombustivel, dataDespesa);
+        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa);
 
         return despesa;
     }

@@ -50,3 +50,8 @@
 22/03/2022
 - trigger de calculo de entrada feita
 - Tela de relatorios com lista de todos os motorista, caminhões e gestores
+
+27/03/2022
+-Criação da tela de despesa
+-Criação de threads para listas
+-Ajustes nos nomes do sistema

@@ -4,6 +4,7 @@ import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
@@ -44,12 +45,13 @@ public class Login {
     private RepositorioEstado repositorioEstado;
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioViagens repositorioViagens;
+    private RepositorioDespesas repositorioDespesas;
 
     public Login(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao, RepositorioEndereco repositorioEndereco,
             RepositorioEstado repositorioEstado, RepositorioCidade repositorioCidade,
             RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -58,6 +60,7 @@ public class Login {
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
     }
 
     @FXML
@@ -89,7 +92,7 @@ public class Login {
                 App.loadTela("fxml/cadastro_users.fxml",
                         a -> new CadastroUsuario(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens)));
+                                repositorioViagens, repositorioDespesas)));
     }
 
     @FXML
@@ -100,7 +103,7 @@ public class Login {
                     .add(App.loadTela("fxml/login.fxml",
                             a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                     repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                    repositorioViagens)));
+                                    repositorioViagens, repositorioDespesas)));
         } else {
 
             if (autenticacaoServico.getLogado().isGestor()) {
@@ -108,7 +111,7 @@ public class Login {
                 root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
                         a -> new HomeGestor(this, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens)));
+                                repositorioViagens, repositorioDespesas)));
 
             } else {
                 root.getChildren().clear();

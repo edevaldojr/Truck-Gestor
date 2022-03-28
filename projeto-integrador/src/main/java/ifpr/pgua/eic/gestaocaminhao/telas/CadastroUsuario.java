@@ -10,6 +10,7 @@ import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
@@ -34,6 +35,7 @@ public class CadastroUsuario {
     private RepositorioEstado repositorioEstado;
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioViagens repositorioViagens;
+    private RepositorioDespesas repositorioDespesas;
 
     private CidadeDAO cidadeDAO;
 
@@ -93,7 +95,7 @@ public class CadastroUsuario {
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -102,6 +104,7 @@ public class CadastroUsuario {
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
     }
 
     public CadastroUsuario(Usuario usuarioExiste, AutenticacaoServico autenticacaoServico,
@@ -146,7 +149,7 @@ public class CadastroUsuario {
                 .add(App.loadTela("fxml/login.fxml",
                         a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens)));
+                                repositorioViagens, repositorioDespesas)));
 
     }
 

@@ -46,7 +46,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public boolean atualizar(int id, Empresa e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Caminhao SET nome=?, tipo=?, endereco_id=? WHERE id=?";
+        String sql = "UPDATE projeto_Empresa SET nome=?, tipo=?, endereco_id=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

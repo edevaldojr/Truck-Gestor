@@ -155,4 +155,52 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         return u;
     }
 
+    @Override
+    public ArrayList<Usuario> listarMotorista() throws Exception {
+        ArrayList<Usuario> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Usuario WHERE gestor=0 and ativo=1";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Usuario u = montarUsuario(rs);
+            lista.add(u);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Usuario> listarGestor() throws Exception {
+        ArrayList<Usuario> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Usuario WHERE gestor=1 and ativo=1";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Usuario u = montarUsuario(rs);
+            lista.add(u);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
 }

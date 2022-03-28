@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,6 +19,7 @@
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
                         <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
+                        <ProgressIndicator fx:id="piListarRelatorio" layoutX="72.0" layoutY="152.0" />
                      </children>
                   </Pane>
                </children>
@@ -32,13 +33,12 @@
                <children>
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
                      <children>
-                        <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
                         <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
                         <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
                         <Text layoutX="201.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
                         <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
-                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuários Cadastrados" />
+                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores Cadastrados" />
                      </children>
                   </Pane>
                </children>

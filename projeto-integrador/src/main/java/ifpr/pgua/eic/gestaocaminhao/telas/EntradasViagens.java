@@ -1,6 +1,7 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
@@ -9,6 +10,7 @@ import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
@@ -64,6 +66,7 @@ public class EntradasViagens {
     private RepositorioEstado repositorioEstado;
     private RepositorioViagens repositorioViagens;
     private RepositorioEmpresa repositorioEmpresa;
+    private RepositorioDespesas repositorioDespesas;
     private AutenticacaoServico autenticacaoServico;
     private Login login;
 
@@ -71,7 +74,7 @@ public class EntradasViagens {
             RepositorioUsuarios repositorioUsuarios, RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -80,15 +83,27 @@ public class EntradasViagens {
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
         this.login = login;
     }
 
     public void initialize() throws Exception {
-        cbEmpresaOrigem.getItems().clear();
-        cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
-        cbEmpresaDestino.getItems().clear();
-        cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
+        threadListar.setDaemon(true);
+        threadListar.start();
     }
+
+    Thread threadListar = new Thread(() -> {
+        try {
+            cbEmpresaOrigem.getItems().clear();
+            cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+            cbEmpresaDestino.getItems().clear();
+            cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
+        } catch (Exception e) {
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+
+    });
 
     @FXML
     private void voltar() {
@@ -96,12 +111,13 @@ public class EntradasViagens {
         root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
                 a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                         repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                        repositorioViagens)));
+                        repositorioViagens, repositorioDespesas)));
 
     }
 
     @FXML
     private void cadastrar() throws Exception {
+        DecimalFormat df = new DecimalFormat("###.00");
         String cpfMotorista = tfCpfMoto.getText();
         String peso = tfPeso.getText();
         String carga = tfCarga.getText();
@@ -112,6 +128,8 @@ public class EntradasViagens {
 
         double pesoDouble = Double.parseDouble(peso);
         double valorDouble = Double.parseDouble(valor);
+        df.format(pesoDouble);
+        df.format(valorDouble);
 
         boolean temErro = false;
         String msg = "";

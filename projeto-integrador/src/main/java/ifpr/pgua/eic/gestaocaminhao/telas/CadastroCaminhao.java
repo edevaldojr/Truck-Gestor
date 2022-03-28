@@ -7,6 +7,7 @@ import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
@@ -30,6 +31,7 @@ public class CadastroCaminhao {
     private RepositorioEstado repositorioEstado;
     private RepositorioViagens repositorioViagens;
     private RepositorioEmpresa repositorioEmpresa;
+    private RepositorioDespesas repositorioDespesas;
     private Caminhao caminhaoExistente = null;
     private Login login;
 
@@ -67,7 +69,7 @@ public class CadastroCaminhao {
             RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade,
             RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -77,6 +79,7 @@ public class CadastroCaminhao {
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
         this.caminhaoExistente = caminhaoExiste;
+        this.repositorioDespesas = repositorioDespesas;
     }
 
     public CadastroCaminhao(Login login, AutenticacaoServico autenticacaoServico,
@@ -86,7 +89,7 @@ public class CadastroCaminhao {
             RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade,
             RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -95,6 +98,7 @@ public class CadastroCaminhao {
         this.repositorioEstado = repositorioEstado;
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
         this.login = login;
     }
 
@@ -119,7 +123,7 @@ public class CadastroCaminhao {
                 .add(App.loadTela("fxml/home_gestor.fxml",
                         a -> new HomeGestor(login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens)));
+                                repositorioViagens, repositorioDespesas)));
 
     }
 

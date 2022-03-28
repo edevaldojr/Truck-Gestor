@@ -58,6 +58,14 @@ public class RepositorioUsuarios {
         return usuarioDAO.listar();
     }
 
+    public ArrayList<Usuario> listarMotoristas() throws Exception {
+        return usuarioDAO.listarMotorista();
+    }
+
+    public ArrayList<Usuario> listarGestores() throws Exception {
+        return usuarioDAO.listarGestor();
+    }
+
     public Usuario buscar(String cpf) throws SQLException {
         try {
             return usuarioDAO.buscar(cpf);

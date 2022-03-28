@@ -19,9 +19,9 @@ public class RepositorioDespesas {
         despesas = new ArrayList<>();
     }
 
-    public boolean cadastrarDespesa(TipoDespesa tipoDespesa, String nome, double valorDespesaAutopeca,
-            double valorDespesaCombustivel, LocalDate dataDespesa) throws SQLException {
-        Despesa d = new Despesa(tipoDespesa, nome, valorDespesaAutopeca, valorDespesaCombustivel, dataDespesa);
+    public boolean cadastrarDespesa(TipoDespesa tipoDespesa, String nome, double valorDespesa,
+            LocalDate dataDespesa) throws SQLException {
+        Despesa d = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa);
 
         try {
             despesaDAO.cadastrar(d);
@@ -35,11 +35,10 @@ public class RepositorioDespesas {
 
     }
 
-    public boolean atualizarDespesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesaAutopeca,
-            double valorDespesaCombustivel, LocalDate dataDespesa) throws SQLException {
+    public boolean atualizarDespesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesa,
+            LocalDate dataDespesa) throws SQLException {
 
-        Despesa Despesa = new Despesa(id, tipoDespesa, nome, valorDespesaAutopeca, valorDespesaCombustivel,
-                dataDespesa);
+        Despesa Despesa = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa);
 
         try {
             return despesaDAO.atualizar(id, Despesa);

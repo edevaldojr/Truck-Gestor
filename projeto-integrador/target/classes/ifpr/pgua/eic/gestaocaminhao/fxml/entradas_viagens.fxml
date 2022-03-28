@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
    <children>
@@ -51,6 +53,11 @@
                         <Button fx:id="btLimpar" layoutX="201.0" layoutY="392.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <Label layoutX="93.0" layoutY="307.0" text="CPF do motorista:" />
+                        <Text layoutX="265.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Viagem">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
                      </children>
                   </Pane>
                </children>

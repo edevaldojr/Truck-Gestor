@@ -5,33 +5,27 @@ import java.time.LocalDate;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 
 public class Despesa {
-    
+
     private int id;
     private TipoDespesa tipoDespesa;
     private String nome;
-    private double valorDespesaAutopeca;
-    private double valorDespesaCombustivel;
+    private double valorDespesa;
     private LocalDate dataDespesa;
 
-    
-    public Despesa(TipoDespesa tipoDespesa, String nome, double valorDespesaAutopeca, double valorDespesaCombustivel, LocalDate dataDespesa) {
+    public Despesa(TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa) {
         this.tipoDespesa = tipoDespesa;
         this.nome = nome;
-        this.valorDespesaAutopeca = valorDespesaAutopeca;
-        this.valorDespesaCombustivel = valorDespesaCombustivel;
+        this.valorDespesa = valorDespesa;
         this.dataDespesa = dataDespesa;
     }
 
-
-    public Despesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesaAutopeca, double valorDespesaCombustivel, LocalDate dataDespesa) {
+    public Despesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa) {
         this.id = id;
         this.tipoDespesa = tipoDespesa;
         this.nome = nome;
-        this.valorDespesaAutopeca = valorDespesaAutopeca;
-        this.valorDespesaCombustivel = valorDespesaCombustivel;
+        this.valorDespesa = valorDespesa;
         this.dataDespesa = dataDespesa;
     }
-
 
     public int getId() {
         return id;
@@ -57,20 +51,12 @@ public class Despesa {
         this.nome = nome;
     }
 
-    public double getValorDespesaAutopeca() {
-        return valorDespesaAutopeca;
+    public double getValorDespesa() {
+        return valorDespesa;
     }
 
-    public void setValorDespesaAutopeca(double valorDespesaAutopeca) {
-        this.valorDespesaAutopeca = valorDespesaAutopeca;
-    }
-
-    public double getValorDespesaCombustivel() {
-        return valorDespesaCombustivel;
-    }
-
-    public void setValorDespesaCombustivel(double valorDespesaCombustivel) {
-        this.valorDespesaCombustivel = valorDespesaCombustivel;
+    public void setValorDespesa(double valorDespesa) {
+        this.valorDespesa = valorDespesa;
     }
 
     public LocalDate getDataDespesa() {
