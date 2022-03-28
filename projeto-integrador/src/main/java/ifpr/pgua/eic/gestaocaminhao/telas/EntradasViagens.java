@@ -95,9 +95,9 @@ public class EntradasViagens {
     Thread threadListar = new Thread(() -> {
         try {
             cbEmpresaOrigem.getItems().clear();
-            cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+            cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigemString());
             cbEmpresaDestino.getItems().clear();
-            cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
+            cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestinoString());
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();

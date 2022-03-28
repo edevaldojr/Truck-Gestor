@@ -31,14 +31,18 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
+                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="664.0" prefWidth="681.0">
                      <children>
                         <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
                         <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
                         <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
                         <Text layoutX="201.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
                         <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
-                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores Cadastrados" />
+                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados" />
+                        <ListView fx:id="lstEmpresasOrigem" layoutX="14.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="160.0" prefWidth="212.0" />
+                        <Text layoutX="14.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:" />
+                        <ListView fx:id="lstEmpresasDestino" layoutX="235.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="160.0" prefWidth="212.0" />
+                        <Text layoutX="235.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:" />
                      </children>
                   </Pane>
                </children>

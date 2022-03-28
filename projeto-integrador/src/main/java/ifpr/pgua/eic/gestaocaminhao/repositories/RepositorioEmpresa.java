@@ -53,12 +53,30 @@ public class RepositorioEmpresa {
         }
     }
 
-    public ArrayList<String> listarEmpresasOrigem() throws Exception {
+    public ArrayList<Empresa> listarEmpresasOrigem() throws Exception {
         return empresaDAO.listarEmpresasOrigem();
     }
 
-    public ArrayList<String> listarEmpresasDestino() throws Exception {
+    public ArrayList<Empresa> listarEmpresasDestino() throws Exception {
         return empresaDAO.listarEmpresasDestino();
+    }
+
+    public ArrayList<String> listarEmpresasOrigemString() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
+        for (Empresa empresa : empresaDAO.listarEmpresasOrigem()) {
+            String nomeEmpresa = empresa.getNome();
+            lista.add(nomeEmpresa);
+        }
+        return lista;
+    }
+
+    public ArrayList<String> listarEmpresasDestinoString() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
+        for (Empresa empresa : empresaDAO.listarEmpresasOrigem()) {
+            String nomeEmpresa = empresa.getNome();
+            lista.add(nomeEmpresa);
+        }
+        return lista;
     }
 
     public Empresa buscar(String nome) throws SQLException {

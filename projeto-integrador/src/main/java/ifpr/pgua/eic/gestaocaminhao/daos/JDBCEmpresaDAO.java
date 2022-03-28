@@ -80,8 +80,8 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     }
 
     @Override
-    public ArrayList<String> listarEmpresasOrigem() throws Exception {
-        ArrayList<String> lista = new ArrayList<>();
+    public ArrayList<Empresa> listarEmpresasOrigem() throws Exception {
+        ArrayList<Empresa> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
@@ -93,7 +93,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         while (rs.next()) {
             Empresa u = montarEmpresa(rs);
-            lista.add(u.getNome());
+            lista.add(u);
         }
 
         rs.close();
@@ -104,8 +104,8 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     }
 
     @Override
-    public ArrayList<String> listarEmpresasDestino() throws Exception {
-        ArrayList<String> lista = new ArrayList<>();
+    public ArrayList<Empresa> listarEmpresasDestino() throws Exception {
+        ArrayList<Empresa> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
@@ -117,7 +117,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         while (rs.next()) {
             Empresa u = montarEmpresa(rs);
-            lista.add(u.getNome());
+            lista.add(u);
         }
 
         rs.close();

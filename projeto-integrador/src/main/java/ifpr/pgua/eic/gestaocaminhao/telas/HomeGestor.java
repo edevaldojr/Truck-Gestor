@@ -25,6 +25,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -54,6 +55,9 @@ public class HomeGestor {
     private TableColumn<Despesa, Double> tbcValorDespesa;
 
     @FXML
+    private ComboBox<LocalDate> cbDataRelatorios;
+
+    @FXML
     private Button btCadastrarCaminhao;
 
     @FXML
@@ -70,8 +74,6 @@ public class HomeGestor {
 
     @FXML
     private AnchorPane root;
-
-    private boolean tarefaPB=false;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -115,7 +117,7 @@ public class HomeGestor {
         tbcDataViagem.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
-                .setCellValueFactory(valor -> new SimpleDoubleProperty(valor.getValue().getValor_total()).asObject());
+                .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValor_total()).asObject());
 
         tbcDataDespesa.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
@@ -123,7 +125,9 @@ public class HomeGestor {
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValorDespesa()).asObject());
-        ;
+
+        // cbDataRelatorios.getItems().clear();
+        // cbDataRelatorios.getItems().addAll(repositorio.lista());
 
         try {
             threadListar.setDaemon(true);
@@ -145,7 +149,6 @@ public class HomeGestor {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
-
     });
 
     @FXML

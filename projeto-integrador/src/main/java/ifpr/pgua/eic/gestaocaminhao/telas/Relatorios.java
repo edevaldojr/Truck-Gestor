@@ -4,6 +4,7 @@ import java.util.List;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
+import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
@@ -37,6 +38,12 @@ public class Relatorios {
 
     @FXML
     private ListView<Usuario> lstGestores;
+
+    @FXML
+    private ListView<Empresa> lstEmpresasOrigem;
+
+    @FXML
+    private ListView<Empresa> lstEmpresasDestino;
 
     @FXML
     private Button btVoltar;
@@ -107,7 +114,27 @@ public class Relatorios {
             };
         });
 
-        
+        lstEmpresasOrigem.setCellFactory(lista -> new ListCell<>() {
+            protected void updateItem(Empresa empresa, boolean alterou) {
+                super.updateItem(empresa, alterou);
+                if (empresa != null) {
+                    setText("(" + empresa.getId() + ")" + empresa.getNome());
+                } else {
+                    setText(null);
+                }
+            };
+        });
+
+        lstEmpresasDestino.setCellFactory(lista -> new ListCell<>() {
+            protected void updateItem(Empresa empresa, boolean alterou) {
+                super.updateItem(empresa, alterou);
+                if (empresa != null) {
+                    setText("(" + empresa.getId() + ")" + empresa.getNome());
+                } else {
+                    setText(null);
+                }
+            };
+        });
 
         try {
             threadListar.setDaemon(true);
@@ -124,6 +151,8 @@ public class Relatorios {
             lstCaminhoes.getItems().addAll(repositorioCaminhao.listarCaminhoes());
             lstMotoristas.getItems().addAll(repositorioUsuarios.listarMotoristas());
             lstGestores.getItems().addAll(repositorioUsuarios.listarGestores());
+            lstEmpresasOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+            lstEmpresasDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
             piListarRelatorio.setVisible(false);
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -151,11 +180,8 @@ public class Relatorios {
         } else if (event.getClickCount() == 2) {
 
             if (caminhaoSelecionado != null) {
-                // substituir o painelCentral do Home
-                StackPane painelCentral = (StackPane) root.getParent();
-
-                painelCentral.getChildren().clear();
-                painelCentral.getChildren().add(App.loadTela("fxml/cadastro_caminhao.fxml",
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/cadastro_caminhao.fxml",
                         o -> new CadastroCaminhao(caminhaoSelecionado, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
                                 repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
@@ -179,10 +205,8 @@ public class Relatorios {
             }
         } else if (event.getClickCount() == 2) {
             if (motoristaSelecionado != null) {
-                StackPane painelCentral = (StackPane) root.getParent();
-
-                painelCentral.getChildren().clear();
-                painelCentral.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
                         o -> new CadastroUsuario(motoristaSelecionado, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
                                 repositorioCidade, repositorioEmpresa, repositorioViagens)));
@@ -206,16 +230,73 @@ public class Relatorios {
             }
         } else if (event.getClickCount() == 2) {
             if (gestorSelecionado != null) {
-                StackPane painelCentral = (StackPane) root.getParent();
-
-                painelCentral.getChildren().clear();
-                painelCentral.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
                         o -> new CadastroUsuario(gestorSelecionado, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
                                 repositorioCidade, repositorioEmpresa, repositorioViagens)));
             }
         }
     }
+
+    @FXML 
+    private void atualizarRemoverEmpresasOrigem(MouseEvent event) {
+        Empresa empresaSelecionada = lstEmpresasOrigem.getSelectionModel().getSelectedItem();
+        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
+            if (empresaSelecionada != null) {
+                try {
+                    lstEmpresasOrigem.getItems().clear();
+                    lstEmpresasOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+                    repositorioEmpresa.removerEmpresas(empresaSelecionada.getId());
+                } catch (Exception e) {
+                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        } else if (event.getClickCount() == 2) {
+            if (empresaSelecionada != null) {
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/cadastro_empresa.fxml",
+                        o -> new CadastroEmpresa(login, autenticacaoServico,
+                        repositorioUsuarios,
+                        repositorioCaminhao,
+                        repositorioEndereco,
+                        repositorioEstado,
+                        repositorioCidade, repositorioEmpresa,
+                        repositorioViagens, repositorioDespesas)));
+            }
+        }
+    }
+
+    @FXML 
+    private void atualizarRemoverEmpresasDestino(MouseEvent event) {
+        Empresa empresaSelecionada = lstEmpresasDestino.getSelectionModel().getSelectedItem();
+        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
+            if (empresaSelecionada != null) {
+                try {
+                    lstEmpresasDestino.getItems().clear();
+                    lstEmpresasDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
+                    repositorioEmpresa.removerEmpresas(empresaSelecionada.getId());
+                } catch (Exception e) {
+                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        } else if (event.getClickCount() == 2) {
+            if (empresaSelecionada != null) {
+                root.getChildren().clear();
+                root.getChildren().add(App.loadTela("fxml/cadastro_empresa.fxml",
+                        o -> new CadastroEmpresa(login, autenticacaoServico,
+                        repositorioUsuarios,
+                        repositorioCaminhao,
+                        repositorioEndereco,
+                        repositorioEstado,
+                        repositorioCidade, repositorioEmpresa,
+                        repositorioViagens, repositorioDespesas)));
+            }
+        }
+    }
+
 
     @FXML
     private void voltar() {
