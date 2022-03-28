@@ -125,15 +125,15 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Despesa";
+        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 7 DAY";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {
-            Despesa u = montarDespesa(rs);
-            lista.add(u);
+            Despesa v = montarDespesa(rs);
+            lista.add(v);
         }
 
         rs.close();
@@ -145,8 +145,50 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
     @Override
     public ArrayList<Despesa> listar14dias() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList<Despesa> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 14 DAY";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Despesa v = montarDespesa(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Despesa> listar30dias() throws Exception {
+        ArrayList<Despesa> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 30 DAY";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Despesa v = montarDespesa(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
     }
 
 }
