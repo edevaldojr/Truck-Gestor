@@ -13,4 +13,8 @@ public interface DespesaDAO {
     boolean remover(int id) throws Exception;
 
     ArrayList<Despesa> listar() throws Exception;
+
+    ArrayList<Despesa> listar7dias() throws Exception;
+
+    ArrayList<Despesa> listar14dias() throws Exception;
 }

@@ -72,7 +72,7 @@ public class RepositorioEmpresa {
 
     public ArrayList<String> listarEmpresasDestinoString() throws Exception {
         ArrayList<String> lista = new ArrayList<>();
-        for (Empresa empresa : empresaDAO.listarEmpresasOrigem()) {
+        for (Empresa empresa : empresaDAO.listarEmpresasDestino()) {
             String nomeEmpresa = empresa.getNome();
             lista.add(nomeEmpresa);
         }

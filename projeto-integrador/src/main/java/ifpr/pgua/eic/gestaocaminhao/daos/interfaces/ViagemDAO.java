@@ -14,6 +14,12 @@ public interface ViagemDAO {
 
     ArrayList<Viagem> listar() throws Exception;
 
+    ArrayList<Viagem> listar7dias() throws Exception;
+
+    ArrayList<Viagem> listar14dias() throws Exception;
+
+    ArrayList<Viagem> listar30dias() throws Exception;
+
     Viagem buscar(int id) throws Exception;
 
 }

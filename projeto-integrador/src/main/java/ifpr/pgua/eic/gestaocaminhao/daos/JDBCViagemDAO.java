@@ -169,4 +169,76 @@ public class JDBCViagemDAO implements ViagemDAO {
         return v;
     }
 
+    @Override
+    public ArrayList<Viagem> listar7dias() throws Exception {
+        ArrayList<Viagem> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Viagem v = montarViagem(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Viagem> listar14dias() throws Exception {
+        ArrayList<Viagem> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Viagem v = montarViagem(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Viagem> listar30dias() throws Exception {
+        ArrayList<Viagem> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Viagem v = montarViagem(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
 }
