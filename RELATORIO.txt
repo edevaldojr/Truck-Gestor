@@ -62,4 +62,5 @@
 -Ordem de listar entradas por data feitos
 -Calculo do lucro feito
 -Nome Motorista inserido na coluna de entradas
--A Fazer(tela do motorista e mostrar só as viagens dele)
+-A Fazer(tela do motorista e mostrar só as viagens dele, fomatar valores)
+-Ajuste na listagem para não copiar código

@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
+      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>

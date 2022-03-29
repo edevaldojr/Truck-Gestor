@@ -60,15 +60,15 @@ public class RepositorioDespesas {
     }
 
     public ArrayList<Despesa> listarDespesas7dias() throws Exception {
-        return despesaDAO.listar7dias();
+        return despesaDAO.listarDias(7);
     }
 
     public ArrayList<Despesa> listarDespesas14dias() throws Exception {
-        return despesaDAO.listar14dias();
+        return despesaDAO.listarDias(14);
     }
 
     public ArrayList<Despesa> listarDespesas30dias() throws Exception {
-        return despesaDAO.listar30dias();
+        return despesaDAO.listarDias(30);
     }
 
 

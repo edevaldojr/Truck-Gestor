@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
+      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <top>
             <HBox prefHeight="102.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
             <VBox prefHeight="419.0" prefWidth="863.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="419.0" prefWidth="863.0">
+                  <Pane prefHeight="521.0" prefWidth="959.0">
                      <children>
-                        <TextField fx:id="tfCpf" layoutX="328.0" layoutY="47.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
-                        <PasswordField fx:id="pfSenha" layoutX="328.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
-                        <Label layoutX="391.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE" />
-                        <Label layoutX="386.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE" />
-                        <Button fx:id="btLogin" onAction="#logar" layoutX="328.0" layoutY="185.0" mnemonicParsing="false" text="Entrar" />
-                        <Button fx:id="btCadastrar" onAction="#cadastrar" layoutX="470.0" layoutY="185.0" mnemonicParsing="false" text="Cadastrar" /> 
+                        <TextField fx:id="tfCpf" layoutX="376.0" layoutY="47.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
+                        <PasswordField fx:id="pfSenha" layoutX="376.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
+                        <Label layoutX="439.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE" />
+                        <Label layoutX="434.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE" />
+                        <Button fx:id="btLogin" layoutX="376.0" layoutY="185.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
+                        <Button fx:id="btCadastrar" layoutX="518.0" layoutY="185.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" /> 
                      </children>
                   </Pane>
                </children>

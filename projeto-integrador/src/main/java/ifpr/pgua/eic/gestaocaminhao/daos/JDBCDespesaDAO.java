@@ -87,7 +87,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Despesa";
+        String sql = "SELECT * FROM projeto_Despesa ORDER BY dataDespesa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -120,62 +120,16 @@ public class JDBCDespesaDAO implements DespesaDAO {
     }
 
     @Override
-    public ArrayList<Despesa> listar7dias() throws Exception {
+    public ArrayList<Despesa> listarDias(int dias) throws Exception {
         ArrayList<Despesa> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 7 DAY";
+        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL ? DAY ORDER BY dataDespesa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            Despesa v = montarDespesa(rs);
-            lista.add(v);
-        }
-
-        rs.close();
-        pstmt.close();
-        con.close();
-
-        return lista;
-    }
-
-    @Override
-    public ArrayList<Despesa> listar14dias() throws Exception {
-        ArrayList<Despesa> lista = new ArrayList<>();
-
-        Connection con = fabricaConexoes.getConnection();
-
-        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 14 DAY";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            Despesa v = montarDespesa(rs);
-            lista.add(v);
-        }
-
-        rs.close();
-        pstmt.close();
-        con.close();
-
-        return lista;
-    }
-
-    @Override
-    public ArrayList<Despesa> listar30dias() throws Exception {
-        ArrayList<Despesa> lista = new ArrayList<>();
-
-        Connection con = fabricaConexoes.getConnection();
-
-        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL 30 DAY";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, dias);
 
         ResultSet rs = pstmt.executeQuery();
 

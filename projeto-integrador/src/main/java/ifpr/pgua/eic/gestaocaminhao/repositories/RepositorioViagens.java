@@ -62,15 +62,15 @@ public class RepositorioViagens {
     }
 
     public ArrayList<Viagem> listarViagens7dias() throws Exception {
-        return viagemDAO.listar7dias();
+        return viagemDAO.listarDias(7);
     }
 
     public ArrayList<Viagem> listarViagens14dias() throws Exception {
-        return viagemDAO.listar14dias();
+        return viagemDAO.listarDias(14);
     }
 
     public ArrayList<Viagem> listarViagens30dias() throws Exception {
-        return viagemDAO.listar30dias();
+        return viagemDAO.listarDias(30);
     }
 
 }

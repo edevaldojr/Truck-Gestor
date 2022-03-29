@@ -170,62 +170,16 @@ public class JDBCViagemDAO implements ViagemDAO {
     }
 
     @Override
-    public ArrayList<Viagem> listar7dias() throws Exception {
+    public ArrayList<Viagem> listarDias(int dias) throws Exception {
         ArrayList<Viagem> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY ORDER BY data_da_Baixa DESC";
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL ? DAY ORDER BY data_da_Baixa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            Viagem v = montarViagem(rs);
-            lista.add(v);
-        }
-
-        rs.close();
-        pstmt.close();
-        con.close();
-
-        return lista;
-    }
-
-    @Override
-    public ArrayList<Viagem> listar14dias() throws Exception {
-        ArrayList<Viagem> lista = new ArrayList<>();
-
-        Connection con = fabricaConexoes.getConnection();
-
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY ORDER BY data_da_Baixa DESC";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            Viagem v = montarViagem(rs);
-            lista.add(v);
-        }
-
-        rs.close();
-        pstmt.close();
-        con.close();
-
-        return lista;
-    }
-
-    @Override
-    public ArrayList<Viagem> listar30dias() throws Exception {
-        ArrayList<Viagem> lista = new ArrayList<>();
-
-        Connection con = fabricaConexoes.getConnection();
-
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY ORDER BY data_da_Baixa DESC";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, dias);
 
         ResultSet rs = pstmt.executeQuery();
 
