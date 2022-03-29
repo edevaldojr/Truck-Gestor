@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
+      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
@@ -36,29 +35,29 @@
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="713.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="50.0" prefWidth="946.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
-         <right>
-            <Pane prefHeight="481.0" prefWidth="681.0" BorderPane.alignment="CENTER">
+         <center>
+            <Pane prefHeight="471.0" prefWidth="775.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                  <ComboBox fx:id="cbDataRelatorios" layoutX="469.0" layoutY="109.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
+                  <ComboBox fx:id="cbDataRelatorios" layoutX="593.0" layoutY="110.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
                   <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:" />
-                  <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="189.0">
+                  <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="289.0">
                      <columns>
                         <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
                         <TableColumn fx:id="tbcValorViagem" prefWidth="83.0" text="Valor" />
+                        <TableColumn fx:id="tbcMotorista" prefWidth="99.0" text="Motorista" />
                      </columns>
                   </TableView>
-                  <Text layoutX="203.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:" />
-                  <TableView fx:id="tbListaDespesa" layoutX="203.0" layoutY="71.0" prefHeight="373.0" prefWidth="265.0">
+                  <Text layoutX="327.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:" />
+                  <TableView fx:id="tbListaDespesa" layoutX="327.0" layoutY="72.0" prefHeight="373.0" prefWidth="265.0">
                      <columns>
                         <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
                         <TableColumn fx:id="tbcTipoDespesa" prefWidth="89.00003051757812" text="Tipo" />
                         <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
                      </columns>
                   </TableView>
-                  <Label fx:id="lbLucro" layoutX="469.0" layoutY="70.0" prefHeight="39.0" prefWidth="211.0" text="Lucro:" textFill="#0ce809">
+                  <Label fx:id="lbLucro" layoutX="593.0" layoutY="71.0" prefHeight="39.0" prefWidth="211.0" text="Lucro:" textFill="#0ce809">
                      <font>
                         <Font size="27.0" />
                      </font>
@@ -68,11 +67,11 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <ProgressIndicator fx:id="piListarHome" layoutX="472.0" layoutY="395.0" prefHeight="43.0" prefWidth="73.0" />
-                  <Button fx:id="btBuscar" layoutX="475.0" layoutY="243.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+                  <ProgressIndicator fx:id="piListarHome" layoutX="596.0" layoutY="396.0" prefHeight="43.0" prefWidth="73.0" />
+                  <Button fx:id="btBuscar" layoutX="599.0" layoutY="244.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
                </children>
             </Pane>
-         </right>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

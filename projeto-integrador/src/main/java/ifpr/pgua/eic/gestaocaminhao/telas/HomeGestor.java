@@ -53,6 +53,9 @@ public class HomeGestor {
     private TableColumn<Despesa, String> tbcDataDespesa;
 
     @FXML
+    private TableColumn<Viagem, String> tbcMotorista;
+
+    @FXML
     private TableColumn<Despesa, String> tbcTipoDespesa;
 
     @FXML
@@ -129,9 +132,10 @@ public class HomeGestor {
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
                 .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValor_total()).asObject());
+        
+        tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
-        tbcDataDespesa.setCellValueFactory(
-                data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
+        tbcDataDespesa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
         tbcTipoDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa

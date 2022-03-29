@@ -76,7 +76,7 @@ public class App extends Application {
                         o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
                                 repositorioViagens, repositorioDespesas)),
-                864, 515);
+                959, 521);
         // stage.setMaximized(true);
         stage.setTitle("Truck");
         // stage.getIcons().add(new Image(""));
