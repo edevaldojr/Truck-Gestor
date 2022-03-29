@@ -100,7 +100,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem";
+        String sql = "SELECT * FROM projeto_Viagem ORDER BY data_da_Baixa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -175,7 +175,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY";
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY ORDER BY data_da_Baixa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -199,7 +199,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY";
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY ORDER BY data_da_Baixa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -223,7 +223,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY";
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY ORDER BY data_da_Baixa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

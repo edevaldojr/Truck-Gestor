@@ -211,7 +211,7 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas30dias());
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucro());
+                lbLucro.setText("Lucro: R$" + calculoLucro());
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -221,14 +221,24 @@ public class HomeGestor {
 
     private double calculoLucro(){
         Double soma = 0.0;
+        Double resultadoEntrada = 0.0;
+        Double resultadoSaida = 0.0;
         Double resultado = 0.0;
         List<Viagem> listaEntrada = tbListaEntradas.getItems();
-            for (Viagem v : listaEntrada) {
-                Double valorTabela = v.getValor_total();
-                soma += valorTabela;
-                resultado = soma;
-            }
-            System.out.println("a soma é: " + resultado);
+        for (Viagem v : listaEntrada) {
+            Double valorTabela = v.getValor_total();
+            soma += valorTabela;
+            resultadoEntrada = soma;
+        }
+        soma = 0.0;
+        List<Despesa> listaSaida = tbListaDespesa.getItems();
+        for (Despesa d : listaSaida) {
+            Double valorTabela = d.getValorDespesa();
+            soma += valorTabela;
+            resultadoSaida = soma;
+        }
+        resultado = resultadoEntrada - resultadoSaida;
+        System.out.println("a soma é: " + resultado);
         return resultado;
     }
 

@@ -58,7 +58,7 @@
                         <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
                      </columns>
                   </TableView>
-                  <Label fx:id="lbLucro" layoutX="469.0" layoutY="70.0" prefHeight="39.0" prefWidth="198.0" text="Lucro:" textFill="#0ce809">
+                  <Label fx:id="lbLucro" layoutX="469.0" layoutY="70.0" prefHeight="39.0" prefWidth="211.0" text="Lucro:" textFill="#0ce809">
                      <font>
                         <Font size="27.0" />
                      </font>
