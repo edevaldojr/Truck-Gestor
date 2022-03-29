@@ -56,3 +56,10 @@
 -Criação de threads para listas
 -Ajustes nos nomes do sistema
 -A FAZER(COMBOBOX FUNCIONAL PARA RELATORIO DE DATAS)
+
+29/03/2022
+-combobox funcional para datas feito
+-Ordem de listar entradas por data feitos
+-Calculo do lucro feito
+-Nome Motorista inserido na coluna de entradas
+-A Fazer(tela do motorista e mostrar só as viagens dele)
