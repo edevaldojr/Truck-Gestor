@@ -17,4 +17,6 @@ public interface DespesaDAO {
     ArrayList<Despesa> listar7dias() throws Exception;
 
     ArrayList<Despesa> listar14dias() throws Exception;
+
+    ArrayList<Despesa> listar30dias() throws Exception;
 }

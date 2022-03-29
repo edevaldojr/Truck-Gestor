@@ -106,8 +106,11 @@ begin
     set new.total = total_entrada;
 end$$
 
-drop table if exists projeto_EntradasSaídas;
-create table projeto_EntradasSaídas(
-			entradaTotal double not null,
-    		saídaTotal double not null
-);
+-- retorna os ultimos 30 dias de viagens
+SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY
+
+-- retorna os ultimos 14 dias de viagens
+SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY
+
+-- retorna os ultimos 7 dias de viagens
+SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY
