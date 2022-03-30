@@ -114,6 +114,11 @@ public class Viagem {
         return valor_total;
     }
 
+    public String getValor_total_ToString() {
+        String total = String.format("R$%.2f", valor_total);
+        return total;
+    }
+
     public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }

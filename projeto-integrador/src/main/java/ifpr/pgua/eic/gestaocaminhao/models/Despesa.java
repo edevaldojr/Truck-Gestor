@@ -55,6 +55,11 @@ public class Despesa {
         return valorDespesa;
     }
 
+    public String getValorDespesaToString() {
+        String valor = String.format("$%.2f", valorDespesa);
+        return valor;
+    }
+
     public void setValorDespesa(double valorDespesa) {
         this.valorDespesa = valorDespesa;
     }

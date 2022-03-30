@@ -44,7 +44,7 @@ public class HomeGestor {
     private TableColumn<Viagem, String> tbcDataViagem;
 
     @FXML
-    private TableColumn<Viagem, Double> tbcValorViagem;
+    private TableColumn<Viagem, String> tbcValorViagem;
 
     @FXML
     private TableView<Despesa> tbListaDespesa;
@@ -59,15 +59,13 @@ public class HomeGestor {
     private TableColumn<Despesa, String> tbcTipoDespesa;
 
     @FXML
-    private TableColumn<Despesa, Double> tbcValorDespesa;
-    
-    ObservableList<String> options = 
-    FXCollections.observableArrayList(
-        "Todas",
-        "7 dias",
-        "14 dias",
-        "30 dias"
-    );
+    private TableColumn<Despesa, String> tbcValorDespesa;
+
+    ObservableList<String> options = FXCollections.observableArrayList(
+            "Todas",
+            "7 dias",
+            "14 dias",
+            "30 dias");
     @FXML
     private ComboBox<String> cbDataRelatorios = new ComboBox<String>(options);
 
@@ -131,20 +129,20 @@ public class HomeGestor {
         tbcDataViagem.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
-                .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValor_total()).asObject());
-        
+                .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValor_total_ToString()));
+
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
-        tbcDataDespesa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
+        tbcDataDespesa.setCellValueFactory(
+                data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
         tbcTipoDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
-                .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValorDespesa()).asObject());
+                .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
 
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
 
-        
         try {
             threadListar.setDaemon(true);
             threadListar.start();
@@ -152,7 +150,7 @@ public class HomeGestor {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
-        
+
     }
 
     Thread threadListar = new Thread(() -> {
@@ -178,13 +176,13 @@ public class HomeGestor {
             tbListaEntradas.getItems().clear();
             tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(7));
             tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(7));   
+            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(7));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
                 lbLucro.setText("Lucro: " + calculoLucro());
             });
         } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());   
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
     });
@@ -223,7 +221,7 @@ public class HomeGestor {
         }
     });
 
-    private double calculoLucro(){
+    private double calculoLucro() {
         Double soma = 0.0;
         Double resultadoEntrada = 0.0;
         Double resultadoSaida = 0.0;
@@ -247,27 +245,24 @@ public class HomeGestor {
     }
 
     @FXML
-    public void buscar(){
+    public void buscar() {
         String opcao0 = options.get(0);
         String opcao1 = options.get(1);
         String opcao2 = options.get(2);
         String opcao3 = options.get(3);
         String dataSelecionada = cbDataRelatorios.getSelectionModel().getSelectedItem();
-        if(dataSelecionada != null && dataSelecionada == opcao0){
+        if (dataSelecionada != null && dataSelecionada == opcao0) {
             threadListar.setDaemon(true);
-            threadListar.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao1){
+            threadListar.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao1) {
             threadListar7dias.setDaemon(true);
-            threadListar7dias.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao2){
+            threadListar7dias.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao2) {
             threadListar14dias.setDaemon(true);
-            threadListar14dias.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao3){
+            threadListar14dias.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao3) {
             threadListar30dias.setDaemon(true);
-            threadListar30dias.start();  
+            threadListar30dias.start();
         }
 
     }
