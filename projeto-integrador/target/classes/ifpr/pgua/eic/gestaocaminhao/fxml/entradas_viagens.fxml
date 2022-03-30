@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,12 +37,12 @@
                <children>
                   <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
                      <children>
-                        <TextField fx:id="tfPeso" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Peso " />
-                        <TextField fx:id="tfPrecoTonelada" layoutX="388.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Preço Tonelada" />
+                        <TextField fx:id="tfPeso" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: &quot;18.720&quot;" />
+                        <TextField fx:id="tfPrecoTonelada" layoutX="388.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: 13.47" />
                         <TextField fx:id="tfCarga" layoutX="93.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Carga" />
                         <ComboBox fx:id="cbEmpresaOrigem" layoutX="388.0" layoutY="175.0" prefHeight="26.0" prefWidth="209.0" promptText="Empresa Origem" />
                         <ComboBox fx:id="cbEmpresaDestino" layoutX="93.0" layoutY="246.0" prefHeight="26.0" prefWidth="210.0" promptText="Empresa Destino" />
-                        <DatePicker fx:id="dpDataDaBaixa" layoutX="388.0" layoutY="247.0" prefHeight="26.0" prefWidth="216.0" />
+                        <DatePicker fx:id="dpDataDaBaixa" layoutX="388.0" layoutY="247.0" prefHeight="26.0" prefWidth="208.0" />
                         <TextField fx:id="tfCpfMoto" layoutX="93.0" layoutY="325.0" prefHeight="26.0" prefWidth="220.0" promptText="CPF do motorista" />
                         <Label layoutX="93.0" layoutY="98.0" text="Peso Tonelada:" />
                         <Label layoutX="388.0" layoutY="225.0" text="Data da Baixa:" />
@@ -58,6 +59,10 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
+                        <Label layoutX="365.0" layoutY="119.0" text="R$" />
+                        <Label layoutX="69.0" layoutY="119.0" text="Kg" />
+                        <ProgressIndicator fx:id="piOrigem" layoutX="604.0" layoutY="181.0" prefHeight="16.0" prefWidth="21.0" />
+                        <ProgressIndicator fx:id="piDestino" layoutX="61.0" layoutY="252.0" prefHeight="16.0" prefWidth="21.0" />
                      </children>
                   </Pane>
                </children>

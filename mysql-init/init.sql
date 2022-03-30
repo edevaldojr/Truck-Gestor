@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS projeto_Usuario;
-CREATE TABLE `tads20_edevaldo`.`projeto_Usuario` (
+CREATE TABLE projeto_Usuario (
       cpf VARCHAR(14) NOT NULL,
       nome VARCHAR(150) NOT NULL,
       telefone VARCHAR(45) NOT NULL,

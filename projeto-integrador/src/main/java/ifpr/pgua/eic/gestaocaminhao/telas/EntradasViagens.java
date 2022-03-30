@@ -17,11 +17,13 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -55,6 +57,12 @@ public class EntradasViagens {
 
     @FXML
     private Button btLimpar;
+
+    @FXML
+    private ProgressIndicator piDestino;
+
+    @FXML
+    private ProgressIndicator piOrigem;
 
     @FXML
     private AnchorPane root;
@@ -95,6 +103,8 @@ public class EntradasViagens {
     }
 
     public void initialize() throws Exception {
+        piDestino.setVisible(true);
+        piOrigem.setVisible(true);
         threadListar.setDaemon(true);
         threadListar.start();
     }
@@ -105,6 +115,10 @@ public class EntradasViagens {
             cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigemString());
             cbEmpresaDestino.getItems().clear();
             cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestinoString());
+            Platform.runLater(() -> {
+                piDestino.setVisible(false);
+                piOrigem.setVisible(false);
+            });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();

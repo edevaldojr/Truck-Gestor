@@ -46,7 +46,7 @@
                         <TableColumn fx:id="tbcMotorista" prefWidth="130.0" text="Motorista" />
                      </columns>
                   </TableView>
-                  <Label fx:id="lbValorAReceber" layoutX="444.0" layoutY="73.0" prefHeight="39.0" prefWidth="350.0" text="Valor a receber:" textFill="#0ce809">
+                  <Label fx:id="lbValorAReceber" layoutX="444.0" layoutY="73.0" prefHeight="39.0" prefWidth="598.0" text="Valor a receber:" textFill="#0ce809">
                      <font>
                         <Font size="27.0" />
                      </font>

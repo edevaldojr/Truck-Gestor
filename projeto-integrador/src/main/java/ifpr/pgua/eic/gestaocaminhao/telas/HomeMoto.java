@@ -45,7 +45,7 @@ public class HomeMoto {
     private TableColumn<Viagem, String> tbcDataViagem;
 
     @FXML
-    private TableColumn<Viagem, Double> tbcValorViagem;
+    private TableColumn<Viagem, String> tbcValorViagem;
 
     @FXML
     private TableColumn<Viagem, String> tbcMotorista;
@@ -86,7 +86,7 @@ public class HomeMoto {
         tbcDataViagem.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
-                .setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getValor_total()).asObject());
+                .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValor_total_ToString()));
         
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
@@ -164,7 +164,7 @@ public class HomeMoto {
         }
     });
 
-    private double calculoValorAReceber(){
+    private String calculoValorAReceber(){
         Double soma = 0.0;
         Double resultadoEntrada = 0.0;
         Double resultado = 0.0;
@@ -175,8 +175,9 @@ public class HomeMoto {
             resultadoEntrada = soma;
         }
         resultado = resultadoEntrada * 0.20;
-        System.out.println("a soma com depreciação é: " + resultado);
-        return resultado;
+        String lucro = String.format("R$%.2f", resultado);
+        System.out.println("a soma é: " + lucro);
+        return lucro;
     }
 
     @FXML

@@ -56,7 +56,7 @@ public class Despesa {
     }
 
     public String getValorDespesaToString() {
-        String valor = String.format("$%.2f", valorDespesa);
+        String valor = String.format("R$%.2f", valorDespesa);
         return valor;
     }
 

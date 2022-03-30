@@ -213,7 +213,7 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(30));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: R$" + calculoLucro());
+                lbLucro.setText("Lucro: " + calculoLucro());
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -221,7 +221,7 @@ public class HomeGestor {
         }
     });
 
-    private double calculoLucro() {
+    private String calculoLucro() {
         Double soma = 0.0;
         Double resultadoEntrada = 0.0;
         Double resultadoSaida = 0.0;
@@ -239,9 +239,11 @@ public class HomeGestor {
             soma += valorTabela;
             resultadoSaida = soma;
         }
+        
         resultado = resultadoEntrada - resultadoSaida;
-        System.out.println("a soma é: " + resultado);
-        return resultado;
+        String lucro = String.format("R$%.2f", resultado);
+        System.out.println("a soma é: " + lucro);
+        return lucro;
     }
 
     @FXML
