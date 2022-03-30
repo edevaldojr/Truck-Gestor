@@ -176,9 +176,9 @@ public class HomeGestor {
         try {
             piListarHome.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagens7dias());
+            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(7));
             tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas7dias());   
+            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(7));   
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
                 lbLucro.setText("Lucro: " + calculoLucro());
@@ -193,9 +193,9 @@ public class HomeGestor {
         try {
             piListarHome.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagens14dias());
+            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(14));
             tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas14dias());
+            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(14));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
                 lbLucro.setText("Lucro: " + calculoLucro());
@@ -210,9 +210,9 @@ public class HomeGestor {
         try {
             piListarHome.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagens30dias());
+            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(30));
             tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas30dias());
+            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(30));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
                 lbLucro.setText("Lucro: R$" + calculoLucro());

@@ -16,6 +16,10 @@ public interface ViagemDAO {
 
     ArrayList<Viagem> listarDias(int dias) throws Exception;
 
+    ArrayList<Viagem> listarPorMoto(String cpf) throws Exception;
+
+    ArrayList<Viagem> listarPorMotoEmDias(int dias, String cpf) throws Exception;
+
     Viagem buscar(int id) throws Exception;
 
 }

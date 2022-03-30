@@ -61,16 +61,16 @@ public class RepositorioViagens {
         return viagemDAO.listar();
     }
 
-    public ArrayList<Viagem> listarViagens7dias() throws Exception {
-        return viagemDAO.listarDias(7);
+    public ArrayList<Viagem> listarViagensDias(int dias) throws Exception {
+        return viagemDAO.listarDias(dias);
     }
 
-    public ArrayList<Viagem> listarViagens14dias() throws Exception {
-        return viagemDAO.listarDias(14);
+    public ArrayList<Viagem> listarViagensMoto(String cpf) throws Exception {
+        return viagemDAO.listarPorMoto(cpf);
     }
 
-    public ArrayList<Viagem> listarViagens30dias() throws Exception {
-        return viagemDAO.listarDias(30);
+    public ArrayList<Viagem> listarViagensMotoDias(int dias, String cpf) throws Exception {
+        return viagemDAO.listarDias(dias);
     }
 
 }

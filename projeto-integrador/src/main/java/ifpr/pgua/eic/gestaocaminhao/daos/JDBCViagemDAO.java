@@ -195,4 +195,57 @@ public class JDBCViagemDAO implements ViagemDAO {
         return lista;
     }
 
+    @Override
+    public ArrayList<Viagem> listarPorMoto(String cpf) throws Exception {
+        ArrayList<Viagem> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Viagem WHERE projeto_Viagem.motorista = ? ORDER BY data_da_Baixa DESC";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, cpf);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Viagem v = montarViagem(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Viagem> listarPorMotoEmDias(int dias, String cpf) throws Exception {
+        ArrayList<Viagem> lista = new ArrayList<>();
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL ? DAY AND projeto_Viagem.motorista = ? ORDER BY data_da_Baixa DESC";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, dias);
+        pstmt.setString(2, cpf);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Viagem v = montarViagem(rs);
+            lista.add(v);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return lista;
+    }
+
 }
