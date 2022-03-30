@@ -87,6 +87,13 @@ public class EntradasViagens {
         this.login = login;
     }
 
+    public EntradasViagens(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas){
+        this.login = login;
+        this.autenticacaoServico = autenticacaoServico;
+        this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
+    }
+
     public void initialize() throws Exception {
         threadListar.setDaemon(true);
         threadListar.start();
@@ -107,12 +114,18 @@ public class EntradasViagens {
 
     @FXML
     private void voltar() {
-        root.getChildren().clear();
-        root.getChildren().add(App.loadTela("fxml/home_gestor.fxml",
-                a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                        repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                        repositorioViagens, repositorioDespesas)));
-
+        if(autenticacaoServico.getLogado().isGestor()){
+            root.getChildren().clear();
+            root.getChildren()
+                    .add(App.loadTela("fxml/home_gestor.fxml",
+                            a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                                    repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                    repositorioViagens, repositorioDespesas)));
+        }else{
+            root.getChildren().clear();
+            root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
+                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas)));
+        }
     }
 
     @FXML

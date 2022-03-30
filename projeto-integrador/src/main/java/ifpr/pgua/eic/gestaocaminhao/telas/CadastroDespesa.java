@@ -24,7 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
 public class CadastroDespesa {
-    
+
     private AutenticacaoServico autenticacaoServico;
     private RepositorioUsuarios repositorioUsuarios;
     private RepositorioEndereco repositorioEndereco;
@@ -76,9 +76,10 @@ public class CadastroDespesa {
         this.login = login;
     }
 
-    public CadastroDespesa(Login login, AutenticacaoServico autenticacaoServico,
+    public CadastroDespesa(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
             RepositorioDespesas repositorioDespesas) {
         this.repositorioDespesas = repositorioDespesas;
+        this.repositorioViagens = repositorioViagens;
         this.autenticacaoServico = autenticacaoServico;
         this.login = login;
     }
@@ -88,13 +89,19 @@ public class CadastroDespesa {
 
     @FXML
     private void voltar() {
-        root.getChildren().clear();
-        root.getChildren()
-                .add(App.loadTela("fxml/home_gestor.fxml",
-                        a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens, repositorioDespesas)));
-
+        if (autenticacaoServico.getLogado().isGestor()) {
+            root.getChildren().clear();
+            root.getChildren()
+                    .add(App.loadTela("fxml/home_gestor.fxml",
+                            a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios,
+                                    repositorioCaminhao,
+                                    repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                    repositorioViagens, repositorioDespesas)));
+        } else {
+            root.getChildren().clear();
+            root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
+                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas)));
+        }
     }
 
     @FXML
@@ -128,8 +135,6 @@ public class CadastroDespesa {
             temErro = true;
             msg += "Data da despesa não pode ser vazio!\n";
         }
-
-        
 
         if (!temErro) {
             try {

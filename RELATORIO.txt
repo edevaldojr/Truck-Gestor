@@ -64,3 +64,6 @@
 -Nome Motorista inserido na coluna de entradas
 -A Fazer(tela do motorista e mostrar só as viagens dele, fomatar valores)
 -Ajuste na listagem para não copiar código
+
+30/03/2022
+-Iniciando modificações na tela de motorista

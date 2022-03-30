@@ -30,7 +30,7 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
+                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
                      <children>
                         <TextField fx:id="tfPlaca" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Placa" />
                         <TextField fx:id="tfCor" layoutX="382.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Cor" />

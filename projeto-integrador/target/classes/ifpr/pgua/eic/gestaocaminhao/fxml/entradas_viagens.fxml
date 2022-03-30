@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="521.0" prefWidth="863.0">
+      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
@@ -34,7 +34,7 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="481.0" prefWidth="681.0">
+                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
                      <children>
                         <TextField fx:id="tfPeso" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Peso " />
                         <TextField fx:id="tfPrecoTonelada" layoutX="388.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Preço Tonelada" />
