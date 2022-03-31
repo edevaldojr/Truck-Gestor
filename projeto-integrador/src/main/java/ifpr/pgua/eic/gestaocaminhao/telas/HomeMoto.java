@@ -9,7 +9,6 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,19 +52,17 @@ public class HomeMoto {
     @FXML
     private TableView<Viagem> tbListaEntradas;
 
-    ObservableList<String> options = 
-    FXCollections.observableArrayList(
-        "Todas",
-        "7 dias",
-        "14 dias",
-        "30 dias"
-    );
+    ObservableList<String> options = FXCollections.observableArrayList(
+            "Todas",
+            "7 dias",
+            "14 dias",
+            "30 dias");
     @FXML
     private ComboBox<String> cbDataRelatorios = new ComboBox<String>(options);
 
     @FXML
     private ProgressIndicator piListarHomeMoto;
-    
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private RepositorioViagens repositorioViagens;
@@ -87,13 +84,12 @@ public class HomeMoto {
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValor_total_ToString()));
-        
+
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
 
-        
         try {
             threadListar.setDaemon(true);
             threadListar.start();
@@ -101,14 +97,15 @@ public class HomeMoto {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
-        
+
     }
 
     Thread threadListar = new Thread(() -> {
         try {
             piListarHomeMoto.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensMoto(autenticacaoServico.getLogado().getCpf()));
+            tbListaEntradas.getItems()
+                    .addAll(repositorioViagens.listarViagensMoto(autenticacaoServico.getLogado().getCpf()));
             Platform.runLater(() -> {
                 piListarHomeMoto.setVisible(false);
                 lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
@@ -123,13 +120,14 @@ public class HomeMoto {
         try {
             piListarHomeMoto.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensMotoDias(7, autenticacaoServico.getLogado().getCpf()));
+            tbListaEntradas.getItems()
+                    .addAll(repositorioViagens.listarViagensMotoDias(7, autenticacaoServico.getLogado().getCpf()));
             Platform.runLater(() -> {
                 piListarHomeMoto.setVisible(false);
                 lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
             });
         } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());   
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
     });
@@ -138,13 +136,14 @@ public class HomeMoto {
         try {
             piListarHomeMoto.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensMotoDias(14, autenticacaoServico.getLogado().getCpf()));
+            tbListaEntradas.getItems()
+                    .addAll(repositorioViagens.listarViagensMotoDias(14, autenticacaoServico.getLogado().getCpf()));
             Platform.runLater(() -> {
                 piListarHomeMoto.setVisible(false);
                 lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
             });
         } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());   
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
     });
@@ -153,18 +152,19 @@ public class HomeMoto {
         try {
             piListarHomeMoto.setVisible(true);
             tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensMotoDias(30, autenticacaoServico.getLogado().getCpf()));
+            tbListaEntradas.getItems()
+                    .addAll(repositorioViagens.listarViagensMotoDias(30, autenticacaoServico.getLogado().getCpf()));
             Platform.runLater(() -> {
                 piListarHomeMoto.setVisible(false);
                 lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
             });
         } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());   
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
     });
 
-    private String calculoValorAReceber(){
+    private String calculoValorAReceber() {
         Double soma = 0.0;
         Double resultadoEntrada = 0.0;
         Double resultado = 0.0;
@@ -181,27 +181,24 @@ public class HomeMoto {
     }
 
     @FXML
-    public void buscar(){
+    public void buscar() {
         String opcao0 = options.get(0);
         String opcao1 = options.get(1);
         String opcao2 = options.get(2);
         String opcao3 = options.get(3);
         String dataSelecionada = cbDataRelatorios.getSelectionModel().getSelectedItem();
-        if(dataSelecionada != null && dataSelecionada == opcao0){
+        if (dataSelecionada != null && dataSelecionada == opcao0) {
             threadListar.setDaemon(true);
-            threadListar.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao1){
+            threadListar.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao1) {
             threadListar7dias.setDaemon(true);
-            threadListar7dias.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao2){
+            threadListar7dias.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao2) {
             threadListar14dias.setDaemon(true);
-            threadListar14dias.start();  
-        }
-        else if(dataSelecionada != null && dataSelecionada == opcao3){
+            threadListar14dias.start();
+        } else if (dataSelecionada != null && dataSelecionada == opcao3) {
             threadListar30dias.setDaemon(true);
-            threadListar30dias.start();  
+            threadListar30dias.start();
         }
 
     }

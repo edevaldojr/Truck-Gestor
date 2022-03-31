@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
@@ -38,10 +38,13 @@
             <HBox prefHeight="50.0" prefWidth="946.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="471.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="471.0" prefWidth="775.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="cbDataRelatorios" layoutX="593.0" layoutY="110.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
-                  <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:" />
+                  <ComboBox fx:id="cbDataRelatorios" layoutX="599.0" layoutY="110.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
+                  <Text fill="WHITE" layoutX="131.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Text>
                   <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="289.0">
                      <columns>
                         <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
@@ -49,7 +52,10 @@
                         <TableColumn fx:id="tbcMotorista" prefWidth="99.0" text="Motorista" />
                      </columns>
                   </TableView>
-                  <Text layoutX="327.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:" />
+                  <Text fill="WHITE" layoutX="429.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Text>
                   <TableView fx:id="tbListaDespesa" layoutX="327.0" layoutY="72.0" prefHeight="373.0" prefWidth="265.0">
                      <columns>
                         <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
@@ -57,14 +63,14 @@
                         <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
                      </columns>
                   </TableView>
-                  <Label fx:id="lbLucro" layoutX="593.0" layoutY="71.0" prefHeight="39.0" prefWidth="449.0" text="Lucro:" textFill="#0ce809">
+                  <Label fx:id="lbLucro" layoutX="599.0" layoutY="71.0" prefHeight="39.0" prefWidth="449.0" text="Lucro:" textFill="#0ce809">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="Microsoft JhengHei Bold" size="27.0" />
                      </font>
                   </Label>
-                  <Text layoutX="198.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
+                  <Text fill="WHITE" layoutX="198.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                   <ProgressIndicator fx:id="piListarHome" layoutX="596.0" layoutY="396.0" prefHeight="43.0" prefWidth="73.0" />

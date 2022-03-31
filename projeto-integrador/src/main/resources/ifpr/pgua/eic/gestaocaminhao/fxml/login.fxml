@@ -9,8 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <top>
@@ -23,8 +24,14 @@
                      <children>
                         <TextField fx:id="tfCpf" layoutX="393.0" layoutY="47.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
                         <PasswordField fx:id="pfSenha" layoutX="393.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
-                        <Label layoutX="456.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE" />
-                        <Label layoutX="451.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE" />
+                        <Label layoutX="456.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="451.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                         <Button fx:id="btLogin" layoutX="393.0" layoutY="185.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
                         <Button fx:id="btCadastrar" layoutX="535.0" layoutY="185.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" /> 
                      </children>

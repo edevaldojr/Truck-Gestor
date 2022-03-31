@@ -239,7 +239,7 @@ public class HomeGestor {
             soma += valorTabela;
             resultadoSaida = soma;
         }
-        
+
         resultado = resultadoEntrada - resultadoSaida;
         String lucro = String.format("R$%.2f", resultado);
         System.out.println("a soma é: " + lucro);

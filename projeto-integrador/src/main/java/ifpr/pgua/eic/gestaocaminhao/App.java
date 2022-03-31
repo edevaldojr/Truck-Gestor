@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -78,8 +78,8 @@ public class App extends Application {
                                 repositorioViagens, repositorioDespesas)),
                 959, 521);
         // stage.setMaximized(true);
-        stage.setTitle("Truck");
-        // stage.getIcons().add(new Image(""));
+        stage.setTitle("Gestão de Caminhão");
+        stage.getIcons().add(new Image(this.getClass().getResource("img/caminhaoIcon.png").toString()));
         stage.setScene(scene);
         stage.show();
     }
