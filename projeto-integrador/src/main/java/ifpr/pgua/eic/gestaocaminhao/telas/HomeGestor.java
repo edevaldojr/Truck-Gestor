@@ -240,7 +240,7 @@ public class HomeGestor {
             resultadoSaida = soma;
         }
         
-        resultado = resultadoEntrada - resultadoSaida;
+        resultado = resultadoEntrada - resultadoSaida - (resultadoEntrada * 0.2);
         System.out.println("a soma é: " + resultado);
         String lucro = String.format("R$%.2f", resultado);
         System.out.println("a soma é: " + lucro);
