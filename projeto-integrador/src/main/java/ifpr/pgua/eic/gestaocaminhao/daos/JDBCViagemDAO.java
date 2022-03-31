@@ -120,7 +120,6 @@ public class JDBCViagemDAO implements ViagemDAO {
 
     public Viagem montarViagem(ResultSet rs) throws Exception {
         DecimalFormat df = new DecimalFormat("###.00");
-
         int id = rs.getInt("id");
         double peso = rs.getDouble("peso");
         Date data = rs.getDate("data_da_Baixa");

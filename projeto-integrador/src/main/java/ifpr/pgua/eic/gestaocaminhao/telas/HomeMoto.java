@@ -6,6 +6,7 @@ import java.util.List;
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.application.Platform;
@@ -67,14 +68,16 @@ public class HomeMoto {
 
     private RepositorioViagens repositorioViagens;
     private RepositorioDespesas repositorioDespesas;
+    private RepositorioEmpresa repositorioEmpresa;
     private AutenticacaoServico autenticacaoServico;
     private Login login;
 
     public HomeMoto(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
-            RepositorioDespesas repositoriodespesas) {
+            RepositorioDespesas repositoriodespesas, RepositorioEmpresa repositorioEmpresa) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioViagens = repositorioViagens;
         this.repositorioDespesas = repositoriodespesas;
+        this.repositorioEmpresa = repositorioEmpresa;
         this.login = login;
     }
 
@@ -209,7 +212,7 @@ public class HomeMoto {
         root.getChildren()
                 .add(App.loadTela("fxml/entradas_viagens.fxml",
                         a -> new EntradasViagens(this.login, autenticacaoServico, repositorioViagens,
-                                repositorioDespesas)));
+                                repositorioDespesas, repositorioEmpresa)));
     }
 
     @FXML

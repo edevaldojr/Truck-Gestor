@@ -100,7 +100,7 @@ public class CadastroDespesa {
         } else {
             root.getChildren().clear();
             root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
-                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas)));
+                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas, repositorioEmpresa)));
         }
     }
 

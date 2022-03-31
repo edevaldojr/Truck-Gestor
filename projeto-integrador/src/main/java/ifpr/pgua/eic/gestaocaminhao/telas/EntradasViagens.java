@@ -95,25 +95,32 @@ public class EntradasViagens {
         this.login = login;
     }
 
-    public EntradasViagens(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas){
+    public EntradasViagens(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
+            RepositorioDespesas repositorioDespesas, RepositorioEmpresa repositorioEmpresa) {
         this.login = login;
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioViagens = repositorioViagens;
         this.repositorioDespesas = repositorioDespesas;
+        this.repositorioEmpresa = repositorioEmpresa;
     }
 
     public void initialize() throws Exception {
-        piDestino.setVisible(true);
-        piOrigem.setVisible(true);
-        threadListar.setDaemon(true);
-        threadListar.start();
+        try {
+            threadListar.setDaemon(true);
+            threadListar.start();
+        } catch (Exception e) {
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     Thread threadListar = new Thread(() -> {
         try {
+            piDestino.setVisible(true);
+            piOrigem.setVisible(true);
             cbEmpresaOrigem.getItems().clear();
-            cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigemString());
             cbEmpresaDestino.getItems().clear();
+            cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigemString());
             cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestinoString());
             Platform.runLater(() -> {
                 piDestino.setVisible(false);
@@ -128,23 +135,25 @@ public class EntradasViagens {
 
     @FXML
     private void voltar() {
-        if(autenticacaoServico.getLogado().isGestor()){
+        if (autenticacaoServico.getLogado().isGestor()) {
             root.getChildren().clear();
             root.getChildren()
                     .add(App.loadTela("fxml/home_gestor.fxml",
-                            a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                            a -> new HomeGestor(this.login, autenticacaoServico, repositorioUsuarios,
+                                    repositorioCaminhao,
                                     repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
                                     repositorioViagens, repositorioDespesas)));
-        }else{
+        } else {
             root.getChildren().clear();
             root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
-                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas)));
+                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas,
+                            repositorioEmpresa)));
         }
     }
 
     @FXML
     private void cadastrar() throws Exception {
-        DecimalFormat df = new DecimalFormat("###.00");
+        DecimalFormat df = new DecimalFormat("#.00");
         String cpfMotorista = tfCpfMoto.getText();
         String peso = tfPeso.getText();
         String carga = tfCarga.getText();
@@ -155,8 +164,6 @@ public class EntradasViagens {
 
         double pesoDouble = Double.parseDouble(peso);
         double valorDouble = Double.parseDouble(valor);
-        df.format(pesoDouble);
-        df.format(valorDouble);
 
         boolean temErro = false;
         String msg = "";

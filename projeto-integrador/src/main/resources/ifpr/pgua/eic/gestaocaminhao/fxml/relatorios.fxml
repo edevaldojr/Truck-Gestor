@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Relatorios">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Relatorios">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
          <left>
@@ -29,22 +30,26 @@
             <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
-                     <children>
-                        <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
-                        <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
-                        <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
-                        <Text layoutX="201.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
-                        <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
-                        <Text layoutX="439.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados" />
-                        <ListView fx:id="lstEmpresasOrigem" layoutX="14.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="400.0" prefWidth="212.0" />
-                        <Text layoutX="14.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:" />
-                        <ListView fx:id="lstEmpresasDestino" layoutX="224.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="402.0" prefWidth="234.0" />
-                        <Text layoutX="235.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:" />
-                     </children>
-                  </Pane>
+                  <ScrollPane prefHeight="479.0" prefWidth="777.0">
+                     <content>
+                        <Pane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #525252;;">
+                           <children>
+                              <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
+                              <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
+                              <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
+                              <Text layoutX="226.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
+                              <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
+                              <Text layoutX="480.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados" />
+                              <ListView fx:id="lstEmpresasOrigem" layoutX="14.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="400.0" prefWidth="212.0" />
+                              <Text layoutX="27.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:" />
+                              <ListView fx:id="lstEmpresasDestino" layoutX="247.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="402.0" prefWidth="234.0" />
+                              <Text layoutX="262.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
                </children>
             </Pane>
          </center>

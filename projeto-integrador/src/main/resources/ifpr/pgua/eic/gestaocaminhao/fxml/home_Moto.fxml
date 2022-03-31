@@ -25,7 +25,7 @@
                   <Button fx:id="btDespesas" mnemonicParsing="false" onAction="#abrirCadastrarDespesas" prefHeight="41.0" prefWidth="195.0" text="Cadastrar Despesas" />
                   <Pane prefHeight="319.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="21.0" layoutY="246.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="142.0" text="Logout" />
+                        <Button fx:id="btLogout" layoutX="21.0" layoutY="289.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="142.0" text="Logout" />
                      </children>
                   </Pane>
                </children>
@@ -35,7 +35,7 @@
             <HBox prefHeight="50.0" prefWidth="946.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="471.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="471.0" prefWidth="775.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
                   <ComboBox fx:id="cbDataRelatorios" layoutX="444.0" layoutY="112.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
                   <Text layoutX="76.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Viagens realizadas:" />

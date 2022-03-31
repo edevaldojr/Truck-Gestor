@@ -139,7 +139,7 @@ public class HomeGestor {
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
-
+        
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
 
@@ -239,8 +239,9 @@ public class HomeGestor {
             soma += valorTabela;
             resultadoSaida = soma;
         }
-
+        
         resultado = resultadoEntrada - resultadoSaida;
+        System.out.println("a soma é: " + resultado);
         String lucro = String.format("R$%.2f", resultado);
         System.out.println("a soma é: " + lucro);
         return lucro;

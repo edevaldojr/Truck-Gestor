@@ -116,7 +116,7 @@ public class Login {
             } else {
                 root.getChildren().clear();
                 root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
-                        a -> new HomeMoto(this, autenticacaoServico, repositorioViagens, repositorioDespesas)));
+                        a -> new HomeMoto(this, autenticacaoServico, repositorioViagens, repositorioDespesas, repositorioEmpresa)));
             }
 
         }

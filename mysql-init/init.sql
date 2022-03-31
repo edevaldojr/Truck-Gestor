@@ -102,7 +102,7 @@ create trigger calcula_entrada before insert on projeto_Viagem for each
 row
 begin
  declare total_entrada double;
-	set total_entrada = new.valor * (new.peso * 1000);
+	set total_entrada = new.valor * (new.peso / 1000);
     set new.total = total_entrada;
 end$$
 

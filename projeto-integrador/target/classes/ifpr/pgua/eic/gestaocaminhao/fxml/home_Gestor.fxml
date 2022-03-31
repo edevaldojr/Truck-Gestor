@@ -35,16 +35,17 @@
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="946.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="471.0" prefWidth="775.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
+            <Pane fx:id="pane" prefHeight="471.0" prefWidth="775.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
                   <ComboBox fx:id="cbDataRelatorios" layoutX="599.0" layoutY="110.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
                   <Text fill="WHITE" layoutX="131.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Text>
+                     </font>
+                  </Text>
                   <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="289.0">
                      <columns>
                         <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
@@ -55,7 +56,8 @@
                   <Text fill="WHITE" layoutX="429.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Text>
+                     </font>
+                  </Text>
                   <TableView fx:id="tbListaDespesa" layoutX="327.0" layoutY="72.0" prefHeight="373.0" prefWidth="265.0">
                      <columns>
                         <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
