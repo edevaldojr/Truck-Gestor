@@ -4,36 +4,56 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Login">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="605.0" prefWidth="1233.0">
          <top>
-            <HBox prefHeight="102.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="102.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="118.0" prefWidth="1233.0">
+                     <children>
+                        <ImageView fitHeight="168.0" fitWidth="165.0" layoutX="532.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/truck-gestor-logotipo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></HBox>
          </top>
          <center>
             <VBox prefHeight="419.0" prefWidth="863.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="419.0" prefWidth="863.0">
+                  <Pane prefHeight="516.0" prefWidth="1233.0">
                      <children>
-                        <TextField fx:id="tfCpf" layoutX="393.0" layoutY="47.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
-                        <PasswordField fx:id="pfSenha" layoutX="393.0" layoutY="120.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
-                        <Label layoutX="456.0" layoutY="30.0" text="Digite seu CPF:" textFill="WHITE">
+                        <TextField fx:id="tfCpf" layoutX="503.0" layoutY="135.0" prefHeight="31.0" prefWidth="226.0" promptText="CPF" />
+                        <PasswordField fx:id="pfSenha" layoutX="504.0" layoutY="214.0" prefHeight="31.0" prefWidth="226.0" promptText="Senha" />
+                        <Label layoutX="563.0" layoutY="107.0" text="Digite seu CPF:" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="451.0" layoutY="103.0" text="Digite sua senha:" textFill="WHITE">
+                        <Label layoutX="556.0" layoutY="185.0" text="Digite sua senha:" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Button fx:id="btLogin" layoutX="393.0" layoutY="185.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
-                        <Button fx:id="btCadastrar" layoutX="535.0" layoutY="185.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" /> 
+                        <Button fx:id="btLogin" layoutX="503.0" layoutY="280.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
+                        <Button fx:id="btCadastrar" layoutX="643.0" layoutY="280.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                        <Text fill="WHITE" layoutX="278.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem Vindo ao Sistema de Gerenciamento Financeiro de seus Caminhões">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by: Edevaldo Chaves Junior" /> 
                      </children>
                   </Pane>
                </children>

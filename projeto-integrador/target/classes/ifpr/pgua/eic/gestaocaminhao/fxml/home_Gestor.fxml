@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -30,23 +32,36 @@
                   <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Empresa" />
                   <Pane prefHeight="276.0" prefWidth="213.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="21.0" layoutY="208.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />
+                        <Button fx:id="btLogout" layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by:" wrappingWidth="117.77344512939453" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edevaldo Chaves Junior" wrappingWidth="144.77344512939453" />
                      </children>
                   </Pane>
                </children>
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="59.0" prefWidth="1233.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="59.0" prefWidth="1233.0">
+                     <children>
+                        <ImageView fitHeight="126.0" fitWidth="107.0" layoutX="617.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/truck-gestor-logotipo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></HBox>
          </top>
          <center>
             <Pane fx:id="pane" prefHeight="1030.0" prefWidth="1736.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane prefHeight="547.0" prefWidth="1012.0">
+                  <ScrollPane prefHeight="539.0" prefWidth="1014.0">
                      <content>
-                        <Pane prefHeight="552.0" prefWidth="999.0" style="-fx-background-color: #525252;;">
+                        <Pane prefHeight="537.0" prefWidth="999.0" style="-fx-background-color: #525252;">
                            <children>
-                              <ComboBox fx:id="cbDataRelatorios" layoutX="637.0" layoutY="291.0" prefHeight="36.0" prefWidth="197.0" promptText="Data dos relatórios" />
+                              <ComboBox fx:id="cbDataRelatorios" layoutX="637.0" layoutY="291.0" prefHeight="31.0" prefWidth="207.0" promptText="Data dos relatórios" />
                               <Text fill="WHITE" layoutX="142.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
@@ -71,9 +86,9 @@
                                     <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
                                  </columns>
                               </TableView>
-                              <Text fill="WHITE" layoutX="189.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
+                              <Text fill="WHITE" layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font name="System Bold" size="23.0" />
                                  </font>
                               </Text>
                               <ProgressIndicator fx:id="piListarHome" layoutX="635.0" layoutY="434.0" prefHeight="43.0" prefWidth="73.0" />
@@ -97,7 +112,7 @@
                                                 <Font name="Microsoft JhengHei Bold" size="22.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="lbLucro" layoutX="8.0" layoutY="7.0" prefHeight="39.0" prefWidth="317.0" text="Lucro:" textFill="WHITE">
+                                          <Label fx:id="lbLucro" layoutX="10.0" layoutY="14.0" prefHeight="39.0" prefWidth="316.0" text="Lucro:" textFill="WHITE">
                                              <font>
                                                 <Font name="Microsoft JhengHei Bold" size="22.0" />
                                              </font>

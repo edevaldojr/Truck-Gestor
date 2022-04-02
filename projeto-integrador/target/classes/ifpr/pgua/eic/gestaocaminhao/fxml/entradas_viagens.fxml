@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,54 +16,90 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.EntradasViagens">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="605.0" prefWidth="1233.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
+                        <Button fx:id="btVoltar" layoutX="-2.0" layoutY="-3.0" mnemonicParsing="false" onAction="#voltar" prefHeight="54.0" prefWidth="187.0" text="Voltar" />
                      </children>
                   </Pane>
                </children>
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="66.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="66.0" prefWidth="1251.0">
+                     <children>
+                        <ImageView fitHeight="126.0" fitWidth="107.0" layoutX="639.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/truck-gestor-logotipo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></HBox>
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
+                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="561.0" prefWidth="1056.0">
                      <children>
-                        <TextField fx:id="tfPeso" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: &quot;17000&quot;" />
-                        <TextField fx:id="tfPrecoTonelada" layoutX="388.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: 13.47" />
-                        <TextField fx:id="tfCarga" layoutX="93.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Carga" />
-                        <ComboBox fx:id="cbEmpresaOrigem" layoutX="388.0" layoutY="175.0" prefHeight="26.0" prefWidth="209.0" promptText="Empresa Origem" />
-                        <ComboBox fx:id="cbEmpresaDestino" layoutX="93.0" layoutY="246.0" prefHeight="26.0" prefWidth="210.0" promptText="Empresa Destino" />
-                        <DatePicker fx:id="dpDataDaBaixa" layoutX="388.0" layoutY="247.0" prefHeight="26.0" prefWidth="208.0" />
-                        <TextField fx:id="tfCpfMoto" layoutX="93.0" layoutY="325.0" prefHeight="26.0" prefWidth="220.0" promptText="CPF do motorista" />
-                        <Label layoutX="93.0" layoutY="98.0" text="Peso Tonelada:" />
-                        <Label layoutX="388.0" layoutY="225.0" text="Data da Baixa:" />
-                        <Label layoutX="388.0" layoutY="98.0" text="Preço por Tonelada:" />
-                        <Label layoutX="93.0" layoutY="158.0" text="Carga:" />
-                        <Label layoutX="93.0" layoutY="225.0" text="Empresa Destino:" />
-                        <Label layoutX="388.0" layoutY="156.0" text="Empresa Origem:" />
-                        <Button fx:id="btCadastrar" layoutX="93.0" layoutY="392.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="201.0" layoutY="392.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
-                        <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="93.0" layoutY="307.0" text="CPF do motorista:" />
-                        <Text layoutX="265.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Viagem">
+                        <TextField fx:id="tfPeso" layoutX="260.0" layoutY="144.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: &quot;17000&quot;" />
+                        <TextField fx:id="tfPrecoTonelada" layoutX="560.0" layoutY="144.0" prefHeight="22.0" prefWidth="207.0" promptText="Ex: 13.47" />
+                        <TextField fx:id="tfCarga" layoutX="260.0" layoutY="229.0" prefHeight="22.0" prefWidth="207.0" promptText="Carga" />
+                        <ComboBox fx:id="cbEmpresaOrigem" layoutX="560.0" layoutY="226.0" prefHeight="31.0" prefWidth="207.0" promptText="Empresa Origem" />
+                        <ComboBox fx:id="cbEmpresaDestino" layoutX="260.0" layoutY="313.0" prefHeight="31.0" prefWidth="207.0" promptText="Empresa Destino" />
+                        <DatePicker fx:id="dpDataDaBaixa" layoutX="560.0" layoutY="313.0" prefHeight="31.0" prefWidth="207.0" />
+                        <TextField fx:id="tfCpfMoto" layoutX="260.0" layoutY="411.0" prefHeight="26.0" prefWidth="207.0" promptText="CPF do motorista" />
+                        <Label layoutX="314.0" layoutY="117.0" text="Peso Tonelada:" textFill="WHITE">
                            <font>
-                              <Font size="17.0" />
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label layoutX="606.0" layoutY="290.0" text="Data da Baixa:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label layoutX="597.0" layoutY="117.0" text="Preço por Tonelada:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label layoutX="338.0" layoutY="207.0" text="Carga:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label layoutX="301.0" layoutY="290.0" text="Empresa Destino:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label layoutX="596.0" layoutY="197.0" text="Empresa Origem:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Button fx:id="btCadastrar" layoutX="560.0" layoutY="424.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                        <Button fx:id="btLimpar" layoutX="691.0" layoutY="424.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+                        <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="300.0" layoutY="383.0" text="CPF do motorista:" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Viagem">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
                            </font>
                         </Text>
-                        <Label layoutX="365.0" layoutY="119.0" text="R$" />
-                        <Label layoutX="69.0" layoutY="119.0" text="Kg" />
-                        <ProgressIndicator fx:id="piOrigem" layoutX="604.0" layoutY="181.0" prefHeight="16.0" prefWidth="21.0" />
-                        <ProgressIndicator fx:id="piDestino" layoutX="61.0" layoutY="252.0" prefHeight="16.0" prefWidth="21.0" />
+                        <Label layoutX="536.0" layoutY="148.0" text="R$" textFill="WHITE" />
+                        <Label layoutX="235.0" layoutY="147.0" text="Kg" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <ProgressIndicator fx:id="piOrigem" layoutX="775.0" layoutY="230.0" prefHeight="24.0" prefWidth="29.0" />
+                        <ProgressIndicator fx:id="piDestino" layoutX="216.0" layoutY="317.0" prefHeight="24.0" prefWidth="39.0" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by: Edevaldo Chaves Junior" />
                      </children>
                   </Pane>
                </children>

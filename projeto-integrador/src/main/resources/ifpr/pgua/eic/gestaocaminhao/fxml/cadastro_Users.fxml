@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,65 +15,163 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="605.0" prefWidth="1233.0">
          <left>
-            <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="527.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
+                        <Button fx:id="btVoltar" layoutX="-2.0" layoutY="-2.0" mnemonicParsing="false" onAction="#voltar" prefHeight="55.0" prefWidth="186.0" text="Voltar" />
                      </children>
                   </Pane>
                </children>
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="66.0" prefWidth="1233.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="66.0" prefWidth="1231.0">
+                     <children>
+                        <ImageView fitHeight="126.0" fitWidth="107.0" layoutX="643.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/truck-gestor-logotipo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></HBox>
          </top>
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0"  prefHeight="1080.0" prefWidth="1920.0">
+                  <Pane layoutX="-2.0" prefHeight="540.0" prefWidth="1052.0" style="-fx-background-color: #525252;">
                      <children>
-                        <TextField fx:id="tfCpf" layoutX="95.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF" />
-                        <TextField fx:id="tfNome" layoutX="384.0" layoutY="55.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome" />                       
-                        <TextField fx:id="tfTelefone" layoutX="96.0" layoutY="106.0" prefHeight="25.0" prefWidth="206.0" promptText="Telefone" />
-                        <TextField fx:id="tfEmail" layoutX="386.0" layoutY="106.0" prefHeight="22.0" prefWidth="207.0" promptText="Email" />
-                        <PasswordField fx:id="pfSenha" layoutX="97.0" layoutY="158.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha" />
-                        <TextField fx:id="tfCnh" layoutX="386.0" layoutY="158.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH" />
-                        <TextField fx:id="tfCidade" layoutX="97.0" layoutY="237.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade" />
-                        <TextField fx:id="tfBairro" layoutX="386.0" layoutY="237.0" prefHeight="25.0" prefWidth="207.0" promptText="Bairro" />
-                        <TextField fx:id="tfRua" layoutX="97.0" layoutY="285.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome da Rua" />
-                        <TextField fx:id="tfNumero" layoutX="386.0" layoutY="285.0" prefHeight="25.0" prefWidth="207.0" promptText="Número" />
-                        <TextField fx:id="tfCep" layoutX="97.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="CEP" />
-                        <TextField fx:id="tfComplemento" layoutX="386.0" layoutY="334.0" prefHeight="25.0" prefWidth="207.0" promptText="Casa, Nº Apto etc" />        
-                        <CheckBox fx:id="cbGestor" layoutX="107.0" layoutY="380.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" />         
-                        <Label layoutX="95.0" layoutY="38.0" text="CPF:" />
-                        <Label layoutX="384.0" layoutY="38.0" text="Nome:" />
-                        <Label layoutX="97.0" layoutY="268.0" text="Rua" />
-                        <Label layoutX="97.0" layoutY="220.0" text="Cidade:" />
-                        <Label layoutX="96.0" layoutY="89.0" text="Telefone" />
-                        <Label layoutX="386.0" layoutY="89.0" text="Email:" />
-                        <Label layoutX="97.0" layoutY="141.0" text="Senha" />
-                        <Button fx:id="btCadastrar" layoutX="165.0" layoutY="430.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="406.0" layoutY="430.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
-                        <Label layoutX="386.0" layoutY="141.0" text="CNH:" />
-                        <Label layoutX="386.0" layoutY="220.0" text="Bairro:" />
-                        <Label layoutX="97.0" layoutY="317.0" text="CEP:" />
-                        <Label layoutX="386.0" layoutY="268.0" text="Número:" />
-                        <Label layoutX="386.0" layoutY="317.0" text="Complemento:" />
-                        <Text layoutX="302.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço">
+                        <TextField fx:id="tfCpf" layoutX="39.0" layoutY="200.0" prefHeight="22.0" prefWidth="207.0" promptText="CPF">
                            <font>
-                              <Font size="17.0" />
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfNome" layoutX="290.0" layoutY="200.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>                       
+                        <TextField fx:id="tfTelefone" layoutX="39.0" layoutY="271.0" prefHeight="25.0" prefWidth="206.0" promptText="Telefone">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfEmail" layoutX="290.0" layoutY="273.0" prefHeight="22.0" prefWidth="207.0" promptText="Email">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <PasswordField fx:id="pfSenha" layoutX="40.0" layoutY="341.0" prefHeight="25.0" prefWidth="205.0" promptText="Senha">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></PasswordField>
+                        <TextField fx:id="tfCnh" layoutX="290.0" layoutY="341.0" prefHeight="22.0" prefWidth="207.0" promptText="CNH">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfCidade" layoutX="554.0" layoutY="200.0" prefHeight="22.0" prefWidth="207.0" promptText="Cidade">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfBairro" layoutX="827.0" layoutY="200.0" prefHeight="25.0" prefWidth="207.0" promptText="Bairro">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfRua" layoutX="554.0" layoutY="271.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome da Rua">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfNumero" layoutX="831.0" layoutY="271.0" prefHeight="25.0" prefWidth="207.0" promptText="Número">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfCep" layoutX="554.0" layoutY="341.0" prefHeight="25.0" prefWidth="207.0" promptText="CEP">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfComplemento" layoutX="831.0" layoutY="339.0" prefHeight="25.0" prefWidth="207.0" promptText="Casa, Nº Apto etc">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></TextField>        
+                        <CheckBox fx:id="cbGestor" layoutX="40.0" layoutY="409.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="69.0" text="Gestor" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></CheckBox>         
+                        <Label layoutX="130.0" layoutY="179.0" text="CPF:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="370.0" layoutY="179.0" text="Nome:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="645.0" layoutY="253.0" text="Rua:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="631.0" layoutY="179.0" text="Cidade:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="114.0" layoutY="254.0" text="Telefone:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="372.0" layoutY="256.0" text="Email:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="119.0" layoutY="317.0" text="Senha:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Button fx:id="btCadastrar" layoutX="421.0" layoutY="455.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Button>
+                        <Button fx:id="btLimpar" layoutX="551.0" layoutY="455.0" mnemonicParsing="false" onAction="#limpar" text="Limpar">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Button>
+                        <Label layoutX="375.0" layoutY="319.0" text="CNH:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="911.0" layoutY="179.0" text="Bairro:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="642.0" layoutY="319.0" text="CEP:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="904.0" layoutY="253.0" text="Número:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="883.0" layoutY="317.0" text="Complemento:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Text fill="WHITE" layoutX="761.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
                            </font>
                         </Text>
-                        <Text layoutX="261.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informações Pessoais">
+                        <Text fill="WHITE" layoutX="190.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informações Pessoais">
                            <font>
-                              <Font size="17.0" />
+                              <Font name="System Bold" size="17.0" />
                            </font>
                         </Text>
+                        <Text fill="WHITE" layoutX="27.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Usuário">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="7.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by: Edevaldo Chaves Junior" />
                      </children>
                   </Pane>
                </children>

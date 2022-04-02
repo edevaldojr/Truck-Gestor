@@ -4,48 +4,83 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Relatorios">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.Relatorios">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="605.0" prefWidth="1233.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="464.0" prefWidth="184.0">
+                  <Pane prefHeight="561.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
-                        <ProgressIndicator fx:id="piListarRelatorio" layoutX="72.0" layoutY="152.0" />
+                        <Button fx:id="btVoltar" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" onAction="#voltar" prefHeight="57.0" prefWidth="186.0" text="Voltar" />
+                        <ProgressIndicator fx:id="piListarRelatorio" layoutX="66.0" layoutY="270.0" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by:                                              Edevaldo Chaves Junior" wrappingWidth="234.375" />
                      </children>
                   </Pane>
                </children>
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="65.0" prefWidth="1233.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="61.0" prefWidth="1233.0">
+                     <children>
+                        <ImageView fitHeight="97.0" fitWidth="102.0" layoutX="610.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/truck-gestor-logotipo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></HBox>
          </top>
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane prefHeight="479.0" prefWidth="777.0">
+                  <ScrollPane prefHeight="539.0" prefWidth="1049.0">
                      <content>
-                        <Pane prefHeight="1080.0" prefWidth="763.0" style="-fx-background-color: #525252;;">
+                        <Pane prefHeight="970.0" prefWidth="1035.0" style="-fx-background-color: #525252;;">
                            <children>
-                              <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
-                              <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />
-                              <ListView fx:id="lstMotoristas" layoutX="201.0" layoutY="59.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
-                              <Text layoutX="226.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:" />
-                              <ListView fx:id="lstGestores" layoutX="439.0" layoutY="59.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
-                              <Text layoutX="480.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados" />
-                              <ListView fx:id="lstEmpresasOrigem" layoutX="14.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="400.0" prefWidth="212.0" />
-                              <Text layoutX="27.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:" />
-                              <ListView fx:id="lstEmpresasDestino" layoutX="247.0" layoutY="504.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="402.0" prefWidth="234.0" />
-                              <Text layoutX="262.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:" />
+                              <ListView fx:id="lstCaminhoes" layoutX="133.0" layoutY="127.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="212.0" />
+                              <Text fill="WHITE" layoutX="154.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Text>
+                              <ListView fx:id="lstMotoristas" layoutX="364.0" layoutY="127.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
+                              <Text fill="WHITE" layoutX="386.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Text>
+                              <ListView fx:id="lstGestores" layoutX="602.0" layoutY="127.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
+                              <Text fill="WHITE" layoutX="633.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Text>
+                              <ListView fx:id="lstEmpresasOrigem" layoutX="260.0" layoutY="572.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="400.0" prefWidth="212.0" />
+                              <Text fill="WHITE" layoutX="278.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Text>
+                              <ListView fx:id="lstEmpresasDestino" layoutX="517.0" layoutY="571.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="400.0" prefWidth="212.0" />
+                              <Text fill="WHITE" layoutX="537.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Text>
+                              <Text fill="WHITE" layoutX="19.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listas do Sistema">
+                                 <font>
+                                    <Font name="System Bold" size="27.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </Pane>
                      </content>
