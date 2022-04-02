@@ -106,14 +106,35 @@ begin
     set new.total = total_entrada;
 end$$
 
--- retorna os ultimos 30 dias de viagens
-SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 30 DAY
+-- store procedure que retorna todas as viagens feitas
+drop procedure if exists projeto_RetornarViagem;
+DELIMITER $$
+CREATE PROCEDURE projeto_RetornarViagem()
+begin
+SELECT * FROM projeto_Viagem ORDER BY data_da_Baixa DESC;
+end$$
+DELIMITER ;
 
--- retorna os ultimos 14 dias de viagens
-SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 14 DAY
 
--- retorna os ultimos 7 dias de viagens
-SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY
+-- store procedure que retorna todas as viagens feitas em determinado periodo de dias
+drop procedure if exists projeto_RetornarViagem;
+DELIMITER $$
+CREATE PROCEDURE projeto_RetornarViagem(IN dias int)
+begin
+SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY;
+end$$
+DELIMITER ;
+
+-- store procedure que retorna todas as viagens feitas por determinado motorista
+drop procedure if exists projeto_RetornarViagemPorMotorista;
+DELIMITER $$
+CREATE PROCEDURE projeto_RetornarViagemPorMotorista(IN cpf varchar(12))
+begin
+SELECT * FROM projeto_Viagem WHERE projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
+end$$
+DELIMITER ;
+
+
 
 -- store procedure que retorna quantidade de viagens feita pelo motorista
 drop procedure if exists projeto_QntViagem;
@@ -121,5 +142,14 @@ DELIMITER $$
 CREATE PROCEDURE projeto_QntViagem(IN cpf varchar(12))
 begin
  SELECT COUNT(motorista) FROM projeto_Viagem WHERE motorista=cpf;
+end$$
+DELIMITER ;
+
+-- store procedure que retorna as viagem com determinado periodo de dias que determinado motorista fez
+drop procedure if exists projeto_RetornarViagemPorDiaEMotorista;
+DELIMITER $$
+CREATE PROCEDURE projeto_RetornarViagemPorDiaEMotorista(IN cpf varchar(12), dias int)
+begin
+SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY AND projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;

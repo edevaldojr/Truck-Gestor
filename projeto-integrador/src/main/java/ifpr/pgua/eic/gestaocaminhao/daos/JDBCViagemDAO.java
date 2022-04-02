@@ -100,7 +100,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem ORDER BY data_da_Baixa DESC";
+        String sql = "CALL projeto_RetornarViagem()";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -174,7 +174,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL ? DAY ORDER BY data_da_Baixa DESC";
+        String sql = "CALL projeto_RetornarViagem(?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -200,7 +200,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE projeto_Viagem.motorista = ? ORDER BY data_da_Baixa DESC";
+        String sql = "CALL projeto_RetornarViagemPorMotorista(?);";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -226,12 +226,12 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL ? DAY AND projeto_Viagem.motorista = ? ORDER BY data_da_Baixa DESC";
+        String sql = "projeto_RetornarViagemPorDiaEMotorista(?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
-        pstmt.setInt(1, dias);
-        pstmt.setString(2, cpf);
+        pstmt.setString(1, cpf);
+        pstmt.setInt(2, dias);
 
         ResultSet rs = pstmt.executeQuery();
 
@@ -245,29 +245,6 @@ public class JDBCViagemDAO implements ViagemDAO {
         con.close();
 
         return lista;
-    }
-
-    @Override
-    public int quantidadeViagemsMoto(String cpf) throws Exception {
-
-        Connection con = fabricaConexoes.getConnection();
-
-        String sql = "call projeto_QntViagem(?);";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-
-        pstmt.setString(1, cpf);
-
-        ResultSet rs = pstmt.executeQuery();
-
-        rs.next();
-        int quantidade = rs.getInt(1);
-
-        rs.close();
-        pstmt.close();
-        con.close();
-
-        return quantidade;
     }
 
 }
