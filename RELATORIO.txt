@@ -69,3 +69,11 @@
 -Iniciando modificações na tela de motorista
 -Sistema do motorista mostrando apenas a suas viagens
 -Falta formatar valores double e deixar bonitin
+
+01/03/2022
+- Corrigindo trigger e css
+-Subtraindo por centagem de motorista do lucro
+
+02/03/2022
+-TELAS CONCLUIDAS
+- A FAZER(IMPLEMENTAR AS QUESTÕES DE WAGNER NO SISTEMA)
