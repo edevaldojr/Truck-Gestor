@@ -34,7 +34,7 @@
                <children>
                   <ScrollPane prefHeight="479.0" prefWidth="777.0">
                      <content>
-                        <Pane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #525252;;">
+                        <Pane prefHeight="1080.0" prefWidth="763.0" style="-fx-background-color: #525252;;">
                            <children>
                               <ListView fx:id="lstCaminhoes" layoutX="23.0" layoutY="59.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="151.0" />
                               <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:" />

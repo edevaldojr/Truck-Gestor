@@ -76,7 +76,8 @@ public class App extends Application {
                         o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
                                 repositorioViagens, repositorioDespesas)),
-                959, 521);
+                                1233, 597);
+        stage.setResizable(false);
         // stage.setMaximized(true);
         stage.setTitle("Gestão de Caminhão");
         stage.getIcons().add(new Image(this.getClass().getResource("img/caminhaoIcon.png").toString()));

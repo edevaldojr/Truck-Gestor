@@ -86,7 +86,7 @@ public class HomeMoto {
         tbcDataViagem.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getData_da_baixa().format(formatter)));
         tbcValorViagem
-                .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValor_total_ToString()));
+                .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValor_pagar_motoristaToString()));
 
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 

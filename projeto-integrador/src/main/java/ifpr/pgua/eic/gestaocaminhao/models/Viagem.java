@@ -119,7 +119,17 @@ public class Viagem {
         return total;
     }
 
+    public String getValor_pagar_motoristaToString() {
+        String total = String.format("R$%.2f", valor_total * 0.2);
+        return total;
+    }
+
     public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
+
+    public int getQntViagens() {
+        return getCaminhoneiro().getViagens().size() != 0 ? getCaminhoneiro().getViagens().size() : 0;
+    }
+
 }

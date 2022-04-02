@@ -4,8 +4,10 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,21 +16,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" stylesheets="@../css/dark_style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.HomeGestor">
    <children>
       <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="547.0" prefWidth="220.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btHome" mnemonicParsing="false" prefHeight="64.0" prefWidth="184.0" text="Home" />
-                  <Button fx:id="btEntradas" mnemonicParsing="false" onAction="#abrirEntradasViagens" prefHeight="41.0" prefWidth="184.0" text="Cadastrar Viagens" />
-                  <Button fx:id="btDespesas" mnemonicParsing="false" onAction="#abrirCadastrarDespesas" prefHeight="41.0" prefWidth="195.0" text="Cadastrar Despesas" />
-                  <Button fx:id="btRelatorios" mnemonicParsing="false" onAction="#abrirRelatorios" prefHeight="41.0" prefWidth="194.0" text="Listar Pessoas e Caminhões" />
-                  <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="191.0" text="Cadastrar Caminhão" />
-                  <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="184.0" text="Cadastrar Empresa" />
-                  <Pane prefHeight="206.0" prefWidth="184.0">
+                  <Button fx:id="btHome" mnemonicParsing="false" prefHeight="64.0" prefWidth="234.0" text="Home" />
+                  <Button fx:id="btEntradas" mnemonicParsing="false" onAction="#abrirEntradasViagens" prefHeight="41.0" prefWidth="227.0" text="Cadastrar Viagens" />
+                  <Button fx:id="btDespesas" mnemonicParsing="false" onAction="#abrirCadastrarDespesas" prefHeight="41.0" prefWidth="228.0" text="Cadastrar Despesas" />
+                  <Button fx:id="btRelatorios" mnemonicParsing="false" onAction="#abrirRelatorios" prefHeight="41.0" prefWidth="229.0" text="Listar Pessoas e Caminhões" />
+                  <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="222.0" text="Cadastrar Caminhão" />
+                  <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Empresa" />
+                  <Pane prefHeight="276.0" prefWidth="213.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="21.0" layoutY="159.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="142.0" text="Logout" />
+                        <Button fx:id="btLogout" layoutX="21.0" layoutY="208.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />
                      </children>
                   </Pane>
                </children>
@@ -38,45 +40,76 @@
             <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane fx:id="pane" prefHeight="471.0" prefWidth="775.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
+            <Pane fx:id="pane" prefHeight="1030.0" prefWidth="1736.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="cbDataRelatorios" layoutX="599.0" layoutY="110.0" prefHeight="27.0" prefWidth="169.0" promptText="Data dos relatórios" />
-                  <Text fill="WHITE" layoutX="131.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <TableView fx:id="tbListaEntradas" layoutX="14.0" layoutY="71.0" prefHeight="373.0" prefWidth="289.0">
-                     <columns>
-                        <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
-                        <TableColumn fx:id="tbcValorViagem" prefWidth="83.0" text="Valor" />
-                        <TableColumn fx:id="tbcMotorista" prefWidth="99.0" text="Motorista" />
-                     </columns>
-                  </TableView>
-                  <Text fill="WHITE" layoutX="429.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <TableView fx:id="tbListaDespesa" layoutX="327.0" layoutY="72.0" prefHeight="373.0" prefWidth="265.0">
-                     <columns>
-                        <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
-                        <TableColumn fx:id="tbcTipoDespesa" prefWidth="89.00003051757812" text="Tipo" />
-                        <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
-                     </columns>
-                  </TableView>
-                  <Label fx:id="lbLucro" layoutX="599.0" layoutY="71.0" prefHeight="39.0" prefWidth="449.0" text="Lucro:" textFill="#0ce809">
-                     <font>
-                        <Font name="Microsoft JhengHei Bold" size="27.0" />
-                     </font>
-                  </Label>
-                  <Text fill="WHITE" layoutX="198.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-                  <ProgressIndicator fx:id="piListarHome" layoutX="596.0" layoutY="396.0" prefHeight="43.0" prefWidth="73.0" />
-                  <Button fx:id="btBuscar" layoutX="599.0" layoutY="244.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+                  <ScrollPane prefHeight="547.0" prefWidth="1012.0">
+                     <content>
+                        <Pane prefHeight="552.0" prefWidth="999.0" style="-fx-background-color: #525252;;">
+                           <children>
+                              <ComboBox fx:id="cbDataRelatorios" layoutX="637.0" layoutY="291.0" prefHeight="36.0" prefWidth="197.0" promptText="Data dos relatórios" />
+                              <Text fill="WHITE" layoutX="142.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <TableView fx:id="tbListaEntradas" layoutX="23.0" layoutY="104.0" prefHeight="373.0" prefWidth="289.0">
+                                 <columns>
+                                    <TableColumn fx:id="tbcDataViagem" prefWidth="106.0" text="Data da Viagem" />
+                                    <TableColumn fx:id="tbcValorViagem" prefWidth="83.0" text="Valor" />
+                                    <TableColumn fx:id="tbcMotorista" prefWidth="99.0" text="Motorista" />
+                                 </columns>
+                              </TableView>
+                              <Text fill="WHITE" layoutX="449.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas:">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <TableView fx:id="tbListaDespesa" layoutX="344.0" layoutY="104.0" prefHeight="373.0" prefWidth="265.0">
+                                 <columns>
+                                    <TableColumn fx:id="tbcDataDespesa" prefWidth="105.0" text="Data da Despesa" />
+                                    <TableColumn fx:id="tbcTipoDespesa" prefWidth="89.00003051757812" text="Tipo" />
+                                    <TableColumn fx:id="tbcValorDespesa" prefWidth="72.0" text="Valor" />
+                                 </columns>
+                              </TableView>
+                              <Text fill="WHITE" layoutX="189.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE ENTRADAS E SAÍDAS">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <ProgressIndicator fx:id="piListarHome" layoutX="635.0" layoutY="434.0" prefHeight="43.0" prefWidth="73.0" />
+                              <Button fx:id="btBuscar" layoutX="637.0" layoutY="371.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+                              <TitledPane animated="false" layoutX="637.0" layoutY="96.0" prefHeight="174.0" prefWidth="347.0" style="-fx-background-color: #525252;" text="Valores">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="159.0" prefWidth="261.0" style="-fx-background-color: #525252;">
+                                       <children>
+                                          <Label fx:id="lbValorLiquido" layoutX="10.0" layoutY="105.0" prefHeight="27.0" prefWidth="339.0" text="Valor Liquido:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft JhengHei Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbPagarMoto" layoutX="10.0" layoutY="46.0" prefHeight="30.0" prefWidth="326.0" text="Motoristas:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft JhengHei Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbDespesa" layoutX="9.0" layoutY="74.0" prefHeight="29.0" prefWidth="325.0" text="Despesas:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft JhengHei Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbLucro" layoutX="8.0" layoutY="7.0" prefHeight="39.0" prefWidth="317.0" text="Lucro:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft JhengHei Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </TitledPane>
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
                </children>
             </Pane>
          </center>

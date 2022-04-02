@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 
 public interface ViagemDAO {
-    
+
     boolean cadastrar(Viagem u) throws Exception;
 
     boolean atualizar(int id, Viagem u) throws Exception;
@@ -19,6 +19,8 @@ public interface ViagemDAO {
     ArrayList<Viagem> listarPorMoto(String cpf) throws Exception;
 
     ArrayList<Viagem> listarPorMotoEmDias(int dias, String cpf) throws Exception;
+
+    int quantidadeViagemsMoto(String cpf) throws Exception;
 
     Viagem buscar(int id) throws Exception;
 

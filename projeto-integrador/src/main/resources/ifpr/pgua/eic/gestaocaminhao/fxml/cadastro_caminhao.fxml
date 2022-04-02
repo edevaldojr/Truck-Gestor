@@ -3,22 +3,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ifpr.pgua.eic.gestaocaminhao.telas.CadastroUsuario">
    <children>
-      <BorderPane layoutY="-5.0" prefHeight="1080.0" prefWidth="1920.0">
+      <BorderPane layoutY="-5.0" prefHeight="605.0" prefWidth="1233.0">
          <left>
             <VBox prefHeight="452.0" prefWidth="184.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="464.0" prefWidth="184.0">
                      <children>
-                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar" />
+                        <Button fx:id="btVoltar" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="33.0" prefWidth="142.0" text="Voltar">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Button>
                      </children>
                   </Pane>
                </children>
@@ -28,25 +32,71 @@
             <HBox prefHeight="50.0" prefWidth="863.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="1080.0" prefWidth="1920.0">
+                  <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="597.0" prefWidth="1233.0">
                      <children>
-                        <TextField fx:id="tfPlaca" layoutX="93.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Placa" />
-                        <TextField fx:id="tfCor" layoutX="382.0" layoutY="115.0" prefHeight="22.0" prefWidth="207.0" promptText="Cor" />
-                        <TextField fx:id="tfAnoFrabricacao" layoutX="93.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Ano de fabricação" />
-                        <TextField fx:id="tfMarca" layoutX="382.0" layoutY="175.0" prefHeight="22.0" prefWidth="207.0" promptText="Marca" />
-                        <TextField fx:id="tfModelo" layoutX="93.0" layoutY="233.0" prefHeight="22.0" prefWidth="204.0" promptText="Modelo:" />
-                        <TextField fx:id="tfTipo" layoutX="382.0" layoutY="233.0" prefHeight="22.0" prefWidth="207.0" promptText="(1) Caçamba, (2) Container" />
-                        <Label layoutX="93.0" layoutY="98.0" text="Placa:" />
-                        <Label layoutX="382.0" layoutY="98.0" text="Cor:" />
-                        <Label layoutX="382.0" layoutY="158.0" text="Marca:" />
-                        <Label layoutX="93.0" layoutY="158.0" text="Ano de Fabricação:" />
-                        <Label layoutX="93.0" layoutY="216.0" text="Modelo:" />
-                        <Label layoutX="382.0" layoutY="216.0" text="Tipo:" />
-                        <Button fx:id="btCadastrar" layoutX="89.0" layoutY="323.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="197.0" layoutY="323.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
-                        <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField fx:id="tfPlaca" layoutX="280.0" layoutY="178.0" prefHeight="31.0" prefWidth="221.0" promptText="Placa">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfCor" layoutX="574.0" layoutY="178.0" prefHeight="31.0" prefWidth="221.0" promptText="Cor">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfAnoFrabricacao" layoutX="280.0" layoutY="267.0" prefHeight="31.0" prefWidth="221.0" promptText="Ano de fabricação">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfMarca" layoutX="574.0" layoutY="267.0" prefHeight="31.0" prefWidth="221.0" promptText="Marca">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfModelo" layoutX="280.0" layoutY="345.0" prefHeight="31.0" prefWidth="221.0" promptText="Modelo:">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <TextField fx:id="tfTipo" layoutX="574.0" layoutY="345.0" prefHeight="31.0" prefWidth="221.0" promptText="(1) Caçamba, (2) Container">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextField>
+                        <Label layoutX="365.0" layoutY="149.0" text="Placa:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="669.0" layoutY="149.0" text="Cor:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="661.0" layoutY="243.0" text="Marca:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="322.0" layoutY="243.0" text="Ano de Fabricação:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="356.0" layoutY="318.0" text="Modelo:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label layoutX="666.0" layoutY="318.0" text="Tipo:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Button fx:id="btCadastrar" layoutX="281.0" layoutY="418.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Button>
+                        <Button fx:id="btLimpar" layoutX="389.0" layoutY="418.0" mnemonicParsing="false" onAction="#limpar" text="Limpar">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Button>
+                        <Text fill="WHITE" layoutX="414.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Caminhão">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Text>
                      </children>
                   </Pane>
                </children>

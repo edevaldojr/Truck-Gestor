@@ -74,4 +74,9 @@ public class RepositorioUsuarios {
         }
     }
 
+    public int qntViagensMoto(String cpf) throws Exception {
+        Usuario motorista = usuarioDAO.buscar(cpf);
+        return motorista.getViagens().size();
+    }
+
 }

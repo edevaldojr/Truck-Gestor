@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.PagarMoto;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
+import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
@@ -22,6 +24,7 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,6 +85,15 @@ public class HomeGestor {
     private Label lbLucro;
 
     @FXML
+    private Label lbPagarMoto;
+
+    @FXML
+    private Label lbDespesa;
+
+    @FXML
+    private Label lbValorLiquido;
+
+    @FXML
     private ProgressIndicator piListarHome;
 
     @FXML
@@ -99,6 +111,9 @@ public class HomeGestor {
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioDespesas repositorioDespesas;
     private Login login;
+    private Double valorPagarMotoristas = 0.0;
+    private Double resultadoEntrada = 0.0;
+    private Double resultadoSaida = 0.0;
 
     public HomeGestor(Login login, AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao,
@@ -139,7 +154,7 @@ public class HomeGestor {
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
-        
+
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
 
@@ -162,7 +177,11 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas());
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucro());
+                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                lbPagarMoto.setText("Motoristas: " + doubleToString(valorPagarMotoristas));
+                lbDespesa.setText("Despesas: " + doubleToString(resultadoSaida));
+                lbValorLiquido.setText("Valor Líquido: " + doubleToString(resultadoEntrada));
+
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -179,7 +198,8 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(7));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucro());
+                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -196,7 +216,8 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(14));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucro());
+                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -213,7 +234,8 @@ public class HomeGestor {
             tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(30));
             Platform.runLater(() -> {
                 piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucro());
+                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -221,16 +243,14 @@ public class HomeGestor {
         }
     });
 
-    private String calculoLucro() {
+    private String calculoLucroEPagarMoto() {
         Double soma = 0.0;
-        Double resultadoEntrada = 0.0;
-        Double resultadoSaida = 0.0;
         Double resultado = 0.0;
         List<Viagem> listaEntrada = tbListaEntradas.getItems();
         for (Viagem v : listaEntrada) {
             Double valorTabela = v.getValor_total();
             soma += valorTabela;
-            resultadoEntrada = soma;
+            this.resultadoEntrada = soma;
         }
         soma = 0.0;
         List<Despesa> listaSaida = tbListaDespesa.getItems();
@@ -239,12 +259,15 @@ public class HomeGestor {
             soma += valorTabela;
             resultadoSaida = soma;
         }
-        
-        resultado = resultadoEntrada - resultadoSaida - (resultadoEntrada * 0.2);
-        System.out.println("a soma é: " + resultado);
-        String lucro = String.format("R$%.2f", resultado);
-        System.out.println("a soma é: " + lucro);
+        this.valorPagarMotoristas = resultadoEntrada * 0.2;
+        resultado = resultadoEntrada - resultadoSaida - valorPagarMotoristas;
+        String lucro = doubleToString(resultado);
         return lucro;
+    }
+
+    private String doubleToString(Double d) {
+        String str = String.format("R$%.2f", d);
+        return str;
     }
 
     @FXML

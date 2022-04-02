@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.PagarMoto;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
@@ -71,6 +72,20 @@ public class RepositorioViagens {
 
     public ArrayList<Viagem> listarViagensMotoDias(int dias, String cpf) throws Exception {
         return viagemDAO.listarDias(dias);
+    }
+
+    public int quantidadeViagemsMoto(String cpf) throws Exception {
+        return viagemDAO.quantidadeViagemsMoto(cpf);
+    }
+
+    public ArrayList<PagarMoto> listarPagarMoto() throws Exception {
+        ArrayList<PagarMoto> pagarMotoristas = new ArrayList<>();
+        PagarMoto pagarmoto;
+        for (Viagem viagem : viagemDAO.listar()) {
+            pagarmoto = new PagarMoto(viagem.getCaminhoneiro(), viagem.getQntViagens(), viagem.getCaminhoneiro().getValorViagens());
+            pagarMotoristas.add(pagarmoto);
+        }
+        return pagarMotoristas;
     }
 
 }

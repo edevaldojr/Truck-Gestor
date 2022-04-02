@@ -111,4 +111,12 @@ public class Usuario {
         this.viagens = viagens;
     }
 
+    public double getValorViagens() {
+        double valor = 0.0;
+        for (Viagem viagem : viagens) {
+            valor = viagem.getValor_total() + valor;
+        }
+        return valor;
+    }
+
 }

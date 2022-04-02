@@ -247,4 +247,27 @@ public class JDBCViagemDAO implements ViagemDAO {
         return lista;
     }
 
+    @Override
+    public int quantidadeViagemsMoto(String cpf) throws Exception {
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "call projeto_QntViagem(?);";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, cpf);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+        int quantidade = rs.getInt(1);
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return quantidade;
+    }
+
 }

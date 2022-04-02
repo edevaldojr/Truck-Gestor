@@ -114,3 +114,12 @@ SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 14 DA
 
 -- retorna os ultimos 7 dias de viagens
 SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL 7 DAY
+
+-- store procedure que retorna quantidade de viagens feita pelo motorista
+drop procedure if exists projeto_QntViagem;
+DELIMITER $$
+CREATE PROCEDURE projeto_QntViagem(IN cpf varchar(12))
+begin
+ SELECT COUNT(motorista) FROM projeto_Viagem WHERE motorista=cpf;
+end$$
+DELIMITER ;
