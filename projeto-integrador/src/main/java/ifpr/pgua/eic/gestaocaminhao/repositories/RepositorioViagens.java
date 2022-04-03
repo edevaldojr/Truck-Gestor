@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.PagarMoto;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;

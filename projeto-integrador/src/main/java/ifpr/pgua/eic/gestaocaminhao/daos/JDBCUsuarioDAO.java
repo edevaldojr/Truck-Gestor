@@ -50,11 +50,12 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean atualizar(String cpf, Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Usuario SET nome=?, cidade=?, endereco=?, telefone=?, email=?,  senha=?, gestor=?, cnh=? WHERE cpf=?";
+        String sql = "UPDATE projeto_Usuario SET cpf=?, nome=?, endereco_id=?, telefone=?, email=?, senha=?, gestor=?, cnh=? WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
-        pstmt.setString(1, u.getNome());
+        pstmt.setString(1, u.getCpf());
+        pstmt.setString(2, u.getNome());
         pstmt.setInt(3, u.getEndereco().getId());
         pstmt.setString(4, u.getTelefone());
         pstmt.setString(5, u.getEmail());

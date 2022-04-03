@@ -35,7 +35,7 @@
                <children>
                   <Pane prefHeight="66.0" prefWidth="1251.0">
                      <children>
-                        <ImageView fitHeight="126.0" fitWidth="107.0" layoutX="639.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="126.0" fitWidth="107.0" layoutX="629.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/truck-gestor-logotipo.png" />
                            </image>
@@ -56,36 +56,36 @@
                         <ComboBox fx:id="cbEmpresaDestino" layoutX="260.0" layoutY="313.0" prefHeight="31.0" prefWidth="207.0" promptText="Empresa Destino" />
                         <DatePicker fx:id="dpDataDaBaixa" layoutX="560.0" layoutY="313.0" prefHeight="31.0" prefWidth="207.0" />
                         <TextField fx:id="tfCpfMoto" layoutX="260.0" layoutY="411.0" prefHeight="26.0" prefWidth="207.0" promptText="CPF do motorista" />
-                        <Label layoutX="314.0" layoutY="117.0" text="Peso Tonelada:" textFill="WHITE">
+                        <Label layoutX="309.0" layoutY="117.0" text="Peso Tonelada:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="606.0" layoutY="290.0" text="Data da Baixa:" textFill="WHITE">
+                        <Label layoutX="613.0" layoutY="290.0" text="Data da Baixa:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="597.0" layoutY="117.0" text="Preço por Tonelada:" textFill="WHITE">
+                        <Label layoutX="593.0" layoutY="117.0" text="Preço por Tonelada:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="338.0" layoutY="207.0" text="Carga:" textFill="WHITE">
+                        <Label layoutX="341.0" layoutY="208.0" text="Carga:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="301.0" layoutY="290.0" text="Empresa Destino:" textFill="WHITE">
+                        <Label layoutX="302.0" layoutY="290.0" text="Empresa Destino:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label layoutX="596.0" layoutY="197.0" text="Empresa Origem:" textFill="WHITE">
+                        <Label layoutX="603.0" layoutY="198.0" text="Empresa Origem:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
                         <Button fx:id="btCadastrar" layoutX="560.0" layoutY="424.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
                         <Button fx:id="btLimpar" layoutX="691.0" layoutY="424.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="300.0" layoutY="383.0" text="CPF do motorista:" textFill="WHITE">
+                        <Label layoutX="301.0" layoutY="384.0" text="CPF do motorista:" textFill="WHITE">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font></Label>
                         <Text fill="WHITE" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Viagem">
                            <font>

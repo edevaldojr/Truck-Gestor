@@ -34,7 +34,6 @@ public class CadastroEmpresa {
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioCaminhao repositorioCaminhao;
     private RepositorioDespesas repositorioDespesas;
-    private Empresa EmpresaExistente = null;
     private Login login;
 
     @FXML
@@ -97,6 +96,7 @@ public class CadastroEmpresa {
     }
 
     public void initialize() {
+        
     }
 
     @FXML

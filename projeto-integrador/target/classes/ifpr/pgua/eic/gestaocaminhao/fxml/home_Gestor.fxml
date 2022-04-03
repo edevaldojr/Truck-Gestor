@@ -30,11 +30,12 @@
                   <Button fx:id="btRelatorios" mnemonicParsing="false" onAction="#abrirRelatorios" prefHeight="41.0" prefWidth="229.0" text="Listar Pessoas e Caminhões" />
                   <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="222.0" text="Cadastrar Caminhão" />
                   <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Empresa" />
-                  <Pane prefHeight="276.0" prefWidth="213.0">
+                  <Button fx:id="btUsuário" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarUsuario" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Usuário" />
+                  <Pane prefHeight="228.0" prefWidth="220.0">
                      <children>
-                        <Button fx:id="btLogout" layoutX="27.0" layoutY="199.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />
-                        <Text fill="WHITE" layoutX="14.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by:" wrappingWidth="117.77344512939453" />
-                        <Text fill="WHITE" layoutX="14.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edevaldo Chaves Junior" wrappingWidth="144.77344512939453" />
+                        <Button fx:id="btLogout" layoutX="27.0" layoutY="142.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by:" wrappingWidth="117.77344512939453" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edevaldo Chaves Junior" wrappingWidth="144.77344512939453" />
                      </children>
                   </Pane>
                </children>
@@ -57,9 +58,9 @@
          <center>
             <Pane fx:id="pane" prefHeight="1030.0" prefWidth="1736.0" style="-fx-background-color: #525252;" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane prefHeight="539.0" prefWidth="1014.0">
+                  <ScrollPane prefHeight="539.0" prefWidth="1013.0">
                      <content>
-                        <Pane prefHeight="537.0" prefWidth="999.0" style="-fx-background-color: #525252;">
+                        <Pane prefHeight="537.0" prefWidth="1012.0" style="-fx-background-color: #525252;">
                            <children>
                               <ComboBox fx:id="cbDataRelatorios" layoutX="637.0" layoutY="291.0" prefHeight="31.0" prefWidth="207.0" promptText="Data dos relatórios" />
                               <Text fill="WHITE" layoutX="142.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">

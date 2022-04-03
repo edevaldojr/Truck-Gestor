@@ -207,9 +207,9 @@ public class Relatorios {
             if (motoristaSelecionado != null) {
                 root.getChildren().clear();
                 root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
-                        o -> new CadastroUsuario(motoristaSelecionado, autenticacaoServico, repositorioUsuarios,
+                        o -> new CadastroUsuario(login, motoristaSelecionado, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
-                                repositorioCidade, repositorioEmpresa, repositorioViagens)));
+                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
             }
         }
     }
@@ -232,9 +232,9 @@ public class Relatorios {
             if (gestorSelecionado != null) {
                 root.getChildren().clear();
                 root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
-                        o -> new CadastroUsuario(gestorSelecionado, autenticacaoServico, repositorioUsuarios,
+                        o -> new CadastroUsuario(login, gestorSelecionado, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
-                                repositorioCidade, repositorioEmpresa, repositorioViagens)));
+                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
             }
         }
     }

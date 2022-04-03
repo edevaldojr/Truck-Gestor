@@ -36,6 +36,7 @@ public class CadastroUsuario {
     private RepositorioEmpresa repositorioEmpresa;
     private RepositorioViagens repositorioViagens;
     private RepositorioDespesas repositorioDespesas;
+    private Login login;
 
     private CidadeDAO cidadeDAO;
 
@@ -91,6 +92,24 @@ public class CadastroUsuario {
 
     private AutenticacaoServico autenticacaoServico;
 
+    public CadastroUsuario(Login login, AutenticacaoServico autenticacaoServico,
+            RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
+        this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
+        this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
+        this.login = login;
+    }
+
     public CadastroUsuario(AutenticacaoServico autenticacaoServico, RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
@@ -107,12 +126,13 @@ public class CadastroUsuario {
         this.repositorioDespesas = repositorioDespesas;
     }
 
-    public CadastroUsuario(Usuario usuarioExiste, AutenticacaoServico autenticacaoServico,
+    public CadastroUsuario(Login login, Usuario usuarioExiste, AutenticacaoServico autenticacaoServico,
             RepositorioUsuarios repositorioUsuarios,
             RepositorioCaminhao repositorioCaminhao,
             RepositorioEndereco repositorioEndereco, RepositorioEstado repositorioEstado,
             RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
-            RepositorioViagens repositorioViagens) {
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
+        this.login = login;
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioUsuarios = repositorioUsuarios;
         this.repositorioEndereco = repositorioEndereco;
@@ -122,10 +142,12 @@ public class CadastroUsuario {
         this.repositorioEmpresa = repositorioEmpresa;
         this.repositorioViagens = repositorioViagens;
         this.usuarioExistente = usuarioExiste;
+        this.repositorioDespesas = repositorioDespesas;
     }
 
     public void initialize() {
         if (usuarioExistente != null) {
+            tfCpf.setText(usuarioExistente.getCpf());
             tfNome.setText(usuarioExistente.getNome());
             tfEmail.setText(usuarioExistente.getEmail());
             tfTelefone.setText(usuarioExistente.getTelefone());
@@ -133,23 +155,39 @@ public class CadastroUsuario {
             pfSenha.setText(usuarioExistente.getSenha());
             tfCidade.setText(usuarioExistente.getEndereco().getCidade().getNome());
             tfBairro.setText(usuarioExistente.getEndereco().getBairro());
+            tfRua.setText(usuarioExistente.getEndereco().getRua());
             tfNumero.setText(usuarioExistente.getEndereco().getNumero() + "");
             tfCep.setText(usuarioExistente.getEndereco().getCep());
             tfComplemento.setText(usuarioExistente.getEndereco().getComplemento());
-
+            if (usuarioExistente.isGestor()) {
+                cbGestor.setSelected(true);
+            }
             btCadastrar.setText("Atualizar");
-
+        }
+        if (!autenticacaoServico.estaLogado()) {
+            cbGestor.setVisible(false);
+            cbGestor.disarm();
         }
     }
 
     @FXML
     private void voltar() {
-        root.getChildren().clear();
-        root.getChildren()
-                .add(App.loadTela("fxml/login.fxml",
-                        a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
-                                repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
-                                repositorioViagens, repositorioDespesas)));
+        if (autenticacaoServico.estaLogado()) {
+            root.getChildren().clear();
+            root.getChildren()
+                    .add(App.loadTela("fxml/home_gestor.fxml",
+                            a -> new HomeGestor(login, autenticacaoServico, repositorioUsuarios,
+                                    repositorioCaminhao,
+                                    repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                    repositorioViagens, repositorioDespesas)));
+        } else {
+            root.getChildren().clear();
+            root.getChildren()
+                    .add(App.loadTela("fxml/login.fxml",
+                            a -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
+                                    repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
+                                    repositorioViagens, repositorioDespesas)));
+        }
 
     }
 
@@ -232,32 +270,35 @@ public class CadastroUsuario {
         if (!temErro) {
             try {
                 boolean ret;
-
+                int existente = 0;
                 if (usuarioExistente != null) {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
                     if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
                         repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
                     }
-                    ;
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                     ret = repositorioUsuarios.atualizarUsuarios(cpf, nome, endereco, telefone, email, senha, cnh,
                             gestor);
+                    existente = 1;
                 } else {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
                     if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
                         repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
                     }
-                    ;
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                     ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
                             gestor);
+                    existente = 2;
                 }
 
-                if (ret) {
+                if (ret && existente == 2) {
                     msg = "Usuário cadastrado com sucesso!";
                     limpar();
+                } else if (ret && existente == 1) {
+                    msg = "Usuário atualizado com sucesso!";
+                    limpar();
                 } else {
-                    msg = "Erro ao cadastrar usuário!";
+                    msg = "Erro ao cadastrar Usuário!";
                 }
 
             } catch (SQLException e) {
@@ -285,7 +326,7 @@ public class CadastroUsuario {
         tfNumero.clear();
         tfCep.clear();
         tfComplemento.clear();
-        cbGestor.disarm();
+        cbGestor.setSelected(false);
     }
 
 }

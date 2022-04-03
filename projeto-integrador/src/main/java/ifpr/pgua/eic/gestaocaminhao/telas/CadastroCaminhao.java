@@ -109,7 +109,7 @@ public class CadastroCaminhao {
             tfAnoFrabricacao.setText("" + caminhaoExistente.getAno());
             tfMarca.setText(caminhaoExistente.getMarca());
             tfModelo.setText(caminhaoExistente.getModelo());
-            tfTipo.setText(caminhaoExistente.getTipo().toString());
+            tfTipo.setText(caminhaoExistente.getTipo().getCod() + "");
 
             btCadastrar.setText("Atualizar");
 
@@ -175,18 +175,24 @@ public class CadastroCaminhao {
         if (!temErro) {
             try {
                 boolean ret;
+                int existente=0;
 
                 if (caminhaoExistente != null) {
                     ret = repositorioCaminhao.atualizarCaminhao(caminhaoExistente.getId(), placa, cor, ano, marca,
                             modelo, tipo);
+                    existente = 1;
                 } else {
                     ret = repositorioCaminhao.cadastrarCaminhao(placa, cor, ano, marca, modelo, tipo);
+                    existente = 2;
                 }
 
-                if (ret) {
+                if (ret && existente == 2) {
                     msg = "Caminhão cadastrado com sucesso!";
                     limpar();
-                } else {
+                } else if(ret && existente == 1){
+                    msg = "Caminhão atualizado com sucesso!";
+                    limpar();
+                }else{
                     msg = "Erro ao cadastrar caminhão!";
                 }
 

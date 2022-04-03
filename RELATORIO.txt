@@ -77,3 +77,5 @@
 02/03/2022
 -TELAS CONCLUIDAS
 - A FAZER(IMPLEMENTAR AS QUESTÕES DE WAGNER NO SISTEMA)
+- Cadastrar usuário inserido em home
+- isGestor excluído de cadastrar novo usuário pela tela de login

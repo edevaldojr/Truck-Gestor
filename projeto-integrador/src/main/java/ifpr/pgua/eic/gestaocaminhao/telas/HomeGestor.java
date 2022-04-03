@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.PagarMoto;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
@@ -291,6 +290,16 @@ public class HomeGestor {
             threadListar30dias.start();
         }
 
+    }
+
+    @FXML
+    public void abrirCadastrarUsuario() {
+        root.getChildren().clear();
+        root.getChildren()
+                .add(App.loadTela("fxml/cadastro_users.fxml",
+                        a -> new CadastroEmpresa(this.login, autenticacaoServico, repositorioUsuarios,
+                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
+                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
     }
 
     @FXML
