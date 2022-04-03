@@ -26,7 +26,7 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     public Usuario login(String loginCPF, String senha) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * from projeto_Usuario WHERE cpf=? AND senha=? AND ativo=1";
+        String sql = "SELECT * from projeto_usuario WHERE cpf=? AND senha=? AND ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

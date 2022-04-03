@@ -29,15 +29,13 @@ public class JDBCEstadoDAO implements EstadoDAO {
 
     }
 
-  
-
     @Override
     public ArrayList<Estado> listar() throws Exception {
         ArrayList<Estado> lista = new ArrayList<>();
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Estado WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_estado WHERE ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -61,7 +59,7 @@ public class JDBCEstadoDAO implements EstadoDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Estado WHERE id=?";
+        String sql = "SELECT * FROM projeto_estado WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -69,7 +67,7 @@ public class JDBCEstadoDAO implements EstadoDAO {
 
         ResultSet rs = pstmt.executeQuery();
 
-        while(rs.next()){
+        while (rs.next()) {
             e = montarEstado(rs);
         }
 
@@ -79,9 +77,5 @@ public class JDBCEstadoDAO implements EstadoDAO {
 
         return e;
     }
-
-    
-
-    
 
 }

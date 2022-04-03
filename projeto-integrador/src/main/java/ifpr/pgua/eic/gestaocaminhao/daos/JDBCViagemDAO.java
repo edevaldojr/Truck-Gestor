@@ -33,7 +33,7 @@ public class JDBCViagemDAO implements ViagemDAO {
     public boolean cadastrar(Viagem v) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Viagem(peso, data_da_Baixa, valor, carga, empresa_origem_id, empresa_destino_id, motorista) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_viagem(peso, data_da_Baixa, valor, carga, empresa_origem_id, empresa_destino_id, motorista) VALUES (?,?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -56,7 +56,7 @@ public class JDBCViagemDAO implements ViagemDAO {
     public boolean atualizar(int id, Viagem v) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Viagem SET peso=?, data_da_Baixa=?, valor=?, carga=? empresa_origem_id=?, empresa_destino_id=?, motorista=? WHERE id=?";
+        String sql = "UPDATE projeto_viagem SET peso=?, data_da_Baixa=?, valor=?, carga=? empresa_origem_id=?, empresa_destino_id=?, motorista=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -81,7 +81,7 @@ public class JDBCViagemDAO implements ViagemDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "DELETE FROM projeto_Viagem WHERE id=?";
+        String sql = "DELETE FROM projeto_viagem WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -149,7 +149,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Viagem WHERE id=?";
+        String sql = "SELECT * FROM projeto_viagem WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

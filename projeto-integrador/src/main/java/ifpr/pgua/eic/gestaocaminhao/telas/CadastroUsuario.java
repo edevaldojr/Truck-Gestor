@@ -273,7 +273,7 @@ public class CadastroUsuario {
                 int existente = 0;
                 if (usuarioExistente != null) {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                    if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                    if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
                         repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
                     }
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
@@ -282,7 +282,7 @@ public class CadastroUsuario {
                     existente = 1;
                 } else {
                     Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                    if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                    if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
                         repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
                     }
                     Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);

@@ -164,10 +164,9 @@ public class CadastroEmpresa {
                 boolean ret;
 
                 Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                if (repositorioEndereco.buscar(bairro, rua, numero) != null) {
+                if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
                     repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
                 }
-                ;
                 Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
                 ret = repositorioEmpresa.cadastrarEmpresa(nomeEmpresa, endereco, tipo);
 

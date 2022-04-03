@@ -26,7 +26,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean cadastrar(Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Despesa(tipoDespesa, nome, valorDespesa, dataDespesa) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO projeto_despesa(tipoDespesa, nome, valorDespesa, dataDespesa) VALUES (?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -46,7 +46,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean atualizar(int id, Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Despesa SET tipoDespesa=?, nome=?, valorDespesa=?, dataDespesa=? WHERE id=?";
+        String sql = "UPDATE projeto_despesa SET tipoDespesa=?, nome=?, valorDespesa=?, dataDespesa=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -68,7 +68,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "DELETE projeto_Despesa WHERE id=?";
+        String sql = "DELETE projeto_despesa WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -87,7 +87,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Despesa ORDER BY dataDespesa DESC";
+        String sql = "SELECT * FROM projeto_despesa ORDER BY dataDespesa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -125,7 +125,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Despesa WHERE dataDespesa >= curdate() - INTERVAL ? DAY ORDER BY dataDespesa DESC";
+        String sql = "SELECT * FROM projeto_despesa WHERE dataDespesa >= curdate() - INTERVAL ? DAY ORDER BY dataDespesa DESC";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

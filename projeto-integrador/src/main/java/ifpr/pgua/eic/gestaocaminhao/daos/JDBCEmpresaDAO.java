@@ -27,7 +27,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public boolean cadastrar(Empresa e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Empresa(nome, tipo, endereco_id) VALUES (?,?,?)";
+        String sql = "INSERT INTO projeto_empresa(nome, tipo, endereco_id) VALUES (?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -46,7 +46,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public boolean atualizar(int id, Empresa e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Empresa SET nome=?, tipo=?, endereco_id=? WHERE id=?";
+        String sql = "UPDATE projeto_empresa SET nome=?, tipo=?, endereco_id=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -66,7 +66,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Empresa SET ativo=0 WHERE id=?";
+        String sql = "UPDATE projeto_empresa SET ativo=0 WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -85,7 +85,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1 and tipo='ORIGEM'";
+        String sql = "SELECT * FROM projeto_empresa WHERE ativo=1 and tipo='ORIGEM'";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -109,7 +109,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE ativo=1 and tipo='DESTINO'";
+        String sql = "SELECT * FROM projeto_empresa WHERE ativo=1 and tipo='DESTINO'";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -146,7 +146,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE id=?";
+        String sql = "SELECT * FROM projeto_empresa WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -171,7 +171,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Empresa WHERE nome=?";
+        String sql = "SELECT * FROM projeto_empresa WHERE nome=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

@@ -23,7 +23,7 @@ public class JDBCCaminhaoDAO implements CaminhaoDAO {
     public boolean cadastrar(Caminhao c) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Caminhao(placa, cor, ano, marca, modelo, tipo) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_caminhao(placa, cor, ano, marca, modelo, tipo) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -45,7 +45,7 @@ public class JDBCCaminhaoDAO implements CaminhaoDAO {
     public boolean atualizar(int id, Caminhao c) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Caminhao SET placa=?, cor=?, ano=?, marca=?, modelo=?,  tipo=? WHERE id=?";
+        String sql = "UPDATE projeto_caminhao SET placa=?, cor=?, ano=?, marca=?, modelo=?,  tipo=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -69,7 +69,7 @@ public class JDBCCaminhaoDAO implements CaminhaoDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Caminhao SET ativo=0 WHERE id=?";
+        String sql = "UPDATE projeto_caminhao SET ativo=0 WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -104,7 +104,7 @@ public class JDBCCaminhaoDAO implements CaminhaoDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Caminhao WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_caminhao WHERE ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

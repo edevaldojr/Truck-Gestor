@@ -46,7 +46,7 @@
                <children>
                   <Pane prefHeight="540.0" prefWidth="1059.0" style="-fx-background-color: #525252;">
                      <children>
-                        <TextField fx:id="tfNome" layoutX="255.0" layoutY="130.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome">
+                        <TextField fx:id="tfNome" layoutX="263.0" layoutY="130.0" prefHeight="22.0" prefWidth="207.0" promptText="Nome">
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
@@ -54,7 +54,7 @@
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
-                        <Label layoutX="335.0" layoutY="109.0" text="Nome:" textFill="WHITE">
+                        <Label layoutX="343.0" layoutY="109.0" text="Nome:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></Label>
@@ -67,7 +67,7 @@
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="tfBairro" layoutX="552.0" layoutY="267.0" prefHeight="25.0" prefWidth="207.0" promptText="Bairro">
+                        <TextField fx:id="tfBairro" layoutX="552.0" layoutY="267.0" prefHeight="22.0" prefWidth="207.0" promptText="Bairro">
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
@@ -75,7 +75,7 @@
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="tfNumero" layoutX="552.0" layoutY="342.0" prefHeight="25.0" prefWidth="207.0" promptText="Número">
+                        <TextField fx:id="tfNumero" layoutX="552.0" layoutY="342.0" prefHeight="22.0" prefWidth="207.0" promptText="Número">
                            <font>
                               <Font size="15.0" />
                            </font></TextField>

@@ -26,7 +26,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean cadastrar(Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Usuario(cpf,nome,telefone,email,senha,gestor,cnh,endereco_id) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_usuario(cpf,nome,telefone,email,senha,gestor,cnh,endereco_id) VALUES (?,?,?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -50,7 +50,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean atualizar(String cpf, Usuario u) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Usuario SET cpf=?, nome=?, endereco_id=?, telefone=?, email=?, senha=?, gestor=?, cnh=? WHERE cpf=?";
+        String sql = "UPDATE projeto_usuario SET cpf=?, nome=?, endereco_id=?, telefone=?, email=?, senha=?, gestor=?, cnh=? WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -76,7 +76,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
     public boolean remover(String cpf) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Usuario SET ativo=0 WHERE cpf=?";
+        String sql = "UPDATE projeto_usuario SET ativo=0 WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -113,7 +113,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Usuario WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_usuario WHERE ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -137,7 +137,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Usuario WHERE cpf=?";
+        String sql = "SELECT * FROM projeto_usuario WHERE cpf=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -162,7 +162,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Usuario WHERE gestor=0 and ativo=1";
+        String sql = "SELECT * FROM projeto_usuario WHERE gestor=0 and ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -186,7 +186,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Usuario WHERE gestor=1 and ativo=1";
+        String sql = "SELECT * FROM projeto_usuario WHERE gestor=1 and ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

@@ -26,7 +26,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
     public boolean cadastrar(Endereco e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_Endereco(numero, rua, complemento, bairro, cep, cidade_id) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO projeto_endereco(numero, rua, complemento, bairro, cep, cidade_id) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -48,7 +48,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
     public boolean atualizar(int id, Endereco e) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Endereco SET numero=?, rua=? , complemento=?, bairro=?, cep=?, cidade_id=? WHERE id=?";
+        String sql = "UPDATE projeto_endereco SET numero=?, rua=? , complemento=?, bairro=?, cep=?, cidade_id=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -72,7 +72,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
     public boolean remover(int id) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_Endereco SET ativo=0 WHERE id=?";
+        String sql = "UPDATE projeto_endereco SET ativo=0 WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -108,7 +108,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Endereco WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_endereco WHERE ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -132,7 +132,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Endereco WHERE id=?";
+        String sql = "SELECT * FROM projeto_endereco WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -157,7 +157,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Endereco WHERE bairro=? and rua=? and numero=?";
+        String sql = "SELECT * FROM projeto_endereco WHERE bairro=? and rua=? and numero=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
