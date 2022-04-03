@@ -30,7 +30,7 @@
                   <Button fx:id="btRelatorios" mnemonicParsing="false" onAction="#abrirRelatorios" prefHeight="41.0" prefWidth="229.0" text="Listar Pessoas e Caminhões" />
                   <Button fx:id="btCadastrarCaminhao" mnemonicParsing="false" onAction="#abrirCadastrarCaminhao" prefHeight="41.0" prefWidth="222.0" text="Cadastrar Caminhão" />
                   <Button fx:id="btEmpresa" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarEmpresa" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Empresa" />
-                  <Button fx:id="btUsuário" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarUsuario" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Usuário" />
+                  <Button fx:id="btUsuario" minHeight="0.0" mnemonicParsing="false" onAction="#abrirCadastrarUsuario" prefHeight="43.0" prefWidth="234.0" text="Cadastrar Usuário" />
                   <Pane prefHeight="228.0" prefWidth="220.0">
                      <children>
                         <Button fx:id="btLogout" layoutX="27.0" layoutY="142.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="165.0" text="Logout" />

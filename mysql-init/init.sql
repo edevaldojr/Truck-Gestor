@@ -95,10 +95,11 @@ create table projeto_Despesa(
 );
 
 
+
 -- trigger calcular valor viagem
 delimiter $$
 drop trigger if exists calcula_entrada$$
-create trigger calcula_entrada before insert on projeto_Viagem for each
+create trigger calcula_entrada before insert on projeto_viagem for each
 row
 begin
  declare total_entrada double;
@@ -111,17 +112,17 @@ drop procedure if exists projeto_RetornarViagem;
 DELIMITER $$
 CREATE PROCEDURE projeto_RetornarViagem()
 begin
-SELECT * FROM projeto_Viagem ORDER BY data_da_Baixa DESC;
+SELECT * FROM projeto_viagem ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;
 
 
 -- store procedure que retorna todas as viagens feitas em determinado periodo de dias
-drop procedure if exists projeto_RetornarViagem;
+drop procedure if exists projeto_RetornarViagemDias;
 DELIMITER $$
-CREATE PROCEDURE projeto_RetornarViagem(IN dias int)
+CREATE PROCEDURE projeto_RetornarViagemDias(IN dias int)
 begin
-SELECT * FROM `projeto_Viagem` WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY;
+SELECT * FROM `projeto_viagem` WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY;
 end$$
 DELIMITER ;
 
@@ -130,7 +131,7 @@ drop procedure if exists projeto_RetornarViagemPorMotorista;
 DELIMITER $$
 CREATE PROCEDURE projeto_RetornarViagemPorMotorista(IN cpf varchar(12))
 begin
-SELECT * FROM projeto_Viagem WHERE projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
+SELECT * FROM projeto_viagem WHERE projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;
 
@@ -141,7 +142,7 @@ drop procedure if exists projeto_QntViagem;
 DELIMITER $$
 CREATE PROCEDURE projeto_QntViagem(IN cpf varchar(12))
 begin
- SELECT COUNT(motorista) FROM projeto_Viagem WHERE motorista=cpf;
+ SELECT COUNT(motorista) FROM projeto_viagem WHERE motorista=cpf;
 end$$
 DELIMITER ;
 
@@ -150,6 +151,6 @@ drop procedure if exists projeto_RetornarViagemPorDiaEMotorista;
 DELIMITER $$
 CREATE PROCEDURE projeto_RetornarViagemPorDiaEMotorista(IN cpf varchar(12), dias int)
 begin
-SELECT * FROM projeto_Viagem WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY AND projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
+SELECT * FROM projeto_viagem WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY AND projeto_viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;

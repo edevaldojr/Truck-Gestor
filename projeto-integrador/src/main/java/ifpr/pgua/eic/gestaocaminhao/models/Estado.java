@@ -1,9 +1,7 @@
 package ifpr.pgua.eic.gestaocaminhao.models;
 
-import java.util.List;
-
 public class Estado {
-    
+
     private int id;
     private String nome;
     private String uf;
@@ -13,8 +11,8 @@ public class Estado {
         this.nome = nome;
     }
 
-    public Estado(){
-        
+    public Estado() {
+
     }
 
     public int getId() {

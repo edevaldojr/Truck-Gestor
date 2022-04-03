@@ -142,10 +142,10 @@ public class CadastroDespesa {
                 ret = repositorioDespesas.cadastrarDespesa(tipo, nome_Despesa, precoDespesa, data_Despesa);
 
                 if (ret) {
-                    msg = "Empresa cadastrada com sucesso!";
+                    msg = "Despesa cadastrada com sucesso!";
                     limpar();
                 } else {
-                    msg = "Erro ao cadastrar empresa!";
+                    msg = "Erro ao cadastrar Despesa!";
                 }
 
             } catch (SQLException e) {
