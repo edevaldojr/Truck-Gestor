@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS projeto_Usuario;
-CREATE TABLE projeto_Usuario (
+DROP TABLE IF EXISTS projeto_usuario;
+CREATE TABLE projeto_usuario (
       cpf VARCHAR(14) NOT NULL,
       nome VARCHAR(150) NOT NULL,
       telefone VARCHAR(45) NOT NULL,
@@ -10,10 +10,10 @@ CREATE TABLE projeto_Usuario (
       endereco_id int NOT NULL,
       ativo TINYINT NOT NULL default 1,
       PRIMARY KEY (cpf),
-	  FOREIGN KEY (endereco_id) REFERENCES projeto_Endereco(id)
+	  FOREIGN KEY (endereco_id) REFERENCES projeto_endereco(id)
 );
 
-create table projeto_Caminhao(
+create table projeto_caminhao(
 	id int not null AUTO_INCREMENT,
     placa varchar(7) not null,
     cor varchar(45) not null,
@@ -25,30 +25,30 @@ create table projeto_Caminhao(
     PRIMARY KEY(id)
 );
 
-create table projeto_Estado(
+create table projeto_estado(
 	  id int not null AUTO_INCREMENT,
     nome varchar(45) not null,
     uf varchar(5) not null,
     PRIMARY KEY(id)
 );
 
-create table projeto_Cidade(
+create table projeto_cidade(
 	  id int not null AUTO_INCREMENT,
     nome varchar(45) not null,
     id_estado int not null,
     PRIMARY KEY(id),
-    FOREIGN KEY(id_estado) REFERENCES projeto_Estado(id)
+    FOREIGN KEY(id_estado) REFERENCES projeto_estado(id)
 );
 
-drop table if exists projeto_Empresa;
-create table projeto_Empresa(
+drop table if exists projeto_empresa;
+create table projeto_empresa(
 	  id int not null AUTO_INCREMENT,
     nome varchar(100) not null,
     tipo enum ('DESTINO','ORIGEM') not null,
     endereco_id int not null,
     ativo TINYINT not null default 1,
 	  PRIMARY KEY(id),
-    FOREIGN KEY(endereco_id) REFERENCES projeto_Endereco(id)    
+    FOREIGN KEY(endereco_id) REFERENCES projeto_endereco(id)    
 );
 
 drop table if exists projeto_viagem;
@@ -72,17 +72,17 @@ create table projeto_viagem(
 --Link para povoar cidades e estados
 --https://zerobugs.com.br/ver-post/codigo-sql-com-todas-as-cidades-e-estados-do-brasil-62/
 
-drop table if exists projetoEndereco;
-create table projeto_Endereco(
+drop table if exists projeto_endereco;
+create table projeto_endereco(
 	  id int not null AUTO_INCREMENT,
     numero varchar(11) not null,
     rua varchar(45) not null,
     complemento varchar(45) not null,
     bairro varchar(45) not null,
     cep varchar(10) not null,
-	  cidade_id int not null,
+	cidade_id int not null,
     PRIMARY KEY(id),
-    FOREIGN KEY(cidade_id) REFERENCES projeto_Cidade(id)
+    FOREIGN KEY(cidade_id) REFERENCES projeto_cidade(id)
 );
 
 
@@ -133,11 +133,9 @@ drop procedure if exists projeto_RetornarViagemPorMotorista;
 DELIMITER $$
 CREATE PROCEDURE projeto_RetornarViagemPorMotorista(IN cpf varchar(12))
 begin
-SELECT * FROM projeto_viagem WHERE projeto_Viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
+SELECT * FROM projeto_viagem WHERE projeto_viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;
-
-
 
 -- store procedure que retorna quantidade de viagens feita pelo motorista
 drop procedure if exists projeto_QntViagem;

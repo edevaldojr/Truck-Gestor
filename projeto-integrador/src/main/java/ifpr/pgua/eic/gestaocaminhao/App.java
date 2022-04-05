@@ -54,7 +54,7 @@ public class App extends Application {
     EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, cidadeDAO);
     EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, enderecoDAO);
     UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, enderecoDAO);
-    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, usuarioDAO, empresaDAO);
+    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, usuarioDAO, empresaDAO, caminhaoDAO);
     DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes);
     private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, enderecoDAO);
 

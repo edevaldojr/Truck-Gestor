@@ -14,4 +14,8 @@ public interface CaminhaoDAO {
 
     ArrayList<Caminhao> listar() throws Exception;
 
+    Caminhao buscar(int id) throws Exception;
+
+    Caminhao buscarPorModelo(String modelo) throws Exception;
+
 }

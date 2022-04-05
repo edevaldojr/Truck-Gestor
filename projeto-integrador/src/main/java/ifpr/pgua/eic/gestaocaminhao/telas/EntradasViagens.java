@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
@@ -50,6 +51,9 @@ public class EntradasViagens {
     private ComboBox<String> cbEmpresaDestino;
 
     @FXML
+    private ComboBox<String> cbCaminhao;
+
+    @FXML
     private DatePicker dpDataDaBaixa;
 
     @FXML
@@ -63,6 +67,9 @@ public class EntradasViagens {
 
     @FXML
     private ProgressIndicator piOrigem;
+
+    @FXML
+    private ProgressIndicator piCaminhao;
 
     @FXML
     private AnchorPane root;
@@ -118,13 +125,17 @@ public class EntradasViagens {
         try {
             piDestino.setVisible(true);
             piOrigem.setVisible(true);
+            piCaminhao.setVisible(true);
             cbEmpresaOrigem.getItems().clear();
             cbEmpresaDestino.getItems().clear();
+            cbCaminhao.getItems().clear();
             cbEmpresaOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigemString());
             cbEmpresaDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestinoString());
+            cbCaminhao.getItems().addAll(repositorioCaminhao.listarCaminhoesToString());
             Platform.runLater(() -> {
                 piDestino.setVisible(false);
                 piOrigem.setVisible(false);
+                piCaminhao.setVisible(false);
             });
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -153,13 +164,13 @@ public class EntradasViagens {
 
     @FXML
     private void cadastrar() throws Exception {
-        DecimalFormat df = new DecimalFormat("#.00");
         String cpfMotorista = tfCpfMoto.getText();
         String peso = tfPeso.getText();
         String carga = tfCarga.getText();
         String valor = tfPrecoTonelada.getText();
         String empresaOrigem = cbEmpresaOrigem.getSelectionModel().getSelectedItem();
         String empresaDestino = cbEmpresaDestino.getSelectionModel().getSelectedItem();
+        String caminhao = cbCaminhao.getSelectionModel().getSelectedItem();
         LocalDate data_da_baixa = dpDataDaBaixa.getValue();
 
         double pesoDouble = Double.parseDouble(peso);
@@ -193,14 +204,20 @@ public class EntradasViagens {
             msg += "Empresa de destino não pode ser vazio!\n";
         }
 
+        if (caminhao.isEmpty() || caminhao.isBlank()) {
+            temErro = true;
+            msg += "Caminhao não pode ser vazio!\n";
+        }
+
         if (!temErro) {
             try {
                 boolean ret;
                 Usuario motorista = repositorioUsuarios.buscar(cpfMotorista);
                 Empresa origem = repositorioEmpresa.buscar(empresaOrigem);
                 Empresa destino = repositorioEmpresa.buscar(empresaDestino);
+                Caminhao caminhao1 = repositorioCaminhao.buscarPorModelo(caminhao);
                 ret = repositorioViagens.cadastrarViagens(pesoDouble, data_da_baixa, valorDouble, origem, destino,
-                        carga, motorista);
+                        carga, motorista, caminhao1);
 
                 if (ret) {
                     msg = "Viagem cadastrado com sucesso!";

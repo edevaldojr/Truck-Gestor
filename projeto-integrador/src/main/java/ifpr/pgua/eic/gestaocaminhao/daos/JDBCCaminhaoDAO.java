@@ -122,4 +122,54 @@ public class JDBCCaminhaoDAO implements CaminhaoDAO {
         return lista;
     }
 
+    @Override
+    public Caminhao buscar(int id) throws Exception {
+        Caminhao u = null;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_caminhao WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            u = montarCaminhao(rs);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return u;
+    }
+
+    @Override
+    public Caminhao buscarPorModelo(String modelo) throws Exception {
+        Caminhao u = null;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT * FROM projeto_caminhao WHERE modelo=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, modelo);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            u = montarCaminhao(rs);
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return u;
+    }
+
 }

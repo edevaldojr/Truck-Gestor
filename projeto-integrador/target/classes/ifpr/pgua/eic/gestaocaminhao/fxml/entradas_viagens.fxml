@@ -80,8 +80,8 @@
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Button fx:id="btCadastrar" layoutX="560.0" layoutY="424.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
-                        <Button fx:id="btLimpar" layoutX="691.0" layoutY="424.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+                        <Button fx:id="btCadastrar" layoutX="406.0" layoutY="481.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                        <Button fx:id="btLimpar" layoutX="537.0" layoutY="481.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
                         <ImageView fitHeight="67.0" fitWidth="329.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <Label layoutX="301.0" layoutY="384.0" text="CPF do motorista:" textFill="WHITE">
                            <font>
@@ -100,6 +100,13 @@
                         <ProgressIndicator fx:id="piOrigem" layoutX="775.0" layoutY="230.0" prefHeight="24.0" prefWidth="29.0" />
                         <ProgressIndicator fx:id="piDestino" layoutX="216.0" layoutY="317.0" prefHeight="24.0" prefWidth="39.0" />
                         <Text fill="WHITE" layoutX="14.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by: Edevaldo Chaves Junior" />
+                        <ComboBox fx:id="cbCaminhao" layoutX="560.0" layoutY="411.0" prefHeight="31.0" prefWidth="207.0" promptText="Caminhão" />
+                        <Label layoutX="587.0" layoutY="384.0" text="Caminhão da viagem:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <ProgressIndicator fx:id="piCaminhao" layoutX="775.0" layoutY="415.0" prefHeight="24.0" prefWidth="29.0" />
                      </children>
                   </Pane>
                </children>

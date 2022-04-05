@@ -49,6 +49,9 @@ public class HomeGestor {
     private TableColumn<Viagem, String> tbcValorViagem;
 
     @FXML
+    private TableColumn<Viagem, String> tbcCaminhao;
+
+    @FXML
     private TableView<Despesa> tbListaDespesa;
 
     @FXML
@@ -147,12 +150,16 @@ public class HomeGestor {
 
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
+        
+        tbcCaminhao.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhao().getModelo()));
+
         tbcDataDespesa.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().getDataDespesa().format(formatter)));
         tbcTipoDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
+
 
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
@@ -250,7 +257,7 @@ public class HomeGestor {
         } else if (dataSelecionada != null && dataSelecionada == opcao1) {
             criaThreadListarDias(7).start();
         } else if (dataSelecionada != null && dataSelecionada == opcao2) {
-            criaThreadListarDias(14);
+            criaThreadListarDias(14).start();;
         } else if (dataSelecionada != null && dataSelecionada == opcao3) {
             criaThreadListarDias(30).start();
         }

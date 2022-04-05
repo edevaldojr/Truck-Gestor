@@ -11,10 +11,10 @@ public class RepositorioCaminhao {
 
     private ArrayList<Caminhao> caminhoes;
 
-    private CaminhaoDAO CaminhaoDAO;
+    private CaminhaoDAO caminhaoDAO;
 
     public RepositorioCaminhao(CaminhaoDAO caminhaoDAO) {
-        this.CaminhaoDAO = caminhaoDAO;
+        this.caminhaoDAO = caminhaoDAO;
         caminhoes = new ArrayList<>();
     }
 
@@ -23,7 +23,7 @@ public class RepositorioCaminhao {
         Caminhao u = new Caminhao(placa, cor, ano, marca, modelo, tipo);
 
         try {
-            CaminhaoDAO.cadastrar(u);
+            caminhaoDAO.cadastrar(u);
             this.caminhoes.add(u);
 
             return true;
@@ -40,7 +40,7 @@ public class RepositorioCaminhao {
         Caminhao Caminhao = new Caminhao(id, placa, cor, ano, marca, modelo, tipo);
 
         try {
-            return CaminhaoDAO.atualizar(id, Caminhao);
+            return caminhaoDAO.atualizar(id, Caminhao);
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }
@@ -48,14 +48,26 @@ public class RepositorioCaminhao {
 
     public boolean removerCaminhoes(int id) throws SQLException {
         try {
-            return CaminhaoDAO.remover(id);
+            return caminhaoDAO.remover(id);
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }
     }
 
     public ArrayList<Caminhao> listarCaminhoes() throws Exception {
-        return CaminhaoDAO.listar();
+        return caminhaoDAO.listar();
     }
 
+    public ArrayList<String> listarCaminhoesToString() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
+        for (Caminhao caminhao : caminhaoDAO.listar()) {
+            String nomeCaminhao = caminhao.getModelo();
+            lista.add(nomeCaminhao);
+        }
+        return lista;
+    }
+
+    public Caminhao buscarPorModelo(String modelo) throws Exception {
+        return caminhaoDAO.buscarPorModelo(modelo);
+    }
 }
