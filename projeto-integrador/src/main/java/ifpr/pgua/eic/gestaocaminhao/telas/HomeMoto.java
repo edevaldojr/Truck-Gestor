@@ -126,7 +126,7 @@ public class HomeMoto {
                 piListarHomeMoto.setVisible(true);
                 tbListaEntradas.getItems().clear();
                 tbListaEntradas.getItems()
-                        .addAll(repositorioViagens.listarViagensMotoDias(7, autenticacaoServico.getLogado().getCpf()));
+                        .addAll(repositorioViagens.listarViagensMotoDias(dias, autenticacaoServico.getLogado().getCpf()));
                 Platform.runLater(() -> {
                     piListarHomeMoto.setVisible(false);
                     lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());

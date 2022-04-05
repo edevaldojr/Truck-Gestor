@@ -234,7 +234,7 @@ public class JDBCViagemDAO implements ViagemDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "projeto_RetornarViagemPorDiaEMotorista(?,?)";
+        String sql = "CALL projeto_RetornarViagemPorDiaEMotorista(?,?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
