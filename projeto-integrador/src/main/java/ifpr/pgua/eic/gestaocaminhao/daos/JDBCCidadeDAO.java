@@ -41,7 +41,7 @@ public class JDBCCidadeDAO implements CidadeDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Cidade WHERE ativo=1";
+        String sql = "SELECT * FROM projeto_cidade WHERE ativo=1";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -65,7 +65,7 @@ public class JDBCCidadeDAO implements CidadeDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Cidade WHERE nome=?";
+        String sql = "SELECT * FROM projeto_cidade WHERE nome=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -90,7 +90,7 @@ public class JDBCCidadeDAO implements CidadeDAO {
 
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "SELECT * FROM projeto_Cidade WHERE id=?";
+        String sql = "SELECT * FROM projeto_cidade WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 

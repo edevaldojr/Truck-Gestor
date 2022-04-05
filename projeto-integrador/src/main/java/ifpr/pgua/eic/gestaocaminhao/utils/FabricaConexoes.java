@@ -8,10 +8,10 @@ public class FabricaConexoes {
 
     private static int MAX_CONNECTIONS = 25;
 
-    private static String URL_DB = "//127.0.0.1:3306/";
-    private static String DB_NAME = "projeto_integrador";
-    private static String USERNAME = "novo_usuario";
-    private static String PASSWORD = "senha";
+    private static String URL_DB = "//wagnerweinert.com.br:3306/";
+    private static String DB_NAME = "tads20_edevaldo";
+    private static String USERNAME = "tads20_edevaldo";
+    private static String PASSWORD = "tads20_edevaldo";
 
     private static String CON_STRING = "jdbc:mysql:" + URL_DB + DB_NAME;
 

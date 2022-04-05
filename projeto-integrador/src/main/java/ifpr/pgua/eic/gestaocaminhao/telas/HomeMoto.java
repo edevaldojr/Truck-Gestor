@@ -94,8 +94,7 @@ public class HomeMoto {
         cbDataRelatorios.getItems().addAll(options);
 
         try {
-            threadListar.setDaemon(true);
-            threadListar.start();
+            criaThreadListar().start();
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -103,69 +102,41 @@ public class HomeMoto {
 
     }
 
-    Thread threadListar = new Thread(() -> {
-        try {
-            piListarHomeMoto.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems()
-                    .addAll(repositorioViagens.listarViagensMoto(autenticacaoServico.getLogado().getCpf()));
-            Platform.runLater(() -> {
-                piListarHomeMoto.setVisible(false);
-                lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
+    private Thread criaThreadListar(){ 
+        return new Thread(() -> {
+            try {
+                piListarHomeMoto.setVisible(true);
+                tbListaEntradas.getItems().clear();
+                tbListaEntradas.getItems()
+                        .addAll(repositorioViagens.listarViagensMoto(autenticacaoServico.getLogado().getCpf()));
+                Platform.runLater(() -> {
+                    piListarHomeMoto.setVisible(false);
+                    lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
+                });
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        });
+    }
 
-    Thread threadListar7dias = new Thread(() -> {
-        try {
-            piListarHomeMoto.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems()
-                    .addAll(repositorioViagens.listarViagensMotoDias(7, autenticacaoServico.getLogado().getCpf()));
-            Platform.runLater(() -> {
-                piListarHomeMoto.setVisible(false);
-                lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
-
-    Thread threadListar14dias = new Thread(() -> {
-        try {
-            piListarHomeMoto.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems()
-                    .addAll(repositorioViagens.listarViagensMotoDias(14, autenticacaoServico.getLogado().getCpf()));
-            Platform.runLater(() -> {
-                piListarHomeMoto.setVisible(false);
-                lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
-
-    Thread threadListar30dias = new Thread(() -> {
-        try {
-            piListarHomeMoto.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems()
-                    .addAll(repositorioViagens.listarViagensMotoDias(30, autenticacaoServico.getLogado().getCpf()));
-            Platform.runLater(() -> {
-                piListarHomeMoto.setVisible(false);
-                lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
+    private Thread criaThreadListarDias(int dias){
+        return new Thread(() -> {
+            try {
+                piListarHomeMoto.setVisible(true);
+                tbListaEntradas.getItems().clear();
+                tbListaEntradas.getItems()
+                        .addAll(repositorioViagens.listarViagensMotoDias(7, autenticacaoServico.getLogado().getCpf()));
+                Platform.runLater(() -> {
+                    piListarHomeMoto.setVisible(false);
+                    lbValorAReceber.setText("Valor a receber: " + calculoValorAReceber());
+                });
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        });
+    }
 
     private String calculoValorAReceber() {
         Double soma = 0.0;
@@ -191,17 +162,13 @@ public class HomeMoto {
         String opcao3 = options.get(3);
         String dataSelecionada = cbDataRelatorios.getSelectionModel().getSelectedItem();
         if (dataSelecionada != null && dataSelecionada == opcao0) {
-            threadListar.setDaemon(true);
-            threadListar.start();
+            criaThreadListar().start();;
         } else if (dataSelecionada != null && dataSelecionada == opcao1) {
-            threadListar7dias.setDaemon(true);
-            threadListar7dias.start();
+            criaThreadListarDias(7).start();
         } else if (dataSelecionada != null && dataSelecionada == opcao2) {
-            threadListar14dias.setDaemon(true);
-            threadListar14dias.start();
+            criaThreadListarDias(14).start();
         } else if (dataSelecionada != null && dataSelecionada == opcao3) {
-            threadListar30dias.setDaemon(true);
-            threadListar30dias.start();
+            criaThreadListarDias(30).start();
         }
 
     }

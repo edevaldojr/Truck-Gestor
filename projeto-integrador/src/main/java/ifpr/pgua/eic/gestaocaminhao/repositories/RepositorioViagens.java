@@ -70,7 +70,7 @@ public class RepositorioViagens {
     }
 
     public ArrayList<Viagem> listarViagensMotoDias(int dias, String cpf) throws Exception {
-        return viagemDAO.listarDias(dias);
+        return viagemDAO.listarPorMotoEmDias(dias, cpf);
     }
 
 }

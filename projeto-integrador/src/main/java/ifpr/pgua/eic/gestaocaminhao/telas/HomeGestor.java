@@ -158,8 +158,7 @@ public class HomeGestor {
         cbDataRelatorios.getItems().addAll(options);
 
         try {
-            threadListar.setDaemon(true);
-            threadListar.start();
+            criaThreadListar().start();;
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -167,80 +166,50 @@ public class HomeGestor {
 
     }
 
-    Thread threadListar = new Thread(() -> {
-        try {
-            piListarHome.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagens());
-            tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas());
-            Platform.runLater(() -> {
-                piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
-                lbPagarMoto.setText("Motoristas: " + doubleToString(valorPagarMotoristas));
-                lbDespesa.setText("Despesas: " + doubleToString(resultadoSaida));
-                lbValorLiquido.setText("Valor Líquido: " + doubleToString(resultadoEntrada));
+    private Thread criaThreadListar(){
+        return new Thread(() -> {
+            try {
+                piListarHome.setVisible(true);
+                tbListaEntradas.getItems().clear();
+                tbListaEntradas.getItems().addAll(repositorioViagens.listarViagens());
+                tbListaDespesa.getItems().clear();
+                tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesas());
+                Platform.runLater(() -> {
+                    piListarHome.setVisible(false);
+                    lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                    lbPagarMoto.setText("Motoristas: " + doubleToString(valorPagarMotoristas));
+                    lbDespesa.setText("Despesas: " + doubleToString(resultadoSaida));
+                    lbValorLiquido.setText("Valor Líquido: " + doubleToString(resultadoEntrada));
 
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
+                });
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        });
+    }
 
-    Thread threadListar7dias = new Thread(() -> {
-        try {
-            piListarHome.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(7));
-            tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(7));
-            Platform.runLater(() -> {
-                piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
-                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
-
-    Thread threadListar14dias = new Thread(() -> {
-        try {
-            piListarHome.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(14));
-            tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(14));
-            Platform.runLater(() -> {
-                piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
-                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
-
-    Thread threadListar30dias = new Thread(() -> {
-        try {
-            piListarHome.setVisible(true);
-            tbListaEntradas.getItems().clear();
-            tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(30));
-            tbListaDespesa.getItems().clear();
-            tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(30));
-            Platform.runLater(() -> {
-                piListarHome.setVisible(false);
-                lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
-                lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
-            });
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-            alert.showAndWait();
-        }
-    });
+    private Thread criaThreadListarDias(int dias){
+        return new Thread(() -> {
+            try {
+                piListarHome.setVisible(true);
+                tbListaEntradas.getItems().clear();
+                tbListaEntradas.getItems().addAll(repositorioViagens.listarViagensDias(dias));
+                tbListaDespesa.getItems().clear();
+                tbListaDespesa.getItems().addAll(repositorioDespesas.listarDespesasDias(dias));
+                Platform.runLater(() -> {
+                    piListarHome.setVisible(false);
+                    lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
+                    lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
+                    lbDespesa.setText("Despesas: " + doubleToString(resultadoSaida));
+                    lbValorLiquido.setText("Valor Líquido: " + doubleToString(resultadoEntrada));
+                });
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        });
+    }
 
     private String calculoLucroEPagarMoto() {
         Double soma = 0.0;
@@ -277,17 +246,13 @@ public class HomeGestor {
         String opcao3 = options.get(3);
         String dataSelecionada = cbDataRelatorios.getSelectionModel().getSelectedItem();
         if (dataSelecionada != null && dataSelecionada == opcao0) {
-            threadListar.setDaemon(true);
-            threadListar.start();
+            criaThreadListar().start();
         } else if (dataSelecionada != null && dataSelecionada == opcao1) {
-            threadListar7dias.setDaemon(true);
-            threadListar7dias.start();
+            criaThreadListarDias(7).start();
         } else if (dataSelecionada != null && dataSelecionada == opcao2) {
-            threadListar14dias.setDaemon(true);
-            threadListar14dias.start();
+            criaThreadListarDias(14);
         } else if (dataSelecionada != null && dataSelecionada == opcao3) {
-            threadListar30dias.setDaemon(true);
-            threadListar30dias.start();
+            criaThreadListarDias(30).start();
         }
 
     }
