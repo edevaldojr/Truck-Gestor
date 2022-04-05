@@ -51,8 +51,8 @@ create table projeto_Empresa(
     FOREIGN KEY(endereco_id) REFERENCES projeto_Endereco(id)    
 );
 
-drop table if exists projeto_Viagem;
-create table projeto_Viagem(
+drop table if exists projeto_viagem;
+create table projeto_viagem(
 	id int not null AUTO_INCREMENT,
     peso double not null,
     data_da_Baixa date not null,
@@ -61,11 +61,13 @@ create table projeto_Viagem(
     empresa_origem_id int not null,
     empresa_destino_id int not null,
     motorista varchar(12) not null,
+    caminhao_id int not null,
     total double not null,
     PRIMARY KEY(id),
-    FOREIGN KEY(empresa_origem_id) REFERENCES projeto_Empresa(id),
-    FOREIGN KEY(empresa_destino_id) REFERENCES projeto_Empresa(id),
-    FOREIGN KEY(motorista) references projeto_Usuario(cpf)
+    FOREIGN KEY(empresa_origem_id) REFERENCES projeto_empresa(id),
+    FOREIGN KEY(empresa_destino_id) REFERENCES projeto_empresa(id),
+    FOREIGN KEY(motorista) references projeto_usuario(cpf)
+    FOREIGN KEY(caminhao_id) references projeto_caminhao(id)
 );
 --Link para povoar cidades e estados
 --https://zerobugs.com.br/ver-post/codigo-sql-com-todas-as-cidades-e-estados-do-brasil-62/
