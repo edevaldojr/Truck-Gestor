@@ -2,7 +2,7 @@ package ifpr.pgua.eic.gestaocaminhao.models.enums;
 
 public enum TipoCaminhao {
 
-    GRANELEIRO(1, "Graneleiro"),
+    CAÇAMBA(1, "Caçamba"),
     CONTAINER(2, "Container");
 
     private int cod;

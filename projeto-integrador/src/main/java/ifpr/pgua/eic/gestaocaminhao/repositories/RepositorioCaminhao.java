@@ -66,6 +66,15 @@ public class RepositorioCaminhao {
         }
         return lista;
     }
+    
+    public ArrayList<String> listarCaminhoesToStringComTipo() throws Exception {
+        ArrayList<String> lista = new ArrayList<>();
+        for (Caminhao caminhao : caminhaoDAO.listar()) {
+            String nomeCaminhao = caminhao.getModelo() + " (" +  caminhao.getTipo().toString() + ")";
+            lista.add(nomeCaminhao);
+        }
+        return lista;
+    }
 
     public Caminhao buscarPorModelo(String modelo) throws Exception {
         return caminhaoDAO.buscarPorModelo(modelo);

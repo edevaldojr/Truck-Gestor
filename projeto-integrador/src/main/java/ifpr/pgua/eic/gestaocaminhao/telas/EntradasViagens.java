@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -31,6 +32,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class EntradasViagens {
+
+    @FXML
+    private ListView<String> lsTipoCaminhao;
 
     @FXML
     private TextField tfCpfMoto;
@@ -113,6 +117,8 @@ public class EntradasViagens {
 
     public void initialize() throws Exception {
         try {
+            lsTipoCaminhao.getItems().clear();
+            lsTipoCaminhao.getItems().addAll(repositorioCaminhao.listarCaminhoesToStringComTipo());
             threadListar.setDaemon(true);
             threadListar.start();
         } catch (Exception e) {

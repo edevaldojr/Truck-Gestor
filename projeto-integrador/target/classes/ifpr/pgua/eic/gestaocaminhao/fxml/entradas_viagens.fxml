@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -107,6 +108,12 @@
                            </font>
                         </Label>
                         <ProgressIndicator fx:id="piCaminhao" layoutX="775.0" layoutY="415.0" prefHeight="24.0" prefWidth="29.0" />
+                        <ListView fx:id="lsTipoCaminhao" layoutX="815.0" layoutY="409.0" prefHeight="130.0" prefWidth="200.0" />
+                        <Label layoutX="843.0" layoutY="384.0" text="Caminhão e seu tipo" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
