@@ -73,10 +73,4 @@ public class RepositorioUsuarios {
             throw new SQLException(e.getMessage());
         }
     }
-
-    public int qntViagensMoto(String cpf) throws Exception {
-        Usuario motorista = usuarioDAO.buscar(cpf);
-        return motorista.getViagens().size();
-    }
-
 }

@@ -281,14 +281,21 @@ public class CadastroUsuario {
                             gestor);
                     existente = 1;
                 } else {
-                    Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
-                    if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
-                        repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                    if(repositorioUsuarios.buscar(cpf) == null){
+                        Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
+                        if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
+                            repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
+                        }
+                        Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
+                        ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
+                                gestor);
+                        existente = 2;
+                    }else{
+                        Alert alert = new Alert(AlertType.INFORMATION, "CPF de usuário já cadastrado");
+                        alert.showAndWait();
+                        ret = false;
                     }
-                    Endereco endereco = repositorioEndereco.buscar(bairro, rua, numero);
-                    ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
-                            gestor);
-                    existente = 2;
+                    
                 }
 
                 if (ret && existente == 2) {

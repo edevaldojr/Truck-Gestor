@@ -1,7 +1,5 @@
 package ifpr.pgua.eic.gestaocaminhao.models;
 
-import java.util.List;
-
 public class Usuario {
 
     private String cpf;
@@ -12,7 +10,6 @@ public class Usuario {
     private String telefone;
     private String cnh;
     private boolean gestor;
-    private List<Viagem> viagens;
 
     public Usuario(String cpf, String nome, Endereco endereco, String telefone, String email, String senha,
             String cnh, boolean gestor) {
@@ -24,19 +21,6 @@ public class Usuario {
         this.telefone = telefone;
         this.cnh = cnh;
         this.gestor = gestor;
-    }
-
-    public Usuario(String cpf, String nome, Endereco endereco, String telefone, String email, String senha,
-            String cnh, boolean gestor, List<Viagem> viagens) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.email = email;
-        this.senha = senha;
-        this.telefone = telefone;
-        this.cnh = cnh;
-        this.gestor = gestor;
-        this.viagens = viagens;
     }
 
     public boolean isGestor() {
@@ -101,22 +85,6 @@ public class Usuario {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }
-
-    public List<Viagem> getViagens() {
-        return viagens;
-    }
-
-    public void setViagens(List<Viagem> viagens) {
-        this.viagens = viagens;
-    }
-
-    public double getValorViagens() {
-        double valor = 0.0;
-        for (Viagem viagem : viagens) {
-            valor = viagem.getValor_total() + valor;
-        }
-        return valor;
     }
 
 }

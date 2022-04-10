@@ -63,7 +63,7 @@
                         <Pane prefHeight="537.0" prefWidth="1012.0" style="-fx-background-color: #525252;">
                            <children>
                               <ComboBox fx:id="cbDataRelatorios" layoutX="662.0" layoutY="291.0" prefHeight="31.0" prefWidth="207.0" promptText="Data dos relatórios" />
-                              <Text fill="WHITE" layoutX="166.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entradas:">
+                              <Text fill="WHITE" layoutX="166.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Viagens:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
