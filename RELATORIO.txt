@@ -85,3 +85,4 @@
 
 12/04/2022
 - Adicionando atualizar remover em relatorios
+- trigger e função para verificar se o cpf é válido

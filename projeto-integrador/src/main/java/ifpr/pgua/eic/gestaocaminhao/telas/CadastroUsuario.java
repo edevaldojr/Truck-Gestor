@@ -159,6 +159,7 @@ public class CadastroUsuario {
             tfNumero.setText(usuarioExistente.getEndereco().getNumero() + "");
             tfCep.setText(usuarioExistente.getEndereco().getCep());
             tfComplemento.setText(usuarioExistente.getEndereco().getComplemento());
+            tfCnh.setText(usuarioExistente.getCnh());
             if (usuarioExistente.isGestor()) {
                 cbGestor.setSelected(true);
             }

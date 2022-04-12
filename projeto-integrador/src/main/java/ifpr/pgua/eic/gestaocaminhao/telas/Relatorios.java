@@ -276,7 +276,7 @@ public class Relatorios {
             root.getChildren().clear();
             root.getChildren()
                 .add(App.loadTela("fxml/cadastro_Users.fxml",
-                    o -> new CadastroUsuario(login, gestorSelecionado, autenticacaoServico,
+                    o -> new CadastroUsuario(login, motoristaSelecionado, autenticacaoServico,
                             repositorioUsuarios,
                             repositorioCaminhao,
                             repositorioEndereco, repositorioEstado,

@@ -20,7 +20,7 @@ create table projeto_caminhao(
     ano int not null,
     marca varchar(45) not null,
     modelo varchar(45) not null,
-    tipo ENUM('GRANELEIRO', 'CONTAINER') not null,
+    tipo ENUM('CAÇAMBA', 'CONTAINER') not null,
     ativo TINYINT not null default 1,
     PRIMARY KEY(id)
 );
@@ -109,6 +109,20 @@ begin
     set new.total = total_entrada;
 end$$
 
+-- trigger verifica se cpf é valido
+delimiter $$
+drop trigger if exists verificaCpfValido$$
+create trigger verificaCpfValido before insert on projeto_usuario for each
+row
+begin
+ declare cpf varchar(11);
+	set cpf = new.cpf;
+	if(validar_CPF(cpf) = 0) THEN
+        signal sqlstate '45001' set message_text = 'CPF inválido!';
+    end if;
+end$$
+
+
 -- store procedure que retorna todas as viagens feitas
 drop procedure if exists projeto_RetornarViagem;
 DELIMITER $$
@@ -154,3 +168,67 @@ begin
 SELECT * FROM projeto_viagem WHERE data_da_Baixa >= curdate() - INTERVAL dias DAY AND projeto_viagem.motorista = cpf ORDER BY data_da_Baixa DESC;
 end$$
 DELIMITER ;
+
+-- função para validar cpf
+
+drop function if exists validar_CPF;
+DELIMITER $
+CREATE FUNCTION validar_CPF(CPF CHAR(11)) RETURNS INT
+BEGIN
+    DECLARE SOMA INT;
+    DECLARE INDICE INT;
+    DECLARE DIGITO_1 INT;
+    DECLARE DIGITO_2 INT;
+    DECLARE NR_DOCUMENTO_AUX VARCHAR(11);
+   
+ DECLARE DIGITO_1_CPF CHAR(2);
+    DECLARE DIGITO_2_CPF CHAR(2);
+    /*
+    Remove os CPFs onde todos os números são iguais
+    */
+    SET NR_DOCUMENTO_AUX = LTRIM(RTRIM(CPF));
+    IF (NR_DOCUMENTO_AUX IN ('00000000000', '11111111111', '22222222222', '33333333333', '44444444444', '55555555555', '66666666666', '77777777777', '88888888888', '99999999999', '12345678909')) THEN
+        RETURN 0;
+    END IF;
+   /*
+   O CPF deve ter 11 caracteres 
+   */
+    IF (LENGTH(NR_DOCUMENTO_AUX) <> 11) THEN
+        RETURN 0;
+    ELSE 
+ /* 
+   Armazendo os digitos verificadores do CPF informado 
+   */
+   SET DIGITO_1_CPF = SUBSTRING(NR_DOCUMENTO_AUX,LENGTH(NR_DOCUMENTO_AUX)-1,1);
+   SET DIGITO_2_CPF = SUBSTRING(NR_DOCUMENTO_AUX,LENGTH(NR_DOCUMENTO_AUX),1);
+ /*Cálculo do primeiro dígito verificador*/
+        SET SOMA = 0;
+        SET INDICE = 1;
+        WHILE (INDICE <= 9) DO          
+            SET Soma = Soma + CAST(SUBSTRING(NR_DOCUMENTO_AUX,INDICE,1) AS UNSIGNED) * (11 - INDICE);             
+            SET INDICE = INDICE + 1;      
+         END WHILE;      
+         SET DIGITO_1 = 11 - (SOMA % 11);      
+         IF (DIGITO_1 > 9) THEN
+            SET DIGITO_1 = 0;
+         END IF;
+        /* Cálculo do segundo dígito verificador */
+        SET SOMA = 0;
+        SET INDICE = 1;
+        WHILE (INDICE <= 10) DO
+             SET Soma = Soma + CAST(SUBSTRING(NR_DOCUMENTO_AUX,INDICE,1) AS UNSIGNED) * (12 - INDICE);              
+             SET INDICE = INDICE + 1;
+        END WHILE;
+        SET DIGITO_2 = 11 - (SOMA % 11);
+        IF DIGITO_2 > 9 THEN
+            SET DIGITO_2 = 0;
+        END IF;
+        /* Validando os digitos verificadores calculados com os digitos verificadores do CPF informado */
+        IF (DIGITO_1 = DIGITO_1_CPF) AND (DIGITO_2 = DIGITO_2_CPF) THEN
+            RETURN 1;
+        ELSE
+            RETURN 0;
+        END IF;
+ END IF;
+END;
+$
