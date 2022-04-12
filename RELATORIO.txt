@@ -79,3 +79,9 @@
 - A FAZER(IMPLEMENTAR AS QUESTÕES DE WAGNER NO SISTEMA)
 - Cadastrar usuário inserido em home
 - isGestor excluído de cadastrar novo usuário pela tela de login
+
+10/04/2022
+- Renomeando tipoCaminhao e inserindo tabela com tipo do caminhao na tela de cadastrar viagem
+
+12/04/2022
+- Adicionando atualizar remover em relatorios

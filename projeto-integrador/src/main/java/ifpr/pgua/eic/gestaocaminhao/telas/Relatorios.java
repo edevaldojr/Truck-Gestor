@@ -49,6 +49,12 @@ public class Relatorios {
     private Button btVoltar;
 
     @FXML
+    private Button btRemover;
+
+    @FXML
+    private Button btAtualizar;
+
+    @FXML
     private ProgressIndicator piListarRelatorio;
 
     @FXML
@@ -162,143 +168,6 @@ public class Relatorios {
     });
 
     @FXML
-    private void atualizarRemoverCaminhao(MouseEvent event) {
-        Caminhao caminhaoSelecionado = lstCaminhoes.getSelectionModel().getSelectedItem();
-
-        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
-            if (caminhaoSelecionado != null) {
-                try {
-                    repositorioCaminhao.removerCaminhoes(caminhaoSelecionado.getId());
-                    lstCaminhoes.getItems().clear();
-                    lstCaminhoes.getItems().addAll(repositorioCaminhao.listarCaminhoes());
-                } catch (Exception e) {
-                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                }
-
-            }
-        } else if (event.getClickCount() == 2) {
-
-            if (caminhaoSelecionado != null) {
-                root.getChildren().clear();
-                root.getChildren().add(App.loadTela("fxml/cadastro_caminhao.fxml",
-                        o -> new CadastroCaminhao(caminhaoSelecionado, autenticacaoServico, repositorioUsuarios,
-                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
-                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
-            }
-        }
-    }
-
-    @FXML
-    private void atualizarRemoverMotorista(MouseEvent event) {
-        Usuario motoristaSelecionado = lstMotoristas.getSelectionModel().getSelectedItem();
-        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
-            if (motoristaSelecionado != null) {
-                try {
-                    lstMotoristas.getItems().clear();
-                    lstMotoristas.getItems().addAll(repositorioUsuarios.listarUsuarios());
-                    repositorioUsuarios.removerUsuarios(motoristaSelecionado.getCpf());
-                } catch (Exception e) {
-                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                }
-            }
-        } else if (event.getClickCount() == 2) {
-            if (motoristaSelecionado != null) {
-                root.getChildren().clear();
-                root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
-                        o -> new CadastroUsuario(login, motoristaSelecionado, autenticacaoServico, repositorioUsuarios,
-                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
-                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
-            }
-        }
-    }
-
-    @FXML
-    private void atualizarRemoverGestor(MouseEvent event) {
-        Usuario gestorSelecionado = lstGestores.getSelectionModel().getSelectedItem();
-        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
-            if (gestorSelecionado != null) {
-                try {
-                    lstGestores.getItems().clear();
-                    lstGestores.getItems().addAll(repositorioUsuarios.listarUsuarios());
-                    repositorioUsuarios.removerUsuarios(gestorSelecionado.getCpf());
-                } catch (Exception e) {
-                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                }
-            }
-        } else if (event.getClickCount() == 2) {
-            if (gestorSelecionado != null) {
-                root.getChildren().clear();
-                root.getChildren().add(App.loadTela("fxml/cadastro_users.fxml",
-                        o -> new CadastroUsuario(login, gestorSelecionado, autenticacaoServico, repositorioUsuarios,
-                                repositorioCaminhao, repositorioEndereco, repositorioEstado,
-                                repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
-            }
-        }
-    }
-
-    @FXML 
-    private void atualizarRemoverEmpresasOrigem(MouseEvent event) {
-        Empresa empresaSelecionada = lstEmpresasOrigem.getSelectionModel().getSelectedItem();
-        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
-            if (empresaSelecionada != null) {
-                try {
-                    lstEmpresasOrigem.getItems().clear();
-                    lstEmpresasOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
-                    repositorioEmpresa.removerEmpresas(empresaSelecionada.getId());
-                } catch (Exception e) {
-                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                }
-            }
-        } else if (event.getClickCount() == 2) {
-            if (empresaSelecionada != null) {
-                root.getChildren().clear();
-                root.getChildren().add(App.loadTela("fxml/cadastro_empresa.fxml",
-                        o -> new CadastroEmpresa(login, autenticacaoServico,
-                        repositorioUsuarios,
-                        repositorioCaminhao,
-                        repositorioEndereco,
-                        repositorioEstado,
-                        repositorioCidade, repositorioEmpresa,
-                        repositorioViagens, repositorioDespesas)));
-            }
-        }
-    }
-
-    @FXML 
-    private void atualizarRemoverEmpresasDestino(MouseEvent event) {
-        Empresa empresaSelecionada = lstEmpresasDestino.getSelectionModel().getSelectedItem();
-        if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 2) {
-            if (empresaSelecionada != null) {
-                try {
-                    lstEmpresasDestino.getItems().clear();
-                    lstEmpresasDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
-                    repositorioEmpresa.removerEmpresas(empresaSelecionada.getId());
-                } catch (Exception e) {
-                    Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                }
-            }
-        } else if (event.getClickCount() == 2) {
-            if (empresaSelecionada != null) {
-                root.getChildren().clear();
-                root.getChildren().add(App.loadTela("fxml/cadastro_empresa.fxml",
-                        o -> new CadastroEmpresa(login, autenticacaoServico,
-                        repositorioUsuarios,
-                        repositorioCaminhao,
-                        repositorioEndereco,
-                        repositorioEstado,
-                        repositorioCidade, repositorioEmpresa,
-                        repositorioViagens, repositorioDespesas)));
-            }
-        }
-    }
-
-
-    @FXML
     private void voltar() {
         root.getChildren().clear();
         root.getChildren()
@@ -307,6 +176,135 @@ public class Relatorios {
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
                                 repositorioViagens, repositorioDespesas)));
 
+    }
+
+    @FXML
+    private void removerSelecionado() {
+        Caminhao caminhaoSelecionado = lstCaminhoes.getSelectionModel().getSelectedItem();
+        Usuario gestorSelecionado = lstGestores.getSelectionModel().getSelectedItem();
+        Usuario motoristaSelecionado = lstMotoristas.getSelectionModel().getSelectedItem();
+        Empresa empresaDestinoSelecionada = lstEmpresasDestino.getSelectionModel().getSelectedItem();
+        Empresa empresaOrigemSelecionada = lstEmpresasOrigem.getSelectionModel().getSelectedItem();
+        if (caminhaoSelecionado != null) {
+            try {
+                repositorioCaminhao.removerCaminhoes((caminhaoSelecionado.getId()));
+                lstCaminhoes.getItems().clear();
+                lstCaminhoes.getItems().addAll(repositorioCaminhao.listarCaminhoes());
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Caminhão removido com sucesso!");
+                alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        } else if (gestorSelecionado != null) {
+            try {
+                repositorioUsuarios.removerUsuarios(gestorSelecionado.getCpf());
+                lstGestores.getItems().clear();
+                lstGestores.getItems().addAll(repositorioUsuarios.listarGestores());
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Gestor removido com sucesso!");
+                alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        } else if (motoristaSelecionado != null) {
+            try {
+                repositorioUsuarios.removerUsuarios(motoristaSelecionado.getCpf());
+                lstMotoristas.getItems().clear();
+                lstMotoristas.getItems().addAll(repositorioUsuarios.listarMotoristas());
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Motorista removido com sucesso!");
+                alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        } else if (empresaDestinoSelecionada != null) {
+            try {
+                repositorioEmpresa.removerEmpresas(empresaDestinoSelecionada.getId());
+                lstEmpresasDestino.getItems().clear();
+                lstEmpresasDestino.getItems().addAll(repositorioEmpresa.listarEmpresasDestino());
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Empresa removida com sucesso!");
+                alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        } else if (empresaOrigemSelecionada != null) {
+            try {
+                repositorioEmpresa.removerEmpresas(empresaOrigemSelecionada.getId());
+                lstEmpresasOrigem.getItems().clear();
+                lstEmpresasOrigem.getItems().addAll(repositorioEmpresa.listarEmpresasOrigem());
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Empresa removida com sucesso!");
+                alert.showAndWait();
+                } catch (Exception e) {
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    private void atualizarSelecionado() {
+        Caminhao caminhaoSelecionado = lstCaminhoes.getSelectionModel().getSelectedItem();
+        Usuario gestorSelecionado = lstGestores.getSelectionModel().getSelectedItem();
+        Usuario motoristaSelecionado = lstMotoristas.getSelectionModel().getSelectedItem();
+        Empresa empresaDestinoSelecionada = lstEmpresasDestino.getSelectionModel().getSelectedItem();
+        Empresa empresaOrigemSelecionada = lstEmpresasOrigem.getSelectionModel().getSelectedItem();
+        if (caminhaoSelecionado != null) {
+            root.getChildren().clear();
+            root.getChildren()
+                .add(App.loadTela("fxml/cadastro_caminhao.fxml",
+                    o -> new CadastroCaminhao(caminhaoSelecionado, autenticacaoServico,
+                            repositorioUsuarios,
+                            repositorioCaminhao,
+                            repositorioEndereco,
+                            repositorioEstado,
+                            repositorioCidade,
+                            repositorioEmpresa,
+                            repositorioViagens, repositorioDespesas)));
+        } else if (gestorSelecionado != null) {
+            root.getChildren().clear();
+            root.getChildren()
+                .add(App.loadTela("fxml/cadastro_Users.fxml",
+                    o -> new CadastroUsuario(login, gestorSelecionado, autenticacaoServico,
+                            repositorioUsuarios,
+                            repositorioCaminhao,
+                            repositorioEndereco, repositorioEstado,
+                            repositorioCidade, repositorioEmpresa,
+                            repositorioViagens, repositorioDespesas)));
+        } else if (motoristaSelecionado != null) {
+            root.getChildren().clear();
+            root.getChildren()
+                .add(App.loadTela("fxml/cadastro_Users.fxml",
+                    o -> new CadastroUsuario(login, gestorSelecionado, autenticacaoServico,
+                            repositorioUsuarios,
+                            repositorioCaminhao,
+                            repositorioEndereco, repositorioEstado,
+                            repositorioCidade, repositorioEmpresa,
+                            repositorioViagens, repositorioDespesas)));
+        } else if (empresaDestinoSelecionada != null) {
+            root.getChildren().clear();
+            root.getChildren()
+                .add(App.loadTela("fxml/cadastro_empresa.fxml",
+                    o -> new CadastroEmpresa(login, empresaDestinoSelecionada, autenticacaoServico,
+                            repositorioUsuarios,
+                            repositorioCaminhao,
+                            repositorioEndereco,
+                            repositorioEstado,
+                            repositorioCidade, repositorioEmpresa,
+                            repositorioViagens, repositorioDespesas)));
+        } else if (empresaOrigemSelecionada != null) {
+            root.getChildren().clear();
+            root.getChildren()
+                .add(App.loadTela("fxml/cadastro_empresa.fxml",
+                    o -> new CadastroEmpresa(login, empresaOrigemSelecionada, autenticacaoServico,
+                            repositorioUsuarios,
+                            repositorioCaminhao,
+                            repositorioEndereco,
+                            repositorioEstado,
+                            repositorioCidade, repositorioEmpresa,
+                            repositorioViagens, repositorioDespesas)));
+        }
     }
 
 }

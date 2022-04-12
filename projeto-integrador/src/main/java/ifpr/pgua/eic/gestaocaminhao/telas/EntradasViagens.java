@@ -210,9 +210,14 @@ public class EntradasViagens {
             msg += "Empresa de destino não pode ser vazio!\n";
         }
 
-        if (caminhao.isEmpty() || caminhao.isBlank()) {
+        if (caminhao.isEmpty() || caminhao.isBlank() || caminhao == null){
             temErro = true;
             msg += "Caminhao não pode ser vazio!\n";
+        }
+
+        if (data_da_baixa==null) {
+            temErro = true;
+            msg += "Data não pode ser vazio!\n";
         }
 
         if (!temErro) {

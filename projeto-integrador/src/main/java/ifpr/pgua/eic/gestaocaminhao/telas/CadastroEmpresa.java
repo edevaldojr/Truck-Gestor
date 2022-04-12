@@ -35,6 +35,7 @@ public class CadastroEmpresa {
     private RepositorioCaminhao repositorioCaminhao;
     private RepositorioDespesas repositorioDespesas;
     private Login login;
+    private Empresa empresaExistente = null;
 
     @FXML
     private TextField tfNome;
@@ -88,15 +89,38 @@ public class CadastroEmpresa {
         this.login = login;
     }
 
-    public CadastroEmpresa(Login login, AutenticacaoServico autenticacaoServico,
-            RepositorioEmpresa repositorioEmpresa) {
-        this.repositorioEmpresa = repositorioEmpresa;
+    public CadastroEmpresa(Login login, Empresa empresaExistente, AutenticacaoServico autenticacaoServico,
+            RepositorioUsuarios repositorioUsuarios,
+            RepositorioCaminhao repositorioCaminhao,
+            RepositorioEndereco repositorioEndereco,
+            RepositorioEstado repositorioEstado,
+            RepositorioCidade repositorioCidade, RepositorioEmpresa repositorioEmpresa,
+            RepositorioViagens repositorioViagens, RepositorioDespesas repositorioDespesas) {
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioEndereco = repositorioEndereco;
+        this.repositorioCaminhao = repositorioCaminhao;
+        this.repositorioCidade = repositorioCidade;
+        this.repositorioEstado = repositorioEstado;
+        this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioViagens = repositorioViagens;
+        this.repositorioDespesas = repositorioDespesas;
+        this.empresaExistente = empresaExistente;
         this.login = login;
     }
 
     public void initialize() {
-        
+        if (empresaExistente != null) {
+            tfNome.setText(empresaExistente.getNome());
+            tfTipo.setText(empresaExistente.getTipo().getCod() + "");
+            tfCidade.setText(empresaExistente.getEndereco().getCidade().getNome());
+            tfBairro.setText(empresaExistente.getEndereco().getBairro());
+            tfRua.setText(empresaExistente.getEndereco().getRua());
+            tfNumero.setText(empresaExistente.getEndereco().getNumero() + "");
+            tfCep.setText(empresaExistente.getEndereco().getCep());
+            tfComplemento.setText(empresaExistente.getEndereco().getComplemento());
+            btCadastrar.setText("Atualizar");
+        }
     }
 
     @FXML

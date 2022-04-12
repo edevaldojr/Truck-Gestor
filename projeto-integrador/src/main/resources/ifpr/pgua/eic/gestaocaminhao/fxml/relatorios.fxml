@@ -51,27 +51,27 @@
                      <content>
                         <Pane prefHeight="970.0" prefWidth="1035.0" style="-fx-background-color: #525252;;">
                            <children>
-                              <ListView fx:id="lstCaminhoes" layoutX="133.0" layoutY="127.0" onMouseClicked="#atualizarRemoverCaminhao" prefHeight="400.0" prefWidth="212.0" />
+                              <ListView fx:id="lstCaminhoes" layoutX="133.0" layoutY="127.0"  prefHeight="400.0" prefWidth="212.0" />
                               <Text fill="WHITE" layoutX="154.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caminhões cadastrados:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font></Text>
-                              <ListView fx:id="lstMotoristas" layoutX="364.0" layoutY="127.0" onMouseClicked="#atualizarRemoverMotorista" prefHeight="400.0" prefWidth="212.0" />
+                              <ListView fx:id="lstMotoristas" layoutX="364.0" layoutY="127.0" prefHeight="400.0" prefWidth="212.0" />
                               <Text fill="WHITE" layoutX="386.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motoristas cadastrados:">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font></Text>
-                              <ListView fx:id="lstGestores" layoutX="602.0" layoutY="127.0" onMouseClicked="#atualizarRemoverGestor" prefHeight="400.0" prefWidth="212.0" />
+                              <ListView fx:id="lstGestores" layoutX="602.0" layoutY="127.0" prefHeight="400.0" prefWidth="212.0" />
                               <Text fill="WHITE" layoutX="633.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestores cadastrados">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font></Text>
-                              <ListView fx:id="lstEmpresasOrigem" layoutX="260.0" layoutY="572.0" onMouseClicked="#atualizarRemoverEmpresasOrigem" prefHeight="400.0" prefWidth="212.0" />
+                              <ListView fx:id="lstEmpresasOrigem" layoutX="260.0" layoutY="572.0" prefHeight="400.0" prefWidth="212.0" />
                               <Text fill="WHITE" layoutX="278.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Origem cadastradas:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Text>
-                              <ListView fx:id="lstEmpresasDestino" layoutX="517.0" layoutY="571.0" onMouseClicked="#atualizarRemoverEmpresasDestino" prefHeight="400.0" prefWidth="212.0" />
+                              <ListView fx:id="lstEmpresasDestino" layoutX="517.0" layoutY="571.0" prefHeight="400.0" prefWidth="212.0" />
                               <Text fill="WHITE" layoutX="537.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empresas Destino cadastradas:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -81,6 +81,8 @@
                                     <Font name="System Bold" size="27.0" />
                                  </font>
                               </Text>
+                              <Button fx:id="btAtualizar" onAction="#atualizarSelecionado" layoutX="860.0" layoutY="327.0" mnemonicParsing="false" text="Atualizar" />
+                              <Button fx:id="btRemover" onAction="#removerSelecionado" layoutX="860.0" layoutY="400.0" mnemonicParsing="false" text="Remover" />
                            </children>
                         </Pane>
                      </content>
