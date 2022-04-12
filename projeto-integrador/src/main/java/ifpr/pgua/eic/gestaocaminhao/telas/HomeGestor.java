@@ -269,7 +269,7 @@ public class HomeGestor {
         root.getChildren().clear();
         root.getChildren()
                 .add(App.loadTela("fxml/cadastro_users.fxml",
-                        a -> new CadastroEmpresa(this.login, autenticacaoServico, repositorioUsuarios,
+                        a -> new CadastroUsuario(this.login, autenticacaoServico, repositorioUsuarios,
                                 repositorioCaminhao, repositorioEndereco, repositorioEstado,
                                 repositorioCidade, repositorioEmpresa, repositorioViagens, repositorioDespesas)));
     }

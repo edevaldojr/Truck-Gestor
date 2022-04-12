@@ -282,7 +282,7 @@ public class CadastroUsuario {
                             gestor);
                     existente = 1;
                 } else {
-                    if(repositorioUsuarios.buscar(cpf) == null){
+                    if (repositorioUsuarios.buscar(cpf) == null) {
                         Cidade cidadeObj = repositorioCidade.buscarCidadePorNome(cidade);
                         if (repositorioEndereco.buscar(bairro, rua, numero) == null) {
                             repositorioEndereco.cadastrarEndereco(numero, complemento, bairro, rua, cep, cidadeObj);
@@ -291,12 +291,12 @@ public class CadastroUsuario {
                         ret = repositorioUsuarios.cadastrarUsuario(cpf, nome, endereco, telefone, email, senha, cnh,
                                 gestor);
                         existente = 2;
-                    }else{
+                    } else {
                         Alert alert = new Alert(AlertType.INFORMATION, "CPF de usuário já cadastrado");
                         alert.showAndWait();
                         ret = false;
                     }
-                    
+
                 }
 
                 if (ret && existente == 2) {
