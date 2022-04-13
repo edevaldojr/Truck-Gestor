@@ -9,24 +9,29 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCDespesaDAO implements DespesaDAO {
 
     FabricaConexoes fabricaConexoes;
+    CaminhaoDAO caminhaoDAO;
 
-    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes) {
+    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes, CaminhaoDAO caminhaoDAO) {
         this.fabricaConexoes = fabricaConexoes;
+        this.caminhaoDAO = caminhaoDAO;
     }
 
     @Override
     public boolean cadastrar(Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "INSERT INTO projeto_despesa(tipoDespesa, nome, valorDespesa, dataDespesa) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO projeto_despesa(tipoDespesa, nome, valorDespesa, dataDespesa, caminhao_id) VALUES (?,?,?,?, ?)";
 
         PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -34,6 +39,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
         pstmt.setString(2, d.getNome());
         pstmt.setDouble(3, d.getValorDespesa());
         pstmt.setDate(4, Date.valueOf(d.getDataDespesa()));
+        pstmt.setInt(5, d.getCaminhaoDespesa().getId());
 
         pstmt.execute();
         pstmt.close();
@@ -46,7 +52,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
     public boolean atualizar(int id, Despesa d) throws Exception {
         Connection con = fabricaConexoes.getConnection();
 
-        String sql = "UPDATE projeto_despesa SET tipoDespesa=?, nome=?, valorDespesa=?, dataDespesa=? WHERE id=?";
+        String sql = "UPDATE projeto_despesa SET tipoDespesa=?, nome=?, valorDespesa=?, dataDespesa=?, caminhao_id=? WHERE id=?";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -54,7 +60,8 @@ public class JDBCDespesaDAO implements DespesaDAO {
         pstmt.setString(2, d.getNome());
         pstmt.setDouble(3, d.getValorDespesa());
         pstmt.setDate(4, Date.valueOf(d.getDataDespesa()));
-        pstmt.setInt(5, id);
+        pstmt.setInt(5, d.getCaminhaoDespesa().getId());
+        pstmt.setInt(6, id);
 
         int ret = pstmt.executeUpdate();
 
@@ -112,9 +119,11 @@ public class JDBCDespesaDAO implements DespesaDAO {
         String nome = rs.getString("nome");
         double valorDespesa = rs.getDouble("valorDespesa");
         LocalDate dataDespesa = rs.getDate("dataDespesa").toLocalDate();
+        int caminhao_id = rs.getInt("caminhao_id");
         df.format(valorDespesa);
 
-        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa);
+        Caminhao caminhao = caminhaoDAO.buscar(caminhao_id);
+        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa, caminhao);
 
         return despesa;
     }

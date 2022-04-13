@@ -66,7 +66,7 @@ create table projeto_viagem(
     PRIMARY KEY(id),
     FOREIGN KEY(empresa_origem_id) REFERENCES projeto_empresa(id),
     FOREIGN KEY(empresa_destino_id) REFERENCES projeto_empresa(id),
-    FOREIGN KEY(motorista) references projeto_usuario(cpf)
+    FOREIGN KEY(motorista) references projeto_usuario(cpf),
     FOREIGN KEY(caminhao_id) references projeto_caminhao(id)
 );
 --Link para povoar cidades e estados
@@ -93,7 +93,9 @@ create table projeto_Despesa(
     nome varchar(120) not null,
     valorDespesa double,
     dataDespesa date not null,
-    PRIMARY KEY(id)
+    caminhao_id int not null,
+    PRIMARY KEY(id),
+    FOREIGN KEY(caminhao_id) REFERENCES projeto_caminhao(id)
 );
 
 

@@ -11,20 +11,25 @@ public class Despesa {
     private String nome;
     private double valorDespesa;
     private LocalDate dataDespesa;
+    private Caminhao caminhaoDespesa;
 
-    public Despesa(TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa) {
+    public Despesa(TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa,
+            Caminhao caminhaoDespesa) {
         this.tipoDespesa = tipoDespesa;
         this.nome = nome;
         this.valorDespesa = valorDespesa;
         this.dataDespesa = dataDespesa;
+        this.caminhaoDespesa = caminhaoDespesa;
     }
 
-    public Despesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa) {
+    public Despesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesa, LocalDate dataDespesa,
+            Caminhao caminhaoDespesa) {
         this.id = id;
         this.tipoDespesa = tipoDespesa;
         this.nome = nome;
         this.valorDespesa = valorDespesa;
         this.dataDespesa = dataDespesa;
+        this.caminhaoDespesa = caminhaoDespesa;
     }
 
     public int getId() {
@@ -70,6 +75,14 @@ public class Despesa {
 
     public void setDataDespesa(LocalDate dataDespesa) {
         this.dataDespesa = dataDespesa;
+    }
+
+    public Caminhao getCaminhaoDespesa() {
+        return caminhaoDespesa;
+    }
+
+    public void setCaminhaoDespesa(Caminhao caminhaoDespesa) {
+        this.caminhaoDespesa = caminhaoDespesa;
     }
 
 }

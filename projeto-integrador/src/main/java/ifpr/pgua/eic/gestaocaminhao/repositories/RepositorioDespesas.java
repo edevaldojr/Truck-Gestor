@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
@@ -20,8 +21,8 @@ public class RepositorioDespesas {
     }
 
     public boolean cadastrarDespesa(TipoDespesa tipoDespesa, String nome, double valorDespesa,
-            LocalDate dataDespesa) throws SQLException {
-        Despesa d = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa);
+            LocalDate dataDespesa, Caminhao caminhao) throws SQLException {
+        Despesa d = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa, caminhao);
 
         try {
             despesaDAO.cadastrar(d);
@@ -36,9 +37,9 @@ public class RepositorioDespesas {
     }
 
     public boolean atualizarDespesa(int id, TipoDespesa tipoDespesa, String nome, double valorDespesa,
-            LocalDate dataDespesa) throws SQLException {
+            LocalDate dataDespesa, Caminhao caminhao) throws SQLException {
 
-        Despesa Despesa = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa);
+        Despesa Despesa = new Despesa(tipoDespesa, nome, valorDespesa, dataDespesa, caminhao);
 
         try {
             return despesaDAO.atualizar(id, Despesa);

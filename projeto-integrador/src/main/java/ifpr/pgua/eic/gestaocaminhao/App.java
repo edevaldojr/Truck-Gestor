@@ -55,7 +55,7 @@ public class App extends Application {
     EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, enderecoDAO);
     UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, enderecoDAO);
     ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, usuarioDAO, empresaDAO, caminhaoDAO);
-    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes);
+    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes, caminhaoDAO);
     private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, enderecoDAO);
 
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);

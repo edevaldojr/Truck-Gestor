@@ -66,11 +66,11 @@ public class RepositorioCaminhao {
         }
         return lista;
     }
-    
+
     public ArrayList<String> listarCaminhoesToStringComTipo() throws Exception {
         ArrayList<String> lista = new ArrayList<>();
         for (Caminhao caminhao : caminhaoDAO.listar()) {
-            String nomeCaminhao = caminhao.getModelo() + " (" +  caminhao.getTipo().toString() + ")";
+            String nomeCaminhao = caminhao.getModelo() + " (" + caminhao.getTipo().toString() + ")";
             lista.add(nomeCaminhao);
         }
         return lista;
@@ -78,5 +78,9 @@ public class RepositorioCaminhao {
 
     public Caminhao buscarPorModelo(String modelo) throws Exception {
         return caminhaoDAO.buscarPorModelo(modelo);
+    }
+
+    public Caminhao buscarPorId(int id) throws Exception {
+        return caminhaoDAO.buscar(id);
     }
 }

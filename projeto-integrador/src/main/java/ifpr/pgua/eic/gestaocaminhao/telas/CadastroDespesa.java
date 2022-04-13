@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
+import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
@@ -18,6 +19,7 @@ import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -47,6 +49,9 @@ public class CadastroDespesa {
 
     @FXML
     private DatePicker dpDataDespesa;
+
+    @FXML
+    private ComboBox<String> cbCaminhaoDespesa;
 
     @FXML
     private Button btCadastrar;
@@ -85,6 +90,14 @@ public class CadastroDespesa {
     }
 
     public void initialize() {
+        try{
+            cbCaminhaoDespesa.getItems().clear();
+            cbCaminhaoDespesa.getItems().addAll(repositorioCaminhao.listarCaminhoesToString());
+        }catch(Exception e){
+            Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+        
     }
 
     @FXML
@@ -113,6 +126,7 @@ public class CadastroDespesa {
         int tipoD = Integer.parseInt(tipo_Despesa);
         TipoDespesa tipo = TipoDespesa.toEnum(tipoD);
         double precoDespesa = Double.parseDouble(preco_Despesa);
+        String modelo = cbCaminhaoDespesa.getSelectionModel().getSelectedItem();
 
         boolean temErro = false;
         String msg = "";
@@ -137,9 +151,11 @@ public class CadastroDespesa {
         }
 
         if (!temErro) {
+            
             try {
                 boolean ret;
-                ret = repositorioDespesas.cadastrarDespesa(tipo, nome_Despesa, precoDespesa, data_Despesa);
+                Caminhao caminhao = repositorioCaminhao.buscarPorModelo(modelo);
+                ret = repositorioDespesas.cadastrarDespesa(tipo, nome_Despesa, precoDespesa, data_Despesa, caminhao);
 
                 if (ret) {
                     msg = "Despesa cadastrada com sucesso!";
@@ -148,7 +164,7 @@ public class CadastroDespesa {
                     msg = "Erro ao cadastrar Despesa!";
                 }
 
-            } catch (SQLException e) {
+            }catch (Exception e) {
                 temErro = true;
                 msg = e.getMessage();
             }
