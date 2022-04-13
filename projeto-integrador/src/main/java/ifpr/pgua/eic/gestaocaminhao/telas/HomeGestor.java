@@ -66,6 +66,9 @@ public class HomeGestor {
     @FXML
     private TableColumn<Despesa, String> tbcValorDespesa;
 
+    @FXML
+    private TableColumn<Despesa, String> tbcCaminhaoDespesa;
+
     ObservableList<String> options = FXCollections.observableArrayList(
             "Todas",
             "7 dias",
@@ -159,7 +162,7 @@ public class HomeGestor {
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
-
+        tbcCaminhaoDespesa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhaoDespesa().getModelo()));
 
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);

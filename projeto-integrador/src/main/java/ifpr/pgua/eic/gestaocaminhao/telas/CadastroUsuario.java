@@ -148,6 +148,7 @@ public class CadastroUsuario {
     public void initialize() {
         if (usuarioExistente != null) {
             tfCpf.setText(usuarioExistente.getCpf());
+            tfCpf.setEditable(false);
             tfNome.setText(usuarioExistente.getNome());
             tfEmail.setText(usuarioExistente.getEmail());
             tfTelefone.setText(usuarioExistente.getTelefone());

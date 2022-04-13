@@ -89,3 +89,7 @@
 - fazendo relacionamento no banco entre despesa e caminhão 
 - colocando combobox de caminhão em despesa e inserindo atributo a classe
 - falta arrumar a inserção e leitura das despesas do banco de dados
+
+13/04/2022
+- Adicionando no tableview de despesas uma coluna com nome do caminhão
+- Atualizando formato da tela
