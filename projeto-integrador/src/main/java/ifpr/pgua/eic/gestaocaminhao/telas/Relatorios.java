@@ -96,7 +96,7 @@ public class Relatorios {
             protected void updateItem(Caminhao caminhao, boolean alterou) {
                 super.updateItem(caminhao, alterou);
                 if (caminhao != null) {
-                    setText("(" + caminhao.getId() + ")" + caminhao.getMarca() + " " + caminhao.getModelo());
+                    setText(caminhao.getMarca() + " " + caminhao.getModelo());
                 } else {
                     setText(null);
                 }
@@ -124,7 +124,7 @@ public class Relatorios {
             protected void updateItem(Empresa empresa, boolean alterou) {
                 super.updateItem(empresa, alterou);
                 if (empresa != null) {
-                    setText("(" + empresa.getId() + ")" + empresa.getNome());
+                    setText(empresa.getNome());
                 } else {
                     setText(null);
                 }
@@ -135,7 +135,7 @@ public class Relatorios {
             protected void updateItem(Empresa empresa, boolean alterou) {
                 super.updateItem(empresa, alterou);
                 if (empresa != null) {
-                    setText("(" + empresa.getId() + ")" + empresa.getNome());
+                    setText(empresa.getNome());
                 } else {
                     setText(null);
                 }
