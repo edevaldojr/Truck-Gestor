@@ -5,6 +5,7 @@ import java.util.List;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioDespesas;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
@@ -70,14 +71,16 @@ public class HomeMoto {
     private RepositorioDespesas repositorioDespesas;
     private RepositorioEmpresa repositorioEmpresa;
     private AutenticacaoServico autenticacaoServico;
+    private RepositorioCaminhao repositorioCaminhao;
     private Login login;
 
     public HomeMoto(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
-            RepositorioDespesas repositoriodespesas, RepositorioEmpresa repositorioEmpresa) {
+            RepositorioDespesas repositoriodespesas, RepositorioEmpresa repositorioEmpresa, RepositorioCaminhao repositorioCaminhao) {
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioViagens = repositorioViagens;
         this.repositorioDespesas = repositoriodespesas;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioCaminhao = repositorioCaminhao;
         this.login = login;
     }
 
@@ -179,7 +182,7 @@ public class HomeMoto {
         root.getChildren()
                 .add(App.loadTela("fxml/entradas_viagens.fxml",
                         a -> new EntradasViagens(this.login, autenticacaoServico, repositorioViagens,
-                                repositorioDespesas, repositorioEmpresa)));
+                                repositorioDespesas, repositorioEmpresa, repositorioCaminhao)));
     }
 
     @FXML
@@ -188,7 +191,7 @@ public class HomeMoto {
         root.getChildren()
                 .add(App.loadTela("fxml/cadastro_despesas.fxml",
                         a -> new CadastroDespesa(this.login, autenticacaoServico, repositorioViagens,
-                                repositorioDespesas)));
+                                repositorioDespesas, repositorioCaminhao)));
     }
 
     @FXML

@@ -82,22 +82,23 @@ public class CadastroDespesa {
     }
 
     public CadastroDespesa(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
-            RepositorioDespesas repositorioDespesas) {
+            RepositorioDespesas repositorioDespesas, RepositorioCaminhao repositorioCaminhao) {
         this.repositorioDespesas = repositorioDespesas;
         this.repositorioViagens = repositorioViagens;
         this.autenticacaoServico = autenticacaoServico;
+        this.repositorioCaminhao = repositorioCaminhao;
         this.login = login;
     }
 
     public void initialize() {
-        try{
+        try {
             cbCaminhaoDespesa.getItems().clear();
             cbCaminhaoDespesa.getItems().addAll(repositorioCaminhao.listarCaminhoesToString());
-        }catch(Exception e){
+        } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
-        
+
     }
 
     @FXML
@@ -113,7 +114,8 @@ public class CadastroDespesa {
         } else {
             root.getChildren().clear();
             root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
-                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas, repositorioEmpresa)));
+                    a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas,
+                            repositorioEmpresa, repositorioCaminhao)));
         }
     }
 
@@ -151,7 +153,7 @@ public class CadastroDespesa {
         }
 
         if (!temErro) {
-            
+
             try {
                 boolean ret;
                 Caminhao caminhao = repositorioCaminhao.buscarPorModelo(modelo);
@@ -164,7 +166,7 @@ public class CadastroDespesa {
                     msg = "Erro ao cadastrar Despesa!";
                 }
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 temErro = true;
                 msg = e.getMessage();
             }

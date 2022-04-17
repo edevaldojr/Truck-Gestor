@@ -210,7 +210,7 @@ public class HomeGestor {
                 Platform.runLater(() -> {
                     piListarHome.setVisible(false);
                     lbLucro.setText("Lucro: " + calculoLucroEPagarMoto());
-                    lbPagarMoto.setText("A pagar: " + doubleToString(valorPagarMotoristas));
+                    lbPagarMoto.setText("Motoristas: " + doubleToString(valorPagarMotoristas));
                     lbDespesa.setText("Despesas: " + doubleToString(resultadoSaida));
                     lbValorLiquido.setText("Valor Líquido: " + doubleToString(resultadoEntrada));
                 });

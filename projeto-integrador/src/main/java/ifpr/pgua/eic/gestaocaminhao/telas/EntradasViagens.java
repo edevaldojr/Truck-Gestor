@@ -107,12 +107,14 @@ public class EntradasViagens {
     }
 
     public EntradasViagens(Login login, AutenticacaoServico autenticacaoServico, RepositorioViagens repositorioViagens,
-            RepositorioDespesas repositorioDespesas, RepositorioEmpresa repositorioEmpresa) {
+            RepositorioDespesas repositorioDespesas, RepositorioEmpresa repositorioEmpresa,
+            RepositorioCaminhao repositorioCaminhao) {
         this.login = login;
         this.autenticacaoServico = autenticacaoServico;
         this.repositorioViagens = repositorioViagens;
         this.repositorioDespesas = repositorioDespesas;
         this.repositorioEmpresa = repositorioEmpresa;
+        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     public void initialize() throws Exception {
@@ -164,7 +166,7 @@ public class EntradasViagens {
             root.getChildren().clear();
             root.getChildren().add(App.loadTela("fxml/home_moto.fxml",
                     a -> new HomeMoto(this.login, autenticacaoServico, repositorioViagens, repositorioDespesas,
-                            repositorioEmpresa)));
+                            repositorioEmpresa, repositorioCaminhao)));
         }
     }
 
@@ -210,12 +212,12 @@ public class EntradasViagens {
             msg += "Empresa de destino não pode ser vazio!\n";
         }
 
-        if (caminhao.isEmpty() || caminhao.isBlank() || caminhao == null){
+        if (caminhao.isEmpty() || caminhao.isBlank() || caminhao == null) {
             temErro = true;
             msg += "Caminhao não pode ser vazio!\n";
         }
 
-        if (data_da_baixa==null) {
+        if (data_da_baixa == null) {
             temErro = true;
             msg += "Data não pode ser vazio!\n";
         }
@@ -257,6 +259,7 @@ public class EntradasViagens {
         tfCarga.clear();
         tfPrecoTonelada.clear();
         dpDataDaBaixa.setValue(null);
+        cbCaminhao.setValue(null);
     }
 
 }
