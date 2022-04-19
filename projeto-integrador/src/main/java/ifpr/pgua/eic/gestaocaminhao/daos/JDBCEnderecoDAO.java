@@ -6,20 +6,20 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCEnderecoDAO implements EnderecoDAO {
 
     FabricaConexoes fabricaConexoes;
-    CidadeDAO cidadeDAO;
+    RepositorioCidade repositorioCidade;
 
-    public JDBCEnderecoDAO(FabricaConexoes fabricaConexoes, CidadeDAO cidadeDAO) {
+    public JDBCEnderecoDAO(FabricaConexoes fabricaConexoes, RepositorioCidade repositorioCidade) {
         this.fabricaConexoes = fabricaConexoes;
-        this.cidadeDAO = cidadeDAO;
+        this.repositorioCidade = repositorioCidade;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
         String cep = rs.getString("cep");
         int cidade_id = rs.getInt("cidade_id");
 
-        Cidade cidade = cidadeDAO.buscarPorId(cidade_id);
+        Cidade cidade = repositorioCidade.buscarCidadePorId(cidade_id);
 
         Endereco u = new Endereco(id, numero, complemento, bairro, rua, cep, cidade);
 

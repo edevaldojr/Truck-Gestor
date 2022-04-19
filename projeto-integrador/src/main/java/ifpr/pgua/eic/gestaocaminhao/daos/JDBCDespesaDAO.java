@@ -9,7 +9,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
@@ -20,11 +19,11 @@ import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 public class JDBCDespesaDAO implements DespesaDAO {
 
     FabricaConexoes fabricaConexoes;
-    CaminhaoDAO caminhaoDAO;
+    RepositorioCaminhao repositorioCaminhao;
 
-    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes, CaminhaoDAO caminhaoDAO) {
+    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes, RepositorioCaminhao repositorioCaminhao) {
         this.fabricaConexoes = fabricaConexoes;
-        this.caminhaoDAO = caminhaoDAO;
+        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     @Override
@@ -122,7 +121,7 @@ public class JDBCDespesaDAO implements DespesaDAO {
         int caminhao_id = rs.getInt("caminhao_id");
         df.format(valorDespesa);
 
-        Caminhao caminhao = caminhaoDAO.buscar(caminhao_id);
+        Caminhao caminhao = repositorioCaminhao.buscarPorId(caminhao_id);
         Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa, caminhao);
 
         return despesa;

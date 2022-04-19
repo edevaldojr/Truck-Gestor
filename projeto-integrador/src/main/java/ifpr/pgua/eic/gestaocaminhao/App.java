@@ -27,7 +27,6 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
@@ -50,21 +49,20 @@ public class App extends Application {
 
     CaminhaoDAO caminhaoDAO = new JDBCCaminhaoDAO(fabricaConexoes);
     EstadoDAO estadoDAO = new JDBCEstadoDAO(fabricaConexoes);
-    CidadeDAO cidadeDAO = new JDBCCidadeDAO(fabricaConexoes, estadoDAO);
-    EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, cidadeDAO);
-    EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, enderecoDAO);
-    UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, enderecoDAO);
-    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, usuarioDAO, empresaDAO, caminhaoDAO);
-    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes, caminhaoDAO);
-    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, enderecoDAO);
-
+    private RepositorioEstado repositorioEstado = new RepositorioEstado(estadoDAO);
+    CidadeDAO cidadeDAO = new JDBCCidadeDAO(fabricaConexoes, repositorioEstado);
+    private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
+    EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, repositorioCidade);
+    private RepositorioEndereco repositorioEndereco = new RepositorioEndereco(enderecoDAO);
+    EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, repositorioEndereco);
+    UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, repositorioEndereco);
+    private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO);
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);
     private RepositorioCaminhao repositorioCaminhao = new RepositorioCaminhao(caminhaoDAO);
+    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, repositorioUsuarios, repositorioEmpresa, repositorioCaminhao);
+    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes, repositorioCaminhao);
+    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, repositorioEndereco);
     private AutenticacaoServico autenticacaoServico = new AutenticacaoServico(autenticacaoDAO);
-    private RepositorioEndereco repositorioEndereco = new RepositorioEndereco(enderecoDAO);
-    private RepositorioEstado repositorioEstado = new RepositorioEstado(estadoDAO);
-    private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
-    private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO);
     private RepositorioViagens repositorioViagens = new RepositorioViagens(viagemDAO);
     private RepositorioDespesas repositorioDespesas = new RepositorioDespesas(despesaDAO);
 

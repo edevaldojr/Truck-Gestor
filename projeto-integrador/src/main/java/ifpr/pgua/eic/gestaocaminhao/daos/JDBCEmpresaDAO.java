@@ -7,20 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCEmpresaDAO implements EmpresaDAO {
 
     FabricaConexoes fabricaConexoes;
-    EnderecoDAO enderecoDAO;
+    RepositorioEndereco repositorioEndereco;
 
-    public JDBCEmpresaDAO(FabricaConexoes fabricaConexoes, EnderecoDAO enderecoDAO) {
+    public JDBCEmpresaDAO(FabricaConexoes fabricaConexoes, RepositorioEndereco repositorioEndereco) {
         this.fabricaConexoes = fabricaConexoes;
-        this.enderecoDAO = enderecoDAO;
+        this.repositorioEndereco = repositorioEndereco;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
         int enderecoid = rs.getInt("endereco_id");
         TipoEmpresa tipo = TipoEmpresa.valueOf(rs.getString("tipo"));
 
-        Endereco endereco = enderecoDAO.buscar(enderecoid);
+        Endereco endereco = repositorioEndereco.buscarId(enderecoid);
 
         Empresa empresa = new Empresa(id, nome, endereco, tipo);
 

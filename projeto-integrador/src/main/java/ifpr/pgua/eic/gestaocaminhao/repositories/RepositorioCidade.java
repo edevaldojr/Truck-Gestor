@@ -9,7 +9,6 @@ import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 public class RepositorioCidade {
 
     private ArrayList<Cidade> cidades;
-
     private CidadeDAO cidadeDAO;
 
     public RepositorioCidade(CidadeDAO cidadeDAO) {
@@ -36,5 +35,4 @@ public class RepositorioCidade {
             throw new SQLException(e.getMessage());
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package ifpr.pgua.eic.gestaocaminhao.repositories;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
@@ -62,6 +61,14 @@ public class RepositorioEndereco {
     public Endereco buscar(String bairro, String rua, String numero) throws SQLException {
         try {
             return enderecoDAO.buscarPorEnd(bairro, rua, numero);
+        } catch (Exception e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    public Endereco buscarId(int id) throws SQLException {
+        try {
+            return enderecoDAO.buscar(id);
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }

@@ -10,13 +10,13 @@ import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
 
 public class RepositorioEmpresa {
 
-    private ArrayList<Empresa> Empresas;
+    private ArrayList<Empresa> empresas;
 
     private EmpresaDAO empresaDAO;
 
     public RepositorioEmpresa(EmpresaDAO empresaDAO) {
         this.empresaDAO = empresaDAO;
-        Empresas = new ArrayList<>();
+        empresas = new ArrayList<>();
     }
 
     public boolean cadastrarEmpresa(String nome, Endereco endereco, TipoEmpresa tipo) throws SQLException {
@@ -24,7 +24,7 @@ public class RepositorioEmpresa {
 
         try {
             empresaDAO.cadastrar(empresa);
-            this.Empresas.add(empresa);
+            this.empresas.add(empresa);
 
             return true;
         } catch (Exception e) {
@@ -82,6 +82,13 @@ public class RepositorioEmpresa {
     public Empresa buscar(String nome) throws SQLException {
         try {
             return empresaDAO.buscarPorNome(nome);
+        } catch (Exception e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+    public Empresa buscarPorId(int id) throws SQLException {
+        try {
+            return empresaDAO.buscar(id);
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }

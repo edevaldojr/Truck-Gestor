@@ -6,20 +6,20 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCUsuarioDAO implements UsuarioDAO {
 
     FabricaConexoes fabricaConexoes;
-    EnderecoDAO enderecoDAO;
+    RepositorioEndereco repositorioEndereco;
 
-    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes, EnderecoDAO enderecoDAO) {
+    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes, RepositorioEndereco repositorioEndereco) {
         this.fabricaConexoes = fabricaConexoes;
-        this.enderecoDAO = enderecoDAO;
+        this.repositorioEndereco = repositorioEndereco;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         boolean gestor = rs.getBoolean("gestor");
         int end = rs.getInt("endereco_id");
 
-        Endereco endereco = enderecoDAO.buscar(end);
+        Endereco endereco = repositorioEndereco.buscarId(end);
 
         Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
 

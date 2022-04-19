@@ -3,23 +3,22 @@ package ifpr.pgua.eic.gestaocaminhao.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
-import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Estado;
+import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCCidadeDAO implements CidadeDAO {
 
     FabricaConexoes fabricaConexoes;
-    EstadoDAO estadoDAO;
+    RepositorioEstado repositorioEstado;
 
-    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes, EstadoDAO estadoDAO) {
+    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes, RepositorioEstado repositorioEstado) {
         this.fabricaConexoes = fabricaConexoes;
-        this.estadoDAO = estadoDAO;
+        this.repositorioEstado = repositorioEstado;
     }
 
     public Cidade montarCidade(ResultSet rs) throws Exception {
@@ -27,7 +26,7 @@ public class JDBCCidadeDAO implements CidadeDAO {
         String nome = rs.getString("nome");
         int id_estado = rs.getInt("id_estado");
 
-        Estado estado = estadoDAO.buscar(id_estado);
+        Estado estado = repositorioEstado.buscarEstado(id_estado);
 
         Cidade c = new Cidade(id, nome, estado);
 

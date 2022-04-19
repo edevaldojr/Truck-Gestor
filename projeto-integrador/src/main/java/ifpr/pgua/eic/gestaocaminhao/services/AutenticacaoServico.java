@@ -13,8 +13,7 @@ public class AutenticacaoServico {
     }
 
     public Usuario logar(String loginCpf, String senha) throws Exception {
-        this.logado = autenticacaoDAO.login(loginCpf, senha);
-        return this.logado;
+        return this.logado = autenticacaoDAO.login(loginCpf, senha);
     }
 
     public Usuario getLogado() {
