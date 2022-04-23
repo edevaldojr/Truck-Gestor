@@ -3,7 +3,10 @@ package ifpr.pgua.eic.gestaocaminhao.repositories;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
+import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 
@@ -12,9 +15,13 @@ public class RepositorioUsuarios {
     private ArrayList<Usuario> usuarios;
 
     private UsuarioDAO usuarioDAO;
+    private EnderecoDAO enderecoDAO;
+    private CidadeDAO cidadeDAO;
 
-    public RepositorioUsuarios(UsuarioDAO usuarioDAO) {
+    public RepositorioUsuarios(UsuarioDAO usuarioDAO, EnderecoDAO enderecoDAO, CidadeDAO cidadeDAO) {
         this.usuarioDAO = usuarioDAO;
+        this.enderecoDAO = enderecoDAO;
+        this.cidadeDAO = cidadeDAO;
         usuarios = new ArrayList<>();
     }
 
@@ -55,20 +62,46 @@ public class RepositorioUsuarios {
     }
 
     public ArrayList<Usuario> listarUsuarios() throws Exception {
-        return usuarioDAO.listar();
+        usuarios = usuarioDAO.listar();
+        for (Usuario usuario : usuarios) {
+            Endereco endereco = enderecoDAO.buscar(usuarioDAO.buscarEnderecoId(usuario.getCpf()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            usuario.setEndereco(endereco);
+        }
+        return usuarios;
     }
 
     public ArrayList<Usuario> listarMotoristas() throws Exception {
-        return usuarioDAO.listarMotorista();
+        usuarios = usuarioDAO.listarMotorista();
+        for (Usuario usuario : usuarios) {
+            Endereco endereco = enderecoDAO.buscar(usuarioDAO.buscarEnderecoId(usuario.getCpf()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            usuario.setEndereco(endereco);
+        }
+        return usuarios;
     }
 
     public ArrayList<Usuario> listarGestores() throws Exception {
-        return usuarioDAO.listarGestor();
+        usuarios = usuarioDAO.listarGestor();
+        for (Usuario usuario : usuarios) {
+            Endereco endereco = enderecoDAO.buscar(usuarioDAO.buscarEnderecoId(usuario.getCpf()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            usuario.setEndereco(endereco);
+        }
+        return usuarios;
     }
 
     public Usuario buscar(String cpf) throws SQLException {
         try {
-            return usuarioDAO.buscar(cpf);
+            Usuario usuario = usuarioDAO.buscar(cpf);
+            Endereco endereco = enderecoDAO.buscar(usuarioDAO.buscarEnderecoId(usuario.getCpf()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            usuario.setEndereco(endereco);
+            return usuario;
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }

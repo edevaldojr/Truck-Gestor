@@ -20,4 +20,6 @@ public interface EmpresaDAO {
 
     Empresa buscarPorNome(String nome) throws Exception;
 
+    int buscarEnderecoId(int id) throws Exception;
+
 }

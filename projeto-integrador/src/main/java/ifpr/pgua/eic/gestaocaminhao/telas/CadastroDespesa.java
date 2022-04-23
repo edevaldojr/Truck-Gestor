@@ -1,11 +1,9 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
-import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;

@@ -7,19 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCUsuarioDAO implements UsuarioDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioEndereco repositorioEndereco;
 
-    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes, RepositorioEndereco repositorioEndereco) {
+    public JDBCUsuarioDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioEndereco = repositorioEndereco;
     }
 
     @Override
@@ -99,9 +95,8 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         boolean gestor = rs.getBoolean("gestor");
         int end = rs.getInt("endereco_id");
 
-        Endereco endereco = repositorioEndereco.buscarId(end);
 
-        Usuario u = new Usuario(cpf, nome, endereco, telefone, email, senha, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, null, telefone, email, senha, cnh, gestor);
 
         return u;
 
@@ -202,6 +197,31 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
         con.close();
 
         return lista;
+    }
+
+    @Override
+    public int buscarEnderecoId(String cpf) throws Exception {
+        int enderecoid = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT endereco_id FROM projeto_usuario WHERE cpf=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, cpf);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        enderecoid = rs.getInt("endereco_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return enderecoid;
     }
 
 }

@@ -5,19 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.AutenticacaoDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioEndereco repositorioEndereco;
 
-    public JDBCAutenticacaoDAO(FabricaConexoes fabricaConexoes, RepositorioEndereco repositorioEndereco) {
+    public JDBCAutenticacaoDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioEndereco = repositorioEndereco;
     }
 
     @Override
@@ -52,16 +48,13 @@ public class JDBCAutenticacaoDAO implements AutenticacaoDAO {
     private Usuario montarUsuario(ResultSet rs) throws Exception {
         String cpf = rs.getString("cpf");
         String nome = rs.getString("nome");
-        int endereco = rs.getInt("endereco_id");
         String email = rs.getString("email");
         String senha = rs.getString("senha");
         String telefone = rs.getString("telefone");
         String cnh = rs.getString("cnh");
         boolean gestor = rs.getBoolean("gestor");
 
-        Endereco enderecoObj = repositorioEndereco.buscarId(endereco);
-
-        Usuario u = new Usuario(cpf, nome, enderecoObj, telefone, email, senha, cnh, gestor);
+        Usuario u = new Usuario(cpf, nome, null, telefone, email, senha, cnh, gestor);
 
         return u;
     }

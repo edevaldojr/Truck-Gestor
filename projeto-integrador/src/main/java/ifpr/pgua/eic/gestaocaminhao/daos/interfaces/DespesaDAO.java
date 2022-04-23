@@ -15,4 +15,6 @@ public interface DespesaDAO {
     ArrayList<Despesa> listar() throws Exception;
 
     ArrayList<Despesa> listarDias(int dias) throws Exception;
+
+    int buscarCaminhaoId(int id) throws Exception;
 }

@@ -20,4 +20,5 @@ public interface UsuarioDAO {
 
     Usuario buscar(String cpf) throws Exception;
 
+    int buscarEnderecoId(String cpf) throws Exception;
 }

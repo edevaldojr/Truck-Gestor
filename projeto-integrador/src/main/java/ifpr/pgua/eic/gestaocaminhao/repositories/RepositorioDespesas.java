@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
 
 public class RepositorioDespesas {
@@ -14,9 +15,11 @@ public class RepositorioDespesas {
     private ArrayList<Despesa> despesas;
 
     private DespesaDAO despesaDAO;
+    private CaminhaoDAO caminhaoDAO;
 
-    public RepositorioDespesas(DespesaDAO despesaDAO) {
+    public RepositorioDespesas(DespesaDAO despesaDAO, CaminhaoDAO caminhaoDAO) {
         this.despesaDAO = despesaDAO;
+        this.caminhaoDAO = caminhaoDAO;
         despesas = new ArrayList<>();
     }
 
@@ -57,11 +60,19 @@ public class RepositorioDespesas {
     }
 
     public ArrayList<Despesa> listarDespesas() throws Exception {
-        return despesaDAO.listar();
+        despesas = despesaDAO.listar();
+        for (Despesa despesa : despesas) {
+            despesa.setCaminhaoDespesa(caminhaoDAO.buscar(despesaDAO.buscarCaminhaoId(despesa.getId())));
+        }
+        return despesas;
     }
 
     public ArrayList<Despesa> listarDespesasDias(int dias) throws Exception {
-        return despesaDAO.listarDias(dias);
+        despesas = despesaDAO.listarDias(dias);
+        for (Despesa despesa : despesas) {
+            despesa.setCaminhaoDespesa(caminhaoDAO.buscar(despesaDAO.buscarCaminhaoId(despesa.getId())));
+        }
+        return despesas;
     }
 
 

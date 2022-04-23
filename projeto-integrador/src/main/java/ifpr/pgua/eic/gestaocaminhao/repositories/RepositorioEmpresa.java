@@ -3,19 +3,26 @@ package ifpr.pgua.eic.gestaocaminhao.repositories;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 
 public class RepositorioEmpresa {
 
     private ArrayList<Empresa> empresas;
 
     private EmpresaDAO empresaDAO;
+    private EnderecoDAO enderecoDAO;
+    private CidadeDAO cidadeDAO;
 
-    public RepositorioEmpresa(EmpresaDAO empresaDAO) {
+    public RepositorioEmpresa(EmpresaDAO empresaDAO, EnderecoDAO enderecoDAO, CidadeDAO cidadeDAO) {
         this.empresaDAO = empresaDAO;
+        this.enderecoDAO = enderecoDAO;
+        this.cidadeDAO = cidadeDAO;
         empresas = new ArrayList<>();
     }
 
@@ -54,16 +61,30 @@ public class RepositorioEmpresa {
     }
 
     public ArrayList<Empresa> listarEmpresasOrigem() throws Exception {
-        return empresaDAO.listarEmpresasOrigem();
+        empresas = empresaDAO.listarEmpresasOrigem();
+        for (Empresa empresa : empresas) {
+            Endereco endereco = enderecoDAO.buscar(empresaDAO.buscarEnderecoId(empresa.getId()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            empresa.setEndereco(endereco);
+        }
+        return empresas;
     }
 
     public ArrayList<Empresa> listarEmpresasDestino() throws Exception {
-        return empresaDAO.listarEmpresasDestino();
+        empresas = empresaDAO.listarEmpresasDestino();
+        for (Empresa empresa : empresas) {
+            Endereco endereco = enderecoDAO.buscar(empresaDAO.buscarEnderecoId(empresa.getId()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            empresa.setEndereco(endereco);
+        }
+        return empresas;
     }
 
     public ArrayList<String> listarEmpresasOrigemString() throws Exception {
         ArrayList<String> lista = new ArrayList<>();
-        for (Empresa empresa : empresaDAO.listarEmpresasOrigem()) {
+        for (Empresa empresa : listarEmpresasOrigem()) {
             String nomeEmpresa = empresa.getNome();
             lista.add(nomeEmpresa);
         }
@@ -72,7 +93,7 @@ public class RepositorioEmpresa {
 
     public ArrayList<String> listarEmpresasDestinoString() throws Exception {
         ArrayList<String> lista = new ArrayList<>();
-        for (Empresa empresa : empresaDAO.listarEmpresasDestino()) {
+        for (Empresa empresa : listarEmpresasDestino()) {
             String nomeEmpresa = empresa.getNome();
             lista.add(nomeEmpresa);
         }
@@ -81,14 +102,24 @@ public class RepositorioEmpresa {
 
     public Empresa buscar(String nome) throws SQLException {
         try {
-            return empresaDAO.buscarPorNome(nome);
+            Empresa empresa = empresaDAO.buscarPorNome(nome);
+            Endereco endereco = enderecoDAO.buscar(empresaDAO.buscarEnderecoId(empresa.getId()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            empresa.setEndereco(endereco);
+            return empresa;
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }
     }
     public Empresa buscarPorId(int id) throws SQLException {
         try {
-            return empresaDAO.buscar(id);
+            Empresa empresa = empresaDAO.buscar(id);
+            Endereco endereco = enderecoDAO.buscar(empresaDAO.buscarEnderecoId(empresa.getId()));
+            Cidade cidade = cidadeDAO.buscarPorId(endereco.getId());
+            endereco.setCidade(cidade);
+            empresa.setEndereco(endereco);
+            return empresa;
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }

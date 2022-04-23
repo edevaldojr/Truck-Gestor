@@ -1,6 +1,5 @@
 package ifpr.pgua.eic.gestaocaminhao.repositories;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CaminhaoDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.UsuarioDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
@@ -15,9 +18,15 @@ public class RepositorioViagens {
     private ArrayList<Viagem> viagens;
 
     private ViagemDAO viagemDAO;
+    private CaminhaoDAO caminhaoDAO;
+    private EmpresaDAO empresaDAO;
+    private UsuarioDAO usuarioDAO;
 
-    public RepositorioViagens(ViagemDAO viagemDAO) {
+    public RepositorioViagens(ViagemDAO viagemDAO, CaminhaoDAO caminhaoDAO, EmpresaDAO empresaDAO, UsuarioDAO usuarioDAO) {
         this.viagemDAO = viagemDAO;
+        this.caminhaoDAO = caminhaoDAO;
+        this.empresaDAO = empresaDAO;
+        this.usuarioDAO = usuarioDAO;
         viagens = new ArrayList<>();
     }
 
@@ -59,19 +68,46 @@ public class RepositorioViagens {
     }
 
     public ArrayList<Viagem> listarViagens() throws Exception {
-        return viagemDAO.listar();
+        viagens = viagemDAO.listar();
+        for (Viagem viagem : viagens) {
+            viagem.setCaminhao(caminhaoDAO.buscar(viagemDAO.buscarCaminhaoId(viagem.getId())));
+            viagem.setEmpresa_destino(empresaDAO.buscar(viagemDAO.buscarEmpresaDestinoId(viagem.getId())));
+            viagem.setEmpresa_origem(empresaDAO.buscar(viagemDAO.buscarEmpresaOrigemId(viagem.getId())));
+            viagem.setCaminhoneiro(usuarioDAO.buscar(viagemDAO.buscarMotoristaCpf(viagem.getId())));
+        }
+        return viagens;
     }
 
     public ArrayList<Viagem> listarViagensDias(int dias) throws Exception {
-        return viagemDAO.listarDias(dias);
+        viagens = viagemDAO.listarDias(dias);
+        for (Viagem viagem : viagens) {
+            viagem.setCaminhao(caminhaoDAO.buscar(viagemDAO.buscarCaminhaoId(viagem.getId())));
+            viagem.setEmpresa_destino(empresaDAO.buscar(viagemDAO.buscarEmpresaDestinoId(viagem.getId())));
+            viagem.setEmpresa_origem(empresaDAO.buscar(viagemDAO.buscarEmpresaOrigemId(viagem.getId())));
+            viagem.setCaminhoneiro(usuarioDAO.buscar(viagemDAO.buscarMotoristaCpf(viagem.getId())));
+        }
+        return viagens;
     }
 
     public ArrayList<Viagem> listarViagensMoto(String cpf) throws Exception {
-        return viagemDAO.listarPorMoto(cpf);
+        viagens = viagemDAO.listarPorMoto(cpf);
+        for (Viagem viagem : viagens) {
+            viagem.setCaminhao(caminhaoDAO.buscar(viagemDAO.buscarCaminhaoId(viagem.getId())));
+            viagem.setEmpresa_destino(empresaDAO.buscar(viagemDAO.buscarEmpresaDestinoId(viagem.getId())));
+            viagem.setEmpresa_origem(empresaDAO.buscar(viagemDAO.buscarEmpresaOrigemId(viagem.getId())));
+            viagem.setCaminhoneiro(usuarioDAO.buscar(viagemDAO.buscarMotoristaCpf(viagem.getId())));
+        }
+        return viagens;
     }
 
     public ArrayList<Viagem> listarViagensMotoDias(int dias, String cpf) throws Exception {
-        return viagemDAO.listarPorMotoEmDias(dias, cpf);
+        viagens = viagemDAO.listarPorMotoEmDias(dias, cpf);
+        for (Viagem viagem : viagens) {
+            viagem.setCaminhao(caminhaoDAO.buscar(viagemDAO.buscarCaminhaoId(viagem.getId())));
+            viagem.setEmpresa_destino(empresaDAO.buscar(viagemDAO.buscarEmpresaDestinoId(viagem.getId())));
+            viagem.setEmpresa_origem(empresaDAO.buscar(viagemDAO.buscarEmpresaOrigemId(viagem.getId())));
+            viagem.setCaminhoneiro(usuarioDAO.buscar(viagemDAO.buscarMotoristaCpf(viagem.getId())));
+        }
+        return viagens;
     }
-
 }

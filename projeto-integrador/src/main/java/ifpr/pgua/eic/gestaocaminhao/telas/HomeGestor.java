@@ -1,16 +1,13 @@
 package ifpr.pgua.eic.gestaocaminhao.telas;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
-import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
@@ -22,12 +19,9 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -153,7 +147,6 @@ public class HomeGestor {
 
         tbcMotorista.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhoneiro().getNome()));
 
-        
         tbcCaminhao.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhao().getModelo()));
 
         tbcDataDespesa.setCellValueFactory(
@@ -162,13 +155,14 @@ public class HomeGestor {
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTipoDespesa().getDescricao()));
         tbcValorDespesa
                 .setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValorDespesaToString()));
-        tbcCaminhaoDespesa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCaminhaoDespesa().getModelo()));
+        tbcCaminhaoDespesa.setCellValueFactory(
+                data -> new SimpleStringProperty(data.getValue().getCaminhaoDespesa().getModelo()));
 
         cbDataRelatorios.getItems().clear();
         cbDataRelatorios.getItems().addAll(options);
 
         try {
-            criaThreadListar().start();;
+            criaThreadListar().start();
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -176,7 +170,7 @@ public class HomeGestor {
 
     }
 
-    private Thread criaThreadListar(){
+    private Thread criaThreadListar() {
         return new Thread(() -> {
             try {
                 piListarHome.setVisible(true);
@@ -199,7 +193,7 @@ public class HomeGestor {
         });
     }
 
-    private Thread criaThreadListarDias(int dias){
+    private Thread criaThreadListarDias(int dias) {
         return new Thread(() -> {
             try {
                 piListarHome.setVisible(true);
@@ -260,7 +254,8 @@ public class HomeGestor {
         } else if (dataSelecionada != null && dataSelecionada == opcao1) {
             criaThreadListarDias(7).start();
         } else if (dataSelecionada != null && dataSelecionada == opcao2) {
-            criaThreadListarDias(14).start();;
+            criaThreadListarDias(14).start();
+            ;
         } else if (dataSelecionada != null && dataSelecionada == opcao3) {
             criaThreadListarDias(30).start();
         }

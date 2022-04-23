@@ -10,30 +10,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.ViagemDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
-import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
-import ifpr.pgua.eic.gestaocaminhao.models.Usuario;
 import ifpr.pgua.eic.gestaocaminhao.models.Viagem;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEmpresa;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCViagemDAO implements ViagemDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioUsuarios repositorioUsuarios;
-    RepositorioEmpresa repositorioEmpresa;
-    RepositorioCaminhao repositorioCaminhao;
 
-    public JDBCViagemDAO(FabricaConexoes fabricaConexoes, 
-                        RepositorioUsuarios repositorioUsuarios,
-                        RepositorioEmpresa repositorioEmpresa,
-                        RepositorioCaminhao repositorioCaminhao) {
+    public JDBCViagemDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioUsuarios = repositorioUsuarios;
-        this.repositorioEmpresa = repositorioEmpresa;
-        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     @Override
@@ -134,22 +119,14 @@ public class JDBCViagemDAO implements ViagemDAO {
         Date data = rs.getDate("data_da_Baixa");
         double valor = rs.getDouble("valor");
         String carga = rs.getString("carga");
-        int empresa_origem = rs.getInt("empresa_origem_id");
-        int empresa_destino = rs.getInt("empresa_origem_id");
-        String moto = rs.getString("motorista");
-        int caminhao_id = rs.getInt("caminhao_id");
         double valor_total = rs.getDouble("total");
 
-        Caminhao caminhao = repositorioCaminhao.buscarPorId(caminhao_id);
-        Empresa origem = repositorioEmpresa.buscarPorId(empresa_origem);
-        Empresa destino = repositorioEmpresa.buscarPorId(empresa_destino);
-        Usuario motorista = repositorioUsuarios.buscar(moto);
         LocalDate data_da_baixa = data.toLocalDate();
         df.format(valor);
         df.format(peso);
         df.format(valor_total);
 
-        Viagem u = new Viagem(id, peso, data_da_baixa, valor, origem, destino, carga, motorista, caminhao, valor_total);
+        Viagem u = new Viagem(id, peso, data_da_baixa, valor, null, null, carga, null, null, valor_total);
 
         return u;
     }
@@ -256,6 +233,106 @@ public class JDBCViagemDAO implements ViagemDAO {
         con.close();
 
         return lista;
+    }
+
+    @Override
+    public int buscarEmpresaOrigemId(int id) throws Exception {
+        int empresaId = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT empresa_origem_id FROM projeto_viagem WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        empresaId = rs.getInt("empresa_origem_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return empresaId;
+    }
+
+    @Override
+    public int buscarEmpresaDestinoId(int id) throws Exception {
+        int empresaId = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT empresa_destino_id FROM projeto_viagem WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+        
+        rs.next();
+
+        empresaId = rs.getInt("empresa_destino_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return empresaId;
+    }
+
+    @Override
+    public int buscarCaminhaoId(int id) throws Exception {
+        int caminhaoId = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT caminhao_id FROM projeto_viagem WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        caminhaoId = rs.getInt("caminhao_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return caminhaoId;
+    }
+
+    @Override
+    public String buscarMotoristaCpf(int id) throws Exception {
+        String motoristaCpf;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT motorista FROM projeto_viagem WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        motoristaCpf = rs.getString("motorista");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return motoristaCpf;
     }
 
 }

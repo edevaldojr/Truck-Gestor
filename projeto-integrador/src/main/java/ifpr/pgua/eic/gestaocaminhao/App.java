@@ -47,24 +47,27 @@ public class App extends Application {
 
     FabricaConexoes fabricaConexoes = FabricaConexoes.getInstance();
 
-    CaminhaoDAO caminhaoDAO = new JDBCCaminhaoDAO(fabricaConexoes);
-    EstadoDAO estadoDAO = new JDBCEstadoDAO(fabricaConexoes);
-    private RepositorioEstado repositorioEstado = new RepositorioEstado(estadoDAO);
-    CidadeDAO cidadeDAO = new JDBCCidadeDAO(fabricaConexoes, repositorioEstado);
-    private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
-    EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes, repositorioCidade);
-    private RepositorioEndereco repositorioEndereco = new RepositorioEndereco(enderecoDAO);
-    EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes, repositorioEndereco);
-    UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes, repositorioEndereco);
-    private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO);
-    private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO);
+    private CaminhaoDAO caminhaoDAO = new JDBCCaminhaoDAO(fabricaConexoes);
+    private EstadoDAO estadoDAO = new JDBCEstadoDAO(fabricaConexoes);
+    private CidadeDAO cidadeDAO = new JDBCCidadeDAO(fabricaConexoes);
+    private EnderecoDAO enderecoDAO = new JDBCEnderecoDAO(fabricaConexoes);
+    private EmpresaDAO empresaDAO = new JDBCEmpresaDAO(fabricaConexoes);
+    private UsuarioDAO usuarioDAO = new JDBCUsuarioDAO(fabricaConexoes);
+    private ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes);
+    private DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes);
+    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes);
+
+    private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios(usuarioDAO, enderecoDAO, cidadeDAO);
     private RepositorioCaminhao repositorioCaminhao = new RepositorioCaminhao(caminhaoDAO);
-    ViagemDAO viagemDAO = new JDBCViagemDAO(fabricaConexoes, repositorioUsuarios, repositorioEmpresa, repositorioCaminhao);
-    DespesaDAO despesaDAO = new JDBCDespesaDAO(fabricaConexoes, repositorioCaminhao);
-    private AutenticacaoDAO autenticacaoDAO = new JDBCAutenticacaoDAO(fabricaConexoes, repositorioEndereco);
-    private AutenticacaoServico autenticacaoServico = new AutenticacaoServico(autenticacaoDAO);
-    private RepositorioViagens repositorioViagens = new RepositorioViagens(viagemDAO);
-    private RepositorioDespesas repositorioDespesas = new RepositorioDespesas(despesaDAO);
+    private AutenticacaoServico autenticacaoServico = new AutenticacaoServico(autenticacaoDAO, enderecoDAO, usuarioDAO,
+            cidadeDAO);
+    private RepositorioEndereco repositorioEndereco = new RepositorioEndereco(enderecoDAO, cidadeDAO);
+    private RepositorioEstado repositorioEstado = new RepositorioEstado(estadoDAO);
+    private RepositorioCidade repositorioCidade = new RepositorioCidade(cidadeDAO);
+    private RepositorioEmpresa repositorioEmpresa = new RepositorioEmpresa(empresaDAO, enderecoDAO, cidadeDAO);
+    private RepositorioViagens repositorioViagens = new RepositorioViagens(viagemDAO, caminhaoDAO, empresaDAO,
+            usuarioDAO);
+    private RepositorioDespesas repositorioDespesas = new RepositorioDespesas(despesaDAO, caminhaoDAO);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -74,7 +77,7 @@ public class App extends Application {
                         o -> new Login(autenticacaoServico, repositorioUsuarios, repositorioCaminhao,
                                 repositorioEndereco, repositorioEstado, repositorioCidade, repositorioEmpresa,
                                 repositorioViagens, repositorioDespesas)),
-                                1233, 597);
+                1233, 597);
         stage.setResizable(false);
         // stage.setMaximized(true);
         stage.setTitle("Gestão de Caminhão");

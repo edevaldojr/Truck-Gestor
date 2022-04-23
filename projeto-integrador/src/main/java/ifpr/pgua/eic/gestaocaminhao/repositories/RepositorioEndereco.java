@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
 
 public class RepositorioEndereco {
@@ -12,9 +13,11 @@ public class RepositorioEndereco {
     private ArrayList<Endereco> enderecos;
 
     private EnderecoDAO enderecoDAO;
+    private CidadeDAO cidadeDAO;
 
-    public RepositorioEndereco(EnderecoDAO enderecoDAO) {
+    public RepositorioEndereco(EnderecoDAO enderecoDAO, CidadeDAO cidadeDAO) {
         this.enderecoDAO = enderecoDAO;
+        this.cidadeDAO = cidadeDAO;
         enderecos = new ArrayList<>();
     }
 
@@ -55,12 +58,18 @@ public class RepositorioEndereco {
     }
 
     public ArrayList<Endereco> listarEndereco() throws Exception {
-        return enderecoDAO.listar();
+        enderecos = enderecoDAO.listar();
+        for (Endereco endereco : enderecos) {
+            endereco.setCidade(cidadeDAO.buscarPorId(enderecoDAO.buscarCidadeId(endereco.getId())));
+        }
+        return enderecos;
     }
 
     public Endereco buscar(String bairro, String rua, String numero) throws SQLException {
         try {
-            return enderecoDAO.buscarPorEnd(bairro, rua, numero);
+            Endereco endereco = enderecoDAO.buscarPorEnd(bairro, rua, numero);
+            endereco.setCidade(cidadeDAO.buscarPorId(enderecoDAO.buscarCidadeId(endereco.getId())));
+            return endereco;
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }
@@ -68,7 +77,9 @@ public class RepositorioEndereco {
 
     public Endereco buscarId(int id) throws SQLException {
         try {
-            return enderecoDAO.buscar(id);
+            Endereco endereco = enderecoDAO.buscar(id);
+            endereco.setCidade(cidadeDAO.buscarPorId(enderecoDAO.buscarCidadeId(endereco.getId())));
+            return endereco;
         } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }

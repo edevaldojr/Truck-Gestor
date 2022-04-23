@@ -4,12 +4,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
+import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EstadoDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 
 public class RepositorioCidade {
 
     private ArrayList<Cidade> cidades;
     private CidadeDAO cidadeDAO;
+    private EstadoDAO estadoDAO;
 
     public RepositorioCidade(CidadeDAO cidadeDAO) {
         this.cidadeDAO = cidadeDAO;
@@ -17,12 +19,18 @@ public class RepositorioCidade {
     }
 
     public ArrayList<Cidade> listarCidades() throws Exception {
-        return cidadeDAO.listar();
+        cidades = cidadeDAO.listar();
+        for (Cidade cidade : cidades) {
+            cidade.setEstado(estadoDAO.buscar(cidadeDAO.buscarEstadoId(cidade.getId())));
+        }
+        return cidades;
     }
 
     public Cidade buscarCidadePorId(int id) throws SQLException {
         try{
-            return cidadeDAO.buscarPorId(id);
+            Cidade cidade = cidadeDAO.buscarPorId(id);
+            cidade.setEstado(estadoDAO.buscar(cidadeDAO.buscarEstadoId(cidade.getId())));
+            return cidade;
         }catch(Exception e){
             throw new SQLException(e.getMessage());
         }
@@ -30,9 +38,15 @@ public class RepositorioCidade {
 
     public Cidade buscarCidadePorNome(String nome) throws SQLException {
         try{
-            return cidadeDAO.buscarPorNome(nome);
+            Cidade cidade = cidadeDAO.buscarPorNome(nome);
+            cidade.setEstado(estadoDAO.buscar(cidadeDAO.buscarEstadoId(cidade.getId())));
+            return cidade;
         }catch(Exception e){
             throw new SQLException(e.getMessage());
         }
     }
+
+
+    
+
 }

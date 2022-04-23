@@ -10,20 +10,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.DespesaDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Caminhao;
 import ifpr.pgua.eic.gestaocaminhao.models.Despesa;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoDespesa;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCaminhao;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCDespesaDAO implements DespesaDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioCaminhao repositorioCaminhao;
 
-    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes, RepositorioCaminhao repositorioCaminhao) {
+    public JDBCDespesaDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioCaminhao = repositorioCaminhao;
     }
 
     @Override
@@ -118,14 +114,38 @@ public class JDBCDespesaDAO implements DespesaDAO {
         String nome = rs.getString("nome");
         double valorDespesa = rs.getDouble("valorDespesa");
         LocalDate dataDespesa = rs.getDate("dataDespesa").toLocalDate();
-        int caminhao_id = rs.getInt("caminhao_id");
         df.format(valorDespesa);
 
-        Caminhao caminhao = repositorioCaminhao.buscarPorId(caminhao_id);
-        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa, caminhao);
+        Despesa despesa = new Despesa(id, tipoDespesa, nome, valorDespesa, dataDespesa, null);
 
         return despesa;
     }
+
+    @Override
+    public int buscarCaminhaoId(int id) throws Exception {
+        int caminhao_id = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT caminhao_id FROM projeto_despesa WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        caminhao_id = rs.getInt("caminhao_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return caminhao_id;
+    }
+
 
     @Override
     public ArrayList<Despesa> listarDias(int dias) throws Exception {

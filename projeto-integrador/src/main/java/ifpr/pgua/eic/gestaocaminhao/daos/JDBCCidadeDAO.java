@@ -7,31 +7,22 @@ import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
-import ifpr.pgua.eic.gestaocaminhao.models.Estado;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCCidadeDAO implements CidadeDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioEstado repositorioEstado;
 
-    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes, RepositorioEstado repositorioEstado) {
+    public JDBCCidadeDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioEstado = repositorioEstado;
     }
 
     public Cidade montarCidade(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
-        int id_estado = rs.getInt("id_estado");
+        Cidade aux = new Cidade(id, nome, null);
 
-        Estado estado = repositorioEstado.buscarEstado(id_estado);
-
-        Cidade c = new Cidade(id, nome, estado);
-
-        return c;
-
+        return aux;
     }
 
     @Override
@@ -106,6 +97,31 @@ public class JDBCCidadeDAO implements CidadeDAO {
         con.close();
 
         return c;
+    }
+
+    @Override
+    public int buscarEstadoId(int id) throws Exception {
+        int id_estado = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT id_estado FROM projeto_cidade WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+        
+        rs.next();
+
+        id_estado = rs.getInt("id_estado");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return id_estado;
     }
 
 }

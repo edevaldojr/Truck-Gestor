@@ -7,19 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EnderecoDAO;
-import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioCidade;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCEnderecoDAO implements EnderecoDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioCidade repositorioCidade;
 
-    public JDBCEnderecoDAO(FabricaConexoes fabricaConexoes, RepositorioCidade repositorioCidade) {
+    public JDBCEnderecoDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioCidade = repositorioCidade;
     }
 
     @Override
@@ -92,14 +88,35 @@ public class JDBCEnderecoDAO implements EnderecoDAO {
         String bairro = rs.getString("bairro");
         String rua = rs.getString("rua");
         String cep = rs.getString("cep");
-        int cidade_id = rs.getInt("cidade_id");
 
-        Cidade cidade = repositorioCidade.buscarCidadePorId(cidade_id);
-
-        Endereco u = new Endereco(id, numero, complemento, bairro, rua, cep, cidade);
+        Endereco u = new Endereco(id, numero, complemento, bairro, rua, cep, null);
 
         return u;
 
+    }
+
+    public int buscarCidadeId(int id) throws Exception {
+        int cidade_id = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT cidade_id FROM projeto_endereco WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        cidade_id = rs.getInt("cidade_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return cidade_id;
     }
 
     @Override

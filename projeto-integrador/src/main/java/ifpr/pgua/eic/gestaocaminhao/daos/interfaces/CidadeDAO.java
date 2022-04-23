@@ -12,4 +12,5 @@ public interface CidadeDAO {
 
     Cidade buscarPorId(int id) throws Exception;
 
+    int buscarEstadoId(int id) throws Exception;
 }

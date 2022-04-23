@@ -22,4 +22,12 @@ public interface ViagemDAO {
 
     Viagem buscar(int id) throws Exception;
 
+    int buscarEmpresaDestinoId(int id) throws Exception;
+
+    int buscarEmpresaOrigemId(int id) throws Exception;
+
+    int buscarCaminhaoId(int id) throws Exception;
+
+    String buscarMotoristaCpf(int id) throws Exception;
+
 }

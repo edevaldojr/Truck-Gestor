@@ -18,4 +18,6 @@ public interface EnderecoDAO {
 
     Endereco buscarPorEnd(String bairro, String rua, String numero) throws Exception;
 
+    int buscarCidadeId(int id) throws Exception;
+
 }

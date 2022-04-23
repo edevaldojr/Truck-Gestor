@@ -8,19 +8,15 @@ import java.util.ArrayList;
 
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.EmpresaDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Empresa;
-import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
 import ifpr.pgua.eic.gestaocaminhao.models.enums.TipoEmpresa;
-import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEndereco;
 import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 
 public class JDBCEmpresaDAO implements EmpresaDAO {
 
     FabricaConexoes fabricaConexoes;
-    RepositorioEndereco repositorioEndereco;
 
-    public JDBCEmpresaDAO(FabricaConexoes fabricaConexoes, RepositorioEndereco repositorioEndereco) {
+    public JDBCEmpresaDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
-        this.repositorioEndereco = repositorioEndereco;
     }
 
     @Override
@@ -130,12 +126,9 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
     public Empresa montarEmpresa(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
-        int enderecoid = rs.getInt("endereco_id");
         TipoEmpresa tipo = TipoEmpresa.valueOf(rs.getString("tipo"));
 
-        Endereco endereco = repositorioEndereco.buscarId(enderecoid);
-
-        Empresa empresa = new Empresa(id, nome, endereco, tipo);
+        Empresa empresa = new Empresa(id, nome, null, tipo);
 
         return empresa;
     }
@@ -188,6 +181,31 @@ public class JDBCEmpresaDAO implements EmpresaDAO {
         con.close();
 
         return e;
+    }
+
+    @Override
+    public int buscarEnderecoId(int id) throws Exception {
+        int enderecoid = 0;
+
+        Connection con = fabricaConexoes.getConnection();
+
+        String sql = "SELECT endereco_id FROM projeto_empresa WHERE id=?";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+
+        enderecoid = rs.getInt("endereco_id");
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return enderecoid;
     }
 
 }

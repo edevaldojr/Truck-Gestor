@@ -3,7 +3,6 @@ package ifpr.pgua.eic.gestaocaminhao.telas;
 import java.sql.SQLException;
 
 import ifpr.pgua.eic.gestaocaminhao.App;
-import ifpr.pgua.eic.gestaocaminhao.daos.JDBCCidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.daos.interfaces.CidadeDAO;
 import ifpr.pgua.eic.gestaocaminhao.models.Cidade;
 import ifpr.pgua.eic.gestaocaminhao.models.Endereco;
@@ -17,7 +16,6 @@ import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioEstado;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioUsuarios;
 import ifpr.pgua.eic.gestaocaminhao.repositories.RepositorioViagens;
 import ifpr.pgua.eic.gestaocaminhao.services.AutenticacaoServico;
-import ifpr.pgua.eic.gestaocaminhao.utils.FabricaConexoes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -37,8 +35,6 @@ public class CadastroUsuario {
     private RepositorioViagens repositorioViagens;
     private RepositorioDespesas repositorioDespesas;
     private Login login;
-
-    private CidadeDAO cidadeDAO;
 
     private Usuario usuarioExistente = null;
 
