@@ -10,15 +10,15 @@
 
 <h3>Canvas: </h3>
 
-<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/imgs/Canvas.png'/>
+<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/docs/Canvas.png'/>
 
 <h3>DR: </h3>
 
-<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/imgs/Modelo%20DR%20banco%20de%20dados.png'/>
+<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/docs/Modelo%20DR%20banco%20de%20dados.png'/>
 
 <h3>Diagrama de Classes: </h3>
 
-<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/imgs/Diagrama%20de%20classes.png'/>
+<img src='https://github.com/edevaldojr/Truck-Gestor/blob/main/docs/Diagrama%20de%20classes.png'/>
 
 <h2>Tecnologias 💻</h2>
 
